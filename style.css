@@ -1,0 +1,88 @@
+#data{
+    margin-top: 10%;
+    margin-right: 5%;
+    margin-left: 5%;
+    padding: auto;
+}
+
+#map{
+    place-items: center;
+    margin-top: 5%;
+    align-items: center;
+}
+
+h5{
+    color:grey;
+    text-align: center;
+}
+
+h4{
+    color:grey;
+    text-align: center;
+}
+h2{
+    color:darkslategray;
+    text-align: center;
+}
+
+p{
+    font-size:small;
+    text-align: center;
+}
+
+#heat_map{
+    /* height: 100%; */
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 60%;
+    height: 15px;
+    border-radius: 5px;
+    margin-left: 25%;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+.slider:hover {
+    opacity: 1;
+}
+  
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    margin-left: 25%;
+    border-radius: 50%;
+    background: #272629cc;
+    cursor: pointer;
+}
+  
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-left: 25%;
+    background: #272629cc;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    width:50%;
+}
+
+#AboutCOVID{
+    text-align:center;
+    font-size: medium;
+}
+.vid{
+    margin-left: 20%;
+    margin-right: 20%;
+}

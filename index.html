@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Awair</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="chart_plot.js"></script>
+  </head>
+  <body>
+
+    <div class="row">
+        <div class="offset-1 col-sm-4 col-11">
+        </br>
+        </br>
+            <div class="row .d-flex">
+                
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>NO<sub>2</sub></h5>
+                    <h2 id = "no2_value"></h2>
+                    <p id ="no2_per"></p>
+                </div>
+
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>NO<sub>2 (Predicted)</sub></h5>
+                    <h2 id = "no2_pre_value"></h2>
+                    <p id ="no2_per_pre"></p>
+                </div>
+
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>SO<sub>2</sub></h5>
+                    <h2 id = "so2_value"></h2>
+                    <p id ="so2_per"></p>
+                </div>
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>SO<sub>2 (Predicted)</sub></h5>
+                    <h2 id = "so2_pre_value"></h2>
+                    <p id ="so2_per_pre"></p>
+                </div>
+                
+                
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>CO<sub>2</sub></h5>
+                    <h2 id = "co2_pre_value"></h2>
+                    <p id ="co2_per"></p>
+                </div>
+                <div class="col-4 col-sm-4" id="data">
+                    <h5>CO<sub>2 (Predicted)</sub></h5>
+                    <h2 id = "co2_value"></h2>
+                    <p id ="co2_per_pre"></p>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="offset-2">
+
+        </div>
+        <div class="col-sm-4 col-12 align-self-center" id="map">
+            <img src="Pakistan-districts-map-svg.svg" class='img-fluid mx-auto d-block' alt="Pakistan Distrcts Map">
+        </div>
+    </div>
+</br>
+</br>
+</br>
+<div class="row">
+    <div class="container">
+        <p id = 'AboutCOVID'>Nitrogen dioxide is an air pollutant that is primarily produced by the combustion of fossil fuels used by industry and transportation—both of which were significantly reduced during the height of the pandemic to prevent the novel coronavirus from spreading. No two years are exactly alike. 
+            Normal variations in weather and atmospheric circulation change the make-up and chemistry of Earth’s atmosphere. Comparing 2020 nitrogen dioxide concentrations with data from 2019 or 2018 alone would not account for year-to-year differences. But, because the NASA model projections account for these natural variations, 
+            scientists can use them to parse how much of the 2020 atmospheric composition change was caused by the COVID-19 containment measures.
+        </p>
+        <p id = 'AboutCOVID'>The model simulation and machine learning analysis took place at the NASA Center for Climate Simulation. Its “business as usual” scenario showed an alternate reality version of 2020—one that did not experience any unexpected changes in human behavior brought on by the pandemic.
+            From there it is simple subtraction. The difference between the model simulated values and the measured ground observations represents the change in emissions due to the pandemic response. The researchers received data from 46 countries—a total of 5,756 observation sites on 
+            the ground—relaying hourly atmospheric composition measurements in near-real time. On a city-level, 50 of the 61 analyzed cities show nitrogen dioxide reductions between 20-50%. </p>
+        </div>
+    </div>
+    
+    <!-- <iframe width="70%" height="400px" src="https://www.youtube.com/embed/OWRxa5eQTUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    <div class="vid">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OWRxa5eQTUw" allowfullscreen></iframe>
+        </div>
+    </div>
+    
+</br>
+</br>
+<div class="row">
+    <div class="container">
+        <h5>Weekly comparison between NO<sub>2</sub> and SO<sub>2</sub> air pollutants 2019 and 2020</h5>
+    </div>
+</div>
+</br>
+</br>
+</br>
+</br>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+            <div class="container">
+                <img src="NO2_timelapse_2019_week_png/S5_NO2-timelapse_2019_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map1" alt="NO2 timelapse April 2019 - Jun 2019">
+            </br>
+            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map1').src = 'NO2_timelapse_2019_week_png/S5_NO2-timelapse_2019_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
+
+            <h5>NO<sub>2</sub> timelapse January 2019 - December 2019</h5>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6">
+            <div class="container">
+                <img src="NO2_timelapse_2020_week_png/S5_NO2-timelapse_2020_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map2" alt="NO2 timelapse April 2019 - Jun 2019">
+            </br>
+            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map2').src = 'NO2_timelapse_2020_week_png/S5_NO2-timelapse_2020_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
+
+            <h5>NO<sub>2</sub> timelapse January 2020 - December 2020</h5>
+        </div>
+        </div>
+    </div>
+    </br>
+    
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+            <div class="container">
+                <img src="SO2_timelapse_2019_week_png/S5_SO2-timelapse_2019_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map3" alt="NO2 timelapse April 2019 - Jun 2019">
+            </br>
+            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map3').src = 'SO2_timelapse_2019_week_png/S5_SO2-timelapse_2019_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
+
+            <h5>SO<sub>2</sub> timelapse January 2019 - December 2019</h5>
+        </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6">
+            <div class="container">
+                <img src="SO2_timelapse_2020_week_png/S5_SO2-timelapse_2020_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map4" alt="NO2 timelapse April 2019 - Jun 2019">
+            </br>
+            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map4').src = 'SO2_timelapse_2020_week_png/S5_SO2-timelapse_2020_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
+
+            <h5>SO<sub>2</sub> timelapse January 2020 - December 2020</h5>
+        </div>
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="row">
+        <div class="container">
+            <h5>Common Air pollutant Graphs with 10 days Prediction</h5>
+        </div>
+    </div>
+    
+</br>
+</br>
+</br>
+
+
+    <div class="row">
+        <div class="col-12 col-sm-6 ">
+            <canvas id="myChart" height="200px"></canvas>
+        </br>
+            <h4>NO2</h4>
+        </div>
+    
+    
+        <div class="col-12 col-sm-6 ">
+            <canvas id="myChart1" height="200px"></canvas>
+        </br>
+            <h4>SO2</h4>
+        </div>
+    </div>
+
+</br>
+</br>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 ">
+            <canvas id="myChart2" height="200px"></canvas>
+        </br>
+            <h4>CO</h4>
+        </div>
+    
+        <div class="col-12 col-sm-6 ">
+            <canvas id="myChart3" height="200px"></canvas>
+        </br>
+            <h4>CO2</h4>
+        </div>
+    </div>
+
+
+    </br>
+    </br>
+    </br>
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <p>A project by <b>Abdullah Mughal</b>, <b>Aymen Bashir</b> and Luqman Khanzada</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
