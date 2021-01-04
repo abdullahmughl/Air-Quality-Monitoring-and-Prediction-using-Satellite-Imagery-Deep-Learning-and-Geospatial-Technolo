@@ -55,24 +55,24 @@ p{
 }
   
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+    /* -webkit-appearance: none;
+    appearance: none; */
     width: 25px;
     height: 25px;
-    margin-left: 25%;
+    /* margin-left: 25%; */
     border-radius: 50%;
     background: #272629cc;
     cursor: pointer;
 }
   
-.slider::-moz-range-thumb {
+/* .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
     margin-left: 25%;
     background: #272629cc;
     cursor: pointer;
-}
+} */
 
 input[type="range"] {
     width:50%;
