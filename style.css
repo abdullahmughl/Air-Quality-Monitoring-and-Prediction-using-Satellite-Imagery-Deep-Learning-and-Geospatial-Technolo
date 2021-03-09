@@ -1,88 +1,80 @@
-#data{
-    margin-top: 10%;
-    margin-right: 5%;
-    margin-left: 5%;
-    padding: auto;
+#pol_bg {
+    object-fit: contain;
+    width: 100%;
+    /* max-height: 20%; */
 }
 
-#map{
-    place-items: center;
-    margin-top: 5%;
-    align-items: center;
+#nav-bar{
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+.navbar{
+    background-image: linear-gradient(to right, #d5eff9, #dedede);
+    padding: 0 !important; 
+    
 }
 
-h5{
-    color:grey;
-    text-align: center;
+#banner{
+    background-image: linear-gradient(to right, #d5eff9, #dedede);
+    color: #002060;
+    padding-top: 0;
 }
 
+.promo-title{
+    font-size: 60px; 
+    font-weight: 600;
+    margin-top: 100px;
+    object-fit: contain;
+    margin-top: 35%;
+    
+}
+
+#info{
+    /* color: #002060; */
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+#pai_txt{
+    font-size: 60px; 
+    font-weight: 600;
+    /* margin-top: 100px; */
+    object-fit: contain;
+    margin-top: 45%;
+    
+}
+
+#pai_bg {
+    object-fit: contain;
+    width: 100%;
+    padding-top: 100px;
+    /* max-height: 20%; */
+}
+table td{
+    border: 1px solid gray;
+}
+
+th{
+    border: 1px solid black;
+}
 h4{
-    color:grey;
+    color: black;
+    margin-right: 40%;
+}
+#alink{
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    justify-content: center;
     text-align: center;
-}
-h2{
-    color:darkslategray;
-    text-align: center;
-}
-
-p{
-    font-size:small;
-    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
-#heat_map{
-    /* height: 100%; */
-    border-radius: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 60%;
-    height: 15px;
-    border-radius: 5px;
-    margin-left: 25%;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-.slider:hover {
-    opacity: 1;
-}
-  
-.slider::-webkit-slider-thumb {
-    /* -webkit-appearance: none;
-    appearance: none; */
-    width: 25px;
-    height: 25px;
-    /* margin-left: 25%; */
-    border-radius: 50%;
-    background: #272629cc;
-    cursor: pointer;
-}
-  
-/* .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-left: 25%;
-    background: #272629cc;
-    cursor: pointer;
-} */
-
-input[type="range"] {
-    width:50%;
-}
-
-#AboutCOVID{
-    text-align:center;
-    font-size: medium;
-}
-.vid{
-    margin-left: 20%;
-    margin-right: 20%;
+.nav-link{
+    
+    margin-top: 5px;
+    width: 100px;
 }

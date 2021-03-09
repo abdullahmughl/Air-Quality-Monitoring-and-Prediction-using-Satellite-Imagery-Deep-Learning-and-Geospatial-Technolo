@@ -7,26 +7,26 @@ async function setup() {
   const ctx3 = document.getElementById('myChart3').getContext('2d');
 
   const globalValue = await getData();
-  valueUpdate(globalValue);
+  // valueUpdate(globalValue);
   const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: globalValue.years,
+      labels: globalValue.years.slice(1,90),
       datasets: [
         {
           label: 'NO2',
-          data: globalValue.no,
+          data: globalValue.no.slice(1,70),
           fill: false,
-          pointRadius : 0.5,
+          pointRadius : 1.5,
           borderColor: 'rgba(255, 99, 132, 1)',
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
           borderWidth: 1
         },
         {
             label: 'NO2 (Predicted)',
-            data: globalValue.no_pre1,
+            data: globalValue.no_pre1.slice(1,90),
             fill: false,
-            pointRadius : 0.5,
+            pointRadius : 1.5,
             borderColor: 'rgba(255, 199, 32, 1)',
             backgroundColor: 'rgba(255, 199, 132, 0.5)',
             borderWidth: 1
@@ -37,65 +37,73 @@ options: {
     maintainAspectRatio: true,
     responsive: true,
     
-}
+  }
 });
 
+
 const myChart1 = new Chart(ctx1, {
-    type: 'line',
-    data: {
-        labels: globalValue.years,
-        datasets: [
-            {
-                label: 'SO2',
-                data: globalValue.so,
-                fill: false,
-                pointRadius : 0.5,
-                borderColor: 'rgba(96, 25, 232, 1)',
-                backgroundColor: 'rgba(96, 25, 232, 0.5)',
-                borderWidth: 1
-            },
-            {
-                label: 'SO2 (Predicted)',
-                data: globalValue.so_pre1,
-                fill: false,
-                pointRadius : 0.5,
-                borderColor: 'rgba(22, 172, 112, 1)',
-                backgroundColor: 'rgba(22, 172, 112, 0.5)',
-                borderWidth: 1
-            }
-            
-        ]
-    },
-    options: {}
+  type: 'line',
+  data: {
+    labels: globalValue.years.slice(1,90),
+    datasets: [
+      {
+        label: 'SO2',
+        data: globalValue.so.slice(1,70),
+        fill: false,
+        pointRadius : 1.5,
+        borderColor: 'rgba(96, 25, 232, 1)',
+        backgroundColor: 'rgba(96, 25, 232, 0.5)',
+        borderWidth: 1
+      },
+      {
+        label: 'SO2 (Predicted)',
+        data: globalValue.so_pre1.slice(1,90),
+        fill: false,
+        pointRadius : 1.5,
+        borderColor: 'rgba(22, 172, 112, 1)',
+        backgroundColor: 'rgba(22, 172, 112, 0.5)',
+        borderWidth: 1
+      }
+      
+    ]
+  },
+  options: {
+    maintainAspectRatio: true,
+    responsive: true,
+    
+    }
   });
 
 
   const myChart2 = new Chart(ctx2, {
     type: 'line',
     data: {
-      labels: globalValue.years,
+      labels: globalValue.years.slice(1,90),
       datasets: [
         {
           label: 'CO',
-          data: globalValue.co,
+          data: globalValue.co.slice(1,70),
           fill: false,
-          pointRadius : 0.5,
+          pointRadius : 1.5,
           borderColor: 'rgba(47, 79, 79, 1)',
           backgroundColor: 'rgba(0, 255, 127, 0.5)',
           borderWidth: 1
         },
         {
           label: 'CO (Predicted)',
-          data: globalValue.co_pre1,
+          data: globalValue.co_pre1.slice(1,90),
           fill: false,
-          pointRadius : 0.5,
+          pointRadius : 1.5,
           borderColor: 'rgba(2, 142, 255, 1)',
           backgroundColor: 'rgba(2, 142, 255, 0.5)',
           borderWidth: 1
         }
       ]
     },
-    options: {}
+    options: {
+      spanGaps: true,
+
+    }
   });
 
 
@@ -108,7 +116,7 @@ const myChart1 = new Chart(ctx1, {
           label: 'CO2',
           data: globalValue.co2,
           fill: false,
-          pointRadius : 0.5,
+          pointRadius : 2.5,
           borderColor: 'rgba(255, 0, 255, 1)',
           backgroundColor: 'rgba(255, 0, 255, 0.5)',
           borderWidth: 1
@@ -117,90 +125,20 @@ const myChart1 = new Chart(ctx1, {
           label: 'CO2 (Predicted)',
           data: globalValue.co2_pre1,
           fill: false,
-          pointRadius : 0.5,
+          pointRadius : 2.5,
           borderColor: 'rgba(255, 0, 0, 1)',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderWidth: 1
         }
       ]
     },
-    options: {}
+    options: {
+      spanGaps: true,
+    }
   });
 }
 
-function valueUpdate(values){
-    
-    
-    document.getElementById('no2_value').innerHTML = values.no2_val;
-    document.getElementById('so2_value').innerHTML = values.so2_val;
-    document.getElementById('co2_value').innerHTML = values.co2_val;
-    document.getElementById('no2_pre_value').innerHTML = values.no2_val_pre;
-    document.getElementById('so2_pre_value').innerHTML = values.so2_val_pre;
-    document.getElementById('co2_pre_value').innerHTML = values.co2_val_pre;
-    
-    no2_pre_perv = parseInt(((values.no2_val_pre/values.no2_val)*100)-100);
-    so2_pre_perv = parseInt(((values.so2_val_pre/values.so2_val)*100)-100);
-    co2_pre_perv = parseInt(((values.co2_val_pre/values.co2_val)*100)-100);
-    
-    if(no2_pre_perv < 0){
-        document.getElementById('no2_per_pre').innerHTML = no2_pre_perv + "% less from today";
-        document.getElementById('no2_per_pre').style.color = "green";
-    }
-    else{
-        document.getElementById('no2_per_pre').innerHTML = no2_pre_perv + "% more from today";
-        document.getElementById('no2_per_pre').style.color = "red";
-    }
-    
-    if(so2_pre_perv < 0){
-        document.getElementById('so2_per_pre').innerHTML = so2_pre_perv + "% less from today";
-        document.getElementById('so2_per_pre').style.color = "green";
-    }
-    else{
-        document.getElementById('so2_per_pre').innerHTML = so2_pre_perv + "% more from today";
-        document.getElementById('so2_per_pre').style.color = "red";
-    }
-    
-    if(co2_pre_perv < 0){
-        document.getElementById('co2_per_pre').innerHTML = co2_pre_perv + "% less from today";
-        document.getElementById('co2_per_pre').style.color = "green";
-    }
-    else{
-        document.getElementById('co2_per_pre').innerHTML = co2_pre_perv + "% more from today"; 
-        document.getElementById('co2_per_pre').style.color = "red";
-    }
-    
-    no2_perv = parseInt(((values.no2_val_wek/values.no2_val)*100)-100);
-    so2_perv = parseInt(((values.so2_val_wek/values.so2_val)*100)-100);
-    co2_perv = parseInt(((values.co2_val_wek/values.co2_val)*100)-100);
-    
-    if(no2_perv < 0){
-        document.getElementById('no2_per').innerHTML = no2_perv + "% less from last week"
-        document.getElementById('no2_per').style.color = "green";
-    }
-    else{
-        document.getElementById('no2_per').innerHTML = no2_perv + "% more from last week"   
-        document.getElementById('no2_per').style.color = "red";
-    }
-    
-    if(so2_perv < 0){
-        document.getElementById('so2_per').innerHTML = so2_perv + "% less from last week"
-        document.getElementById('so2_per').style.color = "green";
-    }
-    else{
-        document.getElementById('so2_per').innerHTML = so2_perv + "% more from last week"   
-        document.getElementById('so2_per').style.color = "red";
-    }
-    
-    if(co2_perv < 0){
-        document.getElementById('co2_per').innerHTML = co2_perv + "% less from last week"
-        document.getElementById('co2_per').style.color = "green";
-    }
-    else{
-        document.getElementById('co2_per').innerHTML = co2_perv + "% more from last week"   
-        document.getElementById('co2_per').style.color = "red";
-    }
 
-}
 
 async function getData() {
   // const response = await fetch('testdata.csv');
@@ -233,7 +171,7 @@ async function getData() {
   const no2_val_wek = parseInt(parseFloat(val[1])*1.07);
   const so2_val_wek = parseInt(parseFloat(val[2])*1.13);
   const co2_val_wek = parseInt(parseFloat(val[3])*0.97);
-  
+
   rows.forEach(row => {
     const cols = row.split(',');
     // years.push(cols[0]);

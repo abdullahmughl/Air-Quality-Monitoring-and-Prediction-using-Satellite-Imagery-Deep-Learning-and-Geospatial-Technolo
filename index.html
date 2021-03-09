@@ -1,207 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Awair</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css"> 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <script src="chart_plot.js"></script>
+    
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Awair Web Portal</title>
   </head>
   <body>
-
-    <div class="row">
-        <div class="offset-1 col-sm-4 col-11">
+      <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
         </br>
-        </br>
-            <div class="row .d-flex">
-                
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>NO<sub>2</sub></h5>
-                    <h2 id = "no2_value"></h2>
-                    <p id ="no2_per"></p>
-                </div>
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">Awair</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item" >
+                    <a class="nav-link" id="alink" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="stats.html">Stats</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="table.html">Tables</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="maps.html">Maps</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+      </section>
+    
 
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>NO<sub>2 (Predicted)</sub></h5>
-                    <h2 id = "no2_pre_value"></h2>
-                    <p id ="no2_per_pre"></p>
-                </div>
+      <section id="banner">
+          <div class="container">
+              <div class="row" style="background-color: #d5eff9;">
+                  <div class="col-md-6" >
+                      <p class="promo-title d-flex justify-content-center">Air Pollution</p>
+                      <p class="text-center" style="font-size: large;">
+                      It is one of the critical problems in the  world.
+                        According to a survey conducted by business insider, nearly 50% people choose climate change as their top concern and 78% were willing to change their lifestyle.
+                    </p>
+                  </div>
+                  <div class="col-md-6 d-none d-md-block" style="padding: 0px;">
+                      <img src="poll.jpg" id="pol_bg">
+                  </div>
+              </div>
+          </div> 
 
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>SO<sub>2</sub></h5>
-                    <h2 id = "so2_value"></h2>
-                    <p id ="so2_per"></p>
+      </section>
+
+      <section id="info">
+          <div class="container">
+              <div class="row">
+                <div class="col-md-6 " style="padding: 0px;">
+                    <img src="paitent.png" id="pai_bg">
                 </div>
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>SO<sub>2 (Predicted)</sub></h5>
-                    <h2 id = "so2_pre_value"></h2>
-                    <p id ="so2_per_pre"></p>
-                </div>
-                
-                
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>CO<sub>2</sub></h5>
-                    <h2 id = "co2_pre_value"></h2>
-                    <p id ="co2_per"></p>
-                </div>
-                <div class="col-4 col-sm-4" id="data">
-                    <h5>CO<sub>2 (Predicted)</sub></h5>
-                    <h2 id = "co2_value"></h2>
-                    <p id ="co2_per_pre"></p>
+                  <div class="col-md-6">
+
+                    <p class="text-center" id="pai_txt" style="font-size: large;">
+                        According to Pakistan Air Quality Initiative (PAQI), in Pakistan, every year nearly 60,000 people die of health problems related to air pollution.
+                    </p>
+                    <!-- <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
+                        Pakistan is the 2nd in index of most polluted countries around the globe.
+                    </p>
+                    <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
+                        Lahore and Karachi are in the list of top 10 most polluted cities in the world.
+                    </p> -->
+                  </div>
                 </div>
             </div>
-
             
-        </div>
-        <div class="offset-2">
-
-        </div>
-        <div class="col-sm-4 col-12 align-self-center" id="map">
-            <img src="Pakistan-districts-map-svg.svg" class='img-fluid mx-auto d-block' alt="Pakistan Distrcts Map">
-        </div>
-    </div>
-</br>
-</br>
-</br>
-<div class="row">
-    <div class="container">
-        <p id = 'AboutCOVID'>Nitrogen dioxide is an air pollutant that is primarily produced by the combustion of fossil fuels used by industry and transportation—both of which were significantly reduced during the height of the pandemic to prevent the novel coronavirus from spreading. No two years are exactly alike. 
-            Normal variations in weather and atmospheric circulation change the make-up and chemistry of Earth’s atmosphere. Comparing 2020 nitrogen dioxide concentrations with data from 2019 or 2018 alone would not account for year-to-year differences. But, because the NASA model projections account for these natural variations, 
-            scientists can use them to parse how much of the 2020 atmospheric composition change was caused by the COVID-19 containment measures.
-        </p>
-        <p id = 'AboutCOVID'>The model simulation and machine learning analysis took place at the NASA Center for Climate Simulation. Its “business as usual” scenario showed an alternate reality version of 2020—one that did not experience any unexpected changes in human behavior brought on by the pandemic.
-            From there it is simple subtraction. The difference between the model simulated values and the measured ground observations represents the change in emissions due to the pandemic response. The researchers received data from 46 countries—a total of 5,756 observation sites on 
-            the ground—relaying hourly atmospheric composition measurements in near-real time. On a city-level, 50 of the 61 analyzed cities show nitrogen dioxide reductions between 20-50%. </p>
-        </div>
-    </div>
-    
-    <!-- <iframe width="70%" height="400px" src="https://www.youtube.com/embed/OWRxa5eQTUw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-    <div class="vid">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OWRxa5eQTUw" allowfullscreen></iframe>
-        </div>
-    </div>
-    
-</br>
-</br>
-<div class="row">
-    <div class="container">
-        <h5>Weekly comparison between NO<sub>2</sub> and SO<sub>2</sub> air pollutants 2019 and 2020</h5>
-    </div>
-</div>
-</br>
-</br>
-</br>
-</br>
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-6">
+        </section>
+        
+        <section>
+            <div class="container" style="margin-top: 100px;">
+                <div class="row">
+                    <div class="md-drag md-table-wrapper"><table style=" border-width: 1px; border-style: solid;">
+                        <caption class="justify-content-center">Criteria air pollutants</caption>
+                        <thead class="">
+                        <tr>
+                        <th scope="col">pollutant</th>
+                        <th scope="col">common sources</th>
+                        <th scope="col">maximum acceptable concentration in the atmosphere</th>
+                        <th scope="col">environmental risks</th>
+                        <th scope="col">human health risks</th>
+                        </tr>
+                        </thead>
+                        <tfoot class="">
+                        <tr>
+                        <td colspan="5">Source: U.S. Environmental Protection Agency</td>
+                        </tr>
+                        </tfoot>
+                        <tbody class="">
+                        <tr>
+                        <td scope="row">carbon monoxide (CO)</td>
+                        <td>automobile emissions, fires, industrial processes</td>
+                        <td>35 ppm (1-hour period); 9 ppm (8-hour period)</td>
+                        <td>contributes to smog formation</td>
+                        <td>exacerbates symptoms of heart disease, such as chest pain; may cause vision problems and reduce physical and mental capabilities in healthy people</td>
+                        </tr>
+                        <tr>
+                        <td scope="row">nitrogen oxides (NO and NO<sub>2</sub>)</td>
+                        <td>automobile emissions, electricity generation, industrial processes</td>
+                        <td>0.053 ppm (1-year period)</td>
+                        <td>damage to foliage; contributes to smog formation</td>
+                        <td>inflammation and irritation of breathing passages</td>
+                        </tr>
+                        <tr>
+                        <td scope="row">sulfur dioxide (SO<sub>2</sub>)</td>
+                        <td>electricity generation, fossil-fuel combustion, industrial processes, automobile emissions</td>
+                        <td>0.03 ppm (1-year period); 0.14 ppm (24-hour period)</td>
+                        <td>major cause of haze; contributes to acid rain formation, which subsequently damages foliage, buildings, and monuments; reacts to form particulate matter</td>
+                        <td>breathing difficulties, particularly for people with asthma and heart disease</td>
+                        </tr>
+                        <tr>
+                        <td scope="row">ozone (O<sub>3</sub>)</td>
+                        <td>nitrogen oxides (NO<sub>x</sub>) and volatile organic compounds (VOCs) from industrial and automobile emissions, gasoline vapours, chemical solvents, and electrical utilities</td>
+                        <td>0.075 ppm (8-hour period)</td>
+                        <td>interferes with the ability of certain plants to respire, leading to increased susceptibility to other environmental stressors (e.g., disease, harsh weather)</td>
+                        <td>reduced lung function; irritation and inflammation of breathing passages</td>
+                        </tr>
+                        <tr>
+                        <td scope="row">particulate matter</td>
+                        <td>sources of primary particles include fires, smokestacks, construction sites, and unpaved roads; sources of secondary particles include reactions between gaseous chemicals emitted by power plants and automobiles</td>
+                        <td>150 μg/m<sup>3</sup> (24-hour period for particles &lt;10 μm); 35 μg/m<sup>3</sup> (24-hour period for particles &lt;2.5 μm)</td>
+                        <td>contributes to formation of haze as well as acid rain, which changes the pH balance of waterways and damages foliage, buildings, and monuments</td>
+                        <td>irritation of breathing passages, aggravation of asthma, irregular heartbeat</td>
+                        </tr>
+                        <tr>
+                        <td scope="row">lead (Pb)</td>
+                        <td>metal processing, waste incineration, fossil-fuel combustion</td>
+                        <td>0.15 μg/m<sup>3</sup> (rolling three-month average); 1.5 μg/m<sup>3</sup> (quarterly average)</td>
+                        <td>loss of biodiversity, decreased reproduction, neurological problems in vertebrates</td>
+                        <td>adverse effects upon multiple bodily systems; may contribute to learning disabilities when young children are exposed; cardiovascular effects in adults</td>
+                        </tr>
+                        </tbody>
+                        </table></div>
+                        
+                        
+                </div>
+            </div>
+        </section>
+        <section id ="map">
             <div class="container">
-                <img src="NO2_timelapse_2019_week_png/S5_NO2-timelapse_2019_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map1" alt="NO2 timelapse April 2019 - Jun 2019">
-            </br>
-            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map1').src = 'NO2_timelapse_2019_week_png/S5_NO2-timelapse_2019_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
-
-            <h5>NO<sub>2</sub> timelapse January 2019 - December 2019</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <p class="text-center" id="pai_txt" style="font-size: large;">
+                        Lahore suffers from high levels of air pollution, with the city regularly ranking at the top of IQAir AirVisual’s live pollution rankings of major global cities. However, pollution only rose to the top of the public’s consciousness in early 2017, when actionable air quality data was published for the first time in Pakistan. In the absence of publicly available government data, a network of citizen-operated sensors began to monitor fine particulate matter, also known as PM2.5, and report data in real-time. The data laid bare Lahore’s high levels of air pollution, shocking the public and becoming a media talking point.  
+                    </p>
+                    <!-- <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
+                    </p>
+                    <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
+                    </p> -->
+                </div>
+                <div class="col-md-6" style="padding: 20px;">
+                    <img src="Pakistan-districts-map-svg.svg" id="pai_bg">
+                </div class="d-flex justify-content-center">
+                <h6  style="margin-top: 20px; padding-right: 40% ;color: grey;"> * We are focusing on Lahore only but other cities will be added with furthur development</h1>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-6">
-            <div class="container">
-                <img src="NO2_timelapse_2020_week_png/S5_NO2-timelapse_2020_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map2" alt="NO2 timelapse April 2019 - Jun 2019">
-            </br>
-            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map2').src = 'NO2_timelapse_2020_week_png/S5_NO2-timelapse_2020_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
+    </section>
 
-            <h5>NO<sub>2</sub> timelapse January 2020 - December 2020</h5>
-        </div>
-        </div>
-    </div>
-    </br>
-    
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-6">
-            <div class="container">
-                <img src="SO2_timelapse_2019_week_png/S5_SO2-timelapse_2019_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map3" alt="NO2 timelapse April 2019 - Jun 2019">
-            </br>
-            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map3').src = 'SO2_timelapse_2019_week_png/S5_SO2-timelapse_2019_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
-
-            <h5>SO<sub>2</sub> timelapse January 2019 - December 2019</h5>
-        </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-6">
-            <div class="container">
-                <img src="SO2_timelapse_2020_week_png/S5_SO2-timelapse_2020_week_0053_Layer-1.png" class="img-fluid mx-auto d-block"  id = "heat_map4" alt="NO2 timelapse April 2019 - Jun 2019">
-            </br>
-            <input type="range" id="mapslider" class="slider" value="1" min="1" max="53" oninput="document.getElementById('heat_map4').src = 'SO2_timelapse_2020_week_png/S5_SO2-timelapse_2020_week_00' + (54 -parseInt(this.value)).toString() +'_Layer-'+this.value+'.png' " />
-
-            <h5>SO<sub>2</sub> timelapse January 2020 - December 2020</h5>
-        </div>
-        </div>
-    </div>
-    </br>
-    </br>
-    </br>
-    </br>
-    <div class="row">
+    <section id="satellite">
         <div class="container">
-            <h5>Common Air pollutant Graphs with 10 days Prediction</h5>
-        </div>
-    </div>
-    
-</br>
-</br>
-</br>
-
-
-    <div class="row">
-        <div class="col-12 col-sm-6 ">
-            <canvas id="myChart" height="200px"></canvas>
-        </br>
-            <h4>NO2</h4>
-        </div>
-    
-    
-        <div class="col-12 col-sm-6 ">
-            <canvas id="myChart1" height="200px"></canvas>
-        </br>
-            <h4>SO2</h4>
-        </div>
-    </div>
-
-</br>
-</br>
-
-    <div class="row">
-        <div class="col-12 col-sm-6 ">
-            <canvas id="myChart2" height="200px"></canvas>
-        </br>
-            <h4>CO</h4>
-        </div>
-    
-        <div class="col-12 col-sm-6 ">
-            <canvas id="myChart3" height="200px"></canvas>
-        </br>
-            <h4>CO2</h4>
-        </div>
-    </div>
-
-
-    </br>
-    </br>
-    </br>
-
-    <footer>
-        <div class="container">
-            <div class="row justify-content-center">
-                <p>A project by <b>Abdullah Mughal</b>, <b>Aymen Bashir</b> and Luqman Khanzada</p>
+            <div class="row">
+                
             </div>
         </div>
-    </footer>
+    </section>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    
+</body>
 </html>
