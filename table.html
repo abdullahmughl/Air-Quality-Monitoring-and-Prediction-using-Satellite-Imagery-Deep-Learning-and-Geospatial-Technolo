@@ -174,19 +174,20 @@
            -->
       <!-- </section> -->
 
-      <div class="container">
+      <div class="col-10 offset-1">
         <div class="table-responsive">
          <h1 class = "text-align">Tabular Data of Air Pollutants</h1>
          <br />
-         <div class="col-3">
-          <input type="checkbox" id="isNo2Checked" name="isNo2Checked" value="NO2">
-          <label for="isNo2Checked"> Nitrogen Dioxide</label><br>
-          <input type="checkbox" id="isSo2Checked" name="isSo2Checked" value="SO2">
-          <label for="isSo2Checked"> Sulphur Dioxide</label><br>
-          <input type="checkbox" id="isCo2Checked" name="isCo2Checked" value="CO2">
-          <label for="isSo2Checked"> Carbon Dioxide</label><br>
-         </div>
-         <div class="col-7">
+         <div class="col-12">
+             <input type="checkbox" id="isNo2Checked" name="isNo2Checked" value="NO2">
+             <label for="isNo2Checked"> Nitrogen Dioxide</label><br>
+             <input type="checkbox" id="isSo2Checked" name="isSo2Checked" value="SO2">
+             <label for="isSo2Checked"> Sulphur Dioxide</label><br>
+             <input type="checkbox" id="isCo2Checked" name="isCo2Checked" value="CO2">
+             <label for="isSo2Checked"> Carbon Dioxide</label><br>
+            </div>
+            <br />
+         <div class="col-12">
              <img src="map_grad.jpg" alt="Map with Grid points" id="map_grd">
          </div>
             
@@ -265,7 +266,7 @@
                                                     ate = false;
                                                 }
                                                 else{
-                                                    table_data += '<th>'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                                    table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
                                                     cell_count += 1;
                                         
                                                 }
@@ -273,7 +274,7 @@
                                 else
                                 {   var temp = new Date(cell_data[0])
                                     if(temp > dts && temp<dte){
-                                        table_data += '<td style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+'</td>';
+                                        table_data += '<td>'+cell_data[cell_count]+'</td>';
                                     }
                                 }
                             }
@@ -315,7 +316,7 @@
                                                     ate = false;
                                                 }
                                                 else{
-                                                    table_data += '<th>'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                                    table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
                                                     cell_count += 1;
                                         
                                                 }
@@ -324,7 +325,7 @@
                                 {
                                     var temp = new Date(cell_data[0])
                                     if(temp > dts && temp<dte){
-                                        table_data += '<td style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+'</td>';
+                                        table_data += '<td>'+cell_data[cell_count]+'</td>';
                                     }
                                 }
                             }
@@ -366,7 +367,7 @@
                                                 ate = false;
                                             }
                                             else{
-                                                table_data += '<th>'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                                table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
                                                 cell_count += 1;
                                                 
                                             }
@@ -375,7 +376,7 @@
                                 {
                                     var temp = new Date(cell_data[0])
                                     if(temp > dts && temp<dte){
-                                        table_data += '<td style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+'</td>';
+                                        table_data += '<td>'+cell_data[cell_count]+'</td>';
                                     }
                                 }
                             }
