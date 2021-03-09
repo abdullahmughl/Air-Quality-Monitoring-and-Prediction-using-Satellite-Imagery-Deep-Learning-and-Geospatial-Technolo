@@ -173,12 +173,13 @@
           </div>
            -->
       <!-- </section> -->
+<section>
 
-      <div class="col-10 offset-1">
+    <div class="col-10 offset-1">
         <div class="table-responsive">
-         <h1 class = "text-align">Tabular Data of Air Pollutants</h1>
-         <br />
-         <div class="col-12">
+            <h1 class = "text-align">Tabular Data of Air Pollutants</h1>
+            <br />
+            <div class="col-12">
              <input type="checkbox" id="isNo2Checked" name="isNo2Checked" value="NO2">
              <label for="isNo2Checked"> Nitrogen Dioxide</label><br>
              <input type="checkbox" id="isSo2Checked" name="isSo2Checked" value="SO2">
@@ -187,18 +188,19 @@
              <label for="isSo2Checked"> Carbon Dioxide</label><br>
             </div>
             <br />
-         <div class="col-12">
-             <img src="map_grad.jpg" alt="Map with Grid points" id="map_grd">
-         </div>
-            
-         <br />
-         <div id="no2_table">
-         </div>
-         <div id="so2_table">
-         </div>
-         <div id="co2_table">
-         </div>
+            <div class="col-12">
+                <img src="map_grad.jpg" alt="Map with Grid points" id="map_grd">
+            </div>
         </div>
+        </div>
+    </section>
+            
+            <br />
+            <div id="no2_table" style="overflow: auto; padding: 15px;">
+         </div>
+         <div id="so2_table" style="overflow: auto; padding: 15px;">
+         </div>
+         <div id="co2_table" style="overflow: auto; padding: 15px;">
        </div>
 
       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
