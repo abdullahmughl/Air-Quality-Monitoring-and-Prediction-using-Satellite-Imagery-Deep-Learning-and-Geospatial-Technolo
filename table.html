@@ -39,6 +39,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="maps.html">Maps</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" style="width: 250px;" href="forecasted_map.html">Forecasted Maps</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -173,7 +176,7 @@
           </div>
            -->
       <!-- </section> -->
-<section>
+<section style="overflow: hidden;">
 
     <div class="col-12 col-md-10 offset-md-1">
         <div class="table-responsive">
@@ -238,17 +241,15 @@
 
         <script>
 
-            
-            $(document).ready(function(){
-                $('#isNo2Checked').click(function() {
-                    var  dts = new Date($('#start-date-input').val())
-                    var  dte = new Date($('#end-date-input').val())
-                    var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
-                    
-                    $("#no2_table").toggle(this.checked);
-                    
-                    $.ajax({
-                        url:"no2_data.csv",
+$(document).ready(function(){
+            $('#isNo2Checked').click(function() {
+                var  dts = new Date($('#start-date-input').val())
+                var  dte = new Date($('#end-date-input').val())
+                var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
+                $("#no2_table").toggle(this.checked);
+                
+                $.ajax({
+                    url:"no2_data.csv",
                         dataType:"text",
                         success:function(data)
                         {
@@ -273,8 +274,9 @@
                                         
                                                 }
                                             }
-                                else
-                                {   var temp = new Date(cell_data[0])
+                                            else
+                                {
+                                    var temp = new Date(cell_data[0])
                                     if(temp > dts && temp<dte){
                                         table_data += '<td>'+cell_data[cell_count]+'</td>';
                                     }
@@ -289,6 +291,7 @@
             });
             
         });
+        
         
         $(document).ready(function(){
             $('#isSo2Checked').click(function() {

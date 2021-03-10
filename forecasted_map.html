@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Awair Web Portal</title>
+  </head>
+  <body>
+      <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="index.html">Awair</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="stats.html">Stats</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="table.html">Tables</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  href="maps.html">Maps</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="alink" style="width: 250px;" href="#">Forecasted Maps</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+      </section>
+      <section></section>
+          <div class="container" style="padding-top: 50px;">
+        <div class="row">
+
+                <div class="col-6 form-group row">
+                    <label for="example-date-input" class="col-4 col-form-label">Select Date</label>
+                    <div class="col-8">
+                        <input class="form-control" type="date" value="2019-12-01" id="start-date-input">
+                    </div>
+                </div> 
+                <!-- <div class="col-4"></div> -->
+            </div>
+                
+        </div>
+      </section>
+      <section style="overflow: hidden;">
+
+        <div class="col-12 col-md-10 offset-md-1">
+            <div class="table-responsive">
+                <h1 class = "text-align">Classification Maps of Air Pollutants</h1>
+                <br />
+                <div class="col-12">
+                  <input type="radio" id="no2" name="pollutant" value="no2" checked>
+                  <label for="no2">Nirogen Dioxide</label><br>
+                  <input type="radio" id="so2" name="pollutant" value="so2">
+                  <label for="so2">Sulphur Dioxide</label><br>
+                  <input type="radio" id="co2" name="pollutant" value="co2">
+                  <label for="co2">Carbon Dioxide</label>
+                </div>
+            </div>
+            </div>
+        </section>
+
+      <section id="maps_grad" style="padding-top: 100px;">
+        <div class="contaier" style="margin-top: 100px;margin-left: 100px;">
+
+          <div class="row" style="height: 500px;">
+            
+            <div class="col-6" style="display: inline-block; overflow: hidden;" >
+              <div style="position: absolute;">
+
+                <img src="lahore.jpg" id="lhr"alt="Lahore Map">
+              </div>
+              <div id="tabel" style="position: absolute; z-index: 9;opacity: 0.4;">
+        
+              </div>
+            </div>
+              <div id="ovl">
+
+                <div  id = "grad" style="height: 45px;width: 400px; display: inline-block;">
+                  
+                </div>
+              </div>
+              <div id="text">
+                <p>High
+                </p>
+              </br>
+              </br>
+            </br>
+              </br>
+            </br>
+              <p>Medium
+              </p>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            <p>Low
+            </p>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+              </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- <section id="maps_grad" style="padding-top: 100px;">
+        <div class="contaier" style="margin-top: 100px;margin-left: 100px;">
+
+          <div class="row" style="height: 500px;">
+            
+            <div class="col-6" style="display: inline-block; overflow: hidden;" >
+              <div style="position: absolute;">
+
+                <img src="lahore.jpg" id="lhr"alt="Lahore Map">
+              </div>
+              <div id="tabel2" style="position: absolute; z-index: 9;opacity: 0.4;">
+        
+              </div>
+            </div>
+              <div id="ovl">
+
+                <div  id = "grad" style="height: 45px;width: 400px; display: inline-block;">
+                  
+                </div>
+              </div>
+              <div id="text">
+                <p>High
+                </p>
+              </br>
+              </br>
+            </br>
+              </br>
+            </br>
+              <p>Medium
+              </p>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            <p>Low
+            </p>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+              </div>
+
+          </div>
+        </div>
+      </section> -->
+    
+    
+      
+      <!-- <section id="maps_grad">
+        <div class="contaier" style="margin-top: 100px;margin-left: 100px;">
+
+          <div class="row">
+            
+            <div class="col-3" style="display: inline-block; overflow: hidden; position: relative;" >
+              <div style="position: absolute;">
+
+                <img src="lahore.jpg" id="lhr"alt="Lahore Map">
+              </div>
+              <div id="tabel2" style="position: absolute; z-index: 9;opacity: 0.4;">
+        
+              </div>
+            </div>
+              
+              <div  id = "grad" style="height: 45px;width: 300px; display: inline-block;">
+
+              </div>
+
+          </div>
+        </div>
+      </section>
+      <section id="maps_grad">
+        <div class="contaier" style="margin-top: 100px;margin-left: 100px;">
+
+          <div class="row">
+            
+            <div class="col-3" style="display: inline-block; overflow: hidden; position: relative;" >
+              <div style="position: absolute;">
+
+                <img src="lahore.jpg" id="lhr"alt="Lahore Map">
+              </div>
+              <div id="tabel2" style="position: absolute; z-index: 9;opacity: 0.4;">
+        
+              </div>
+            </div>
+              
+              <div  id = "grad" style="height: 45px;width: 300px; display: inline-block;">
+               
+              </div>
+
+          </div>
+        </div>
+      </section> -->
+
+
+
+
+      <section>
+      </section>
+      
+      <!-- </section>
+      <section id="maps_grad">
+        <canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+          Your browser does not support the HTML5 canvas tag.</canvas>
+          
+          <script>
+          var c = document.getElementById("myCanvas");
+          var ctx = c.getContext("2d");
+          
+          var grd = ctx.createLinearGradient(0, 0, 170, 0);
+          grd.addColorStop(0, "grey");
+          grd.addColorStop(1, "purple");
+          
+          ctx.fillStyle = grd;
+          ctx.fillRect(20, 20, 150, 100);
+          </script>
+      </section>
+    -->
+      <script>
+        $('input').on('change', function() {
+          var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
+                    
+                    // $("#no2_table").toggle(this.checked);
+                    
+                    // $.ajax({
+                    //     url:"no2_data.csv",
+                    //     dataType:"text",
+                    //     success:function(data)
+                    //     {
+                            // var ate = true;
+                            // var employee_data = data.split(/\r?\n|\r/);
+                            var table_data = '<table class="table table-bordered table-striped">';
+                                for(var count = 0; count<8; count++)
+                                {
+                                    // var cell_data = employee_data[count].split(",");
+                                    table_data += '<tr id="trr">';
+                                        for(var cell_count=0; cell_count<8; cell_count++)
+                                        {
+                                            // if(count === 0)
+                                            // {
+                                            //     if(ate){
+                                            //         table_data += '<th>'+cell_count+'</th>';
+                                            //         ate = false;
+                                            //     }
+                                            //     else{
+                                            //         table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                            //         cell_count += 1;
+                                        
+                                            //     }
+                                            // }
+                                // else
+                                {   
+                                  // var temp = new Date(cell_data[0])
+                                  //   if(temp > dts && temp<dte){
+                                        table_data += '<td style="background-color: '+color[Math.floor(Math.random() * 15)+1]+'"></td>';
+                                    // }
+                                }
+                            }
+                            table_data += '</tr>';
+                        }
+                        table_data += '</table>';
+                        $('#tabel').html(table_data);
+});
+      </script>
+      <script>
+        $(document).ready(function(){
+                // $('#isNo2Checked').click(function() {
+                    // var  dts = new Date($('#start-date-input').val())
+                    // var  dte = new Date($('#end-date-input').val())
+                    var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
+                    
+                    // $("#no2_table").toggle(this.checked);
+                    
+                    // $.ajax({
+                    //     url:"no2_data.csv",
+                    //     dataType:"text",
+                    //     success:function(data)
+                    //     {
+                            // var ate = true;
+                            // var employee_data = data.split(/\r?\n|\r/);
+                            var table_data = '<table class="table table-bordered table-striped">';
+                                for(var count = 0; count<8; count++)
+                                {
+                                    // var cell_data = employee_data[count].split(",");
+                                    table_data += '<tr id="trr">';
+                                        for(var cell_count=0; cell_count<8; cell_count++)
+                                        {
+                                            // if(count === 0)
+                                            // {
+                                            //     if(ate){
+                                            //         table_data += '<th>'+cell_count+'</th>';
+                                            //         ate = false;
+                                            //     }
+                                            //     else{
+                                            //         table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                            //         cell_count += 1;
+                                        
+                                            //     }
+                                            // }
+                                // else
+                                {   
+                                  // var temp = new Date(cell_data[0])
+                                  //   if(temp > dts && temp<dte){
+                                        table_data += '<td style="background-color: '+color[Math.floor(Math.random() * 15)+1]+'"></td>';
+                                    // }
+                                }
+                            }
+                            table_data += '</tr>';
+                        }
+                        table_data += '</table>';
+                        $('#tabel').html(table_data);
+                    });
+            //     });
+            // });
+            
+        // });
+
+      </script>
+      <script>
+        $(document).ready(function(){
+                // $('#isNo2Checked').click(function() {
+                    // var  dts = new Date($('#start-date-input').val())
+                    // var  dte = new Date($('#end-date-input').val())
+                    var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
+                    
+                    // $("#no2_table").toggle(this.checked);
+                    
+                    // $.ajax({
+                    //     url:"no2_data.csv",
+                    //     dataType:"text",
+                    //     success:function(data)
+                    //     {
+                            // var ate = true;
+                            // var employee_data = data.split(/\r?\n|\r/);
+                            var table_data = '<table class="table table-bordered table-striped">';
+                                for(var count = 0; count<8; count++)
+                                {
+                                    // var cell_data = employee_data[count].split(",");
+                                    table_data += '<tr>';
+                                        for(var cell_count=0; cell_count<8; cell_count++)
+                                        {
+                                            // if(count === 0)
+                                            // {
+                                            //     if(ate){
+                                            //         table_data += '<th>'+cell_count+'</th>';
+                                            //         ate = false;
+                                            //     }
+                                            //     else{
+                                            //         table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                            //         cell_count += 1;
+                                        
+                                            //     }
+                                            // }
+                                // else
+                                {   
+                                  // var temp = new Date(cell_data[0])
+                                  //   if(temp > dts && temp<dte){
+                                        table_data += '<td style="background-color: '+color[Math.floor(Math.random() * 15)+1]+'"></td>';
+                                    // }
+                                }
+                            }
+                            table_data += '</tr>';
+                        }
+                        table_data += '</table>';
+                        $('#tabel2').html(table_data);
+                    });
+            //     });
+            // });
+            
+        // });
+
+      </script>
+      <script>
+        $(document).ready(function(){
+                // $('#isNo2Checked').click(function() {
+                    // var  dts = new Date($('#start-date-input').val())
+                    // var  dte = new Date($('#end-date-input').val())
+                    var color = ['#fff','#e91605','#e95b05','#e87c21','#e89606','#e79d1a','#e8ab05','#e8c006','#e8e406','#e8054c','#e93b34','#df7136','#ea8444','#de921a','#e8b22b','#dfa911','#d7e806','#e9058c','#e94061','#ea675f','#ea675f','#d6885a','#d69e4b','#d6c805','#c9d505','#d4058b','#d43575','#d55673','#c58e6f','#c68a4e','#b88a4f','#b8ab39','#b8d606','#a20499','#a13b84','#a16372','#a08067','#a19974','#a29d63','#a2a939','#a2a939','#7a0498','#7a3e96','#7a6286','#798480','#79957e','#7aa27d','#7ab575','#7ab575','#500498','#58318a','#425573','#436b73','#438e6f','#41ad6f','#3ba13b','#3ba13b','#0a0498','#044798','#047d98','#047f7c','#016d55','#05aa72','#04aa3e','#0baa05'];
+                    
+                    // $("#no2_table").toggle(this.checked);
+                    
+                    // $.ajax({
+                    //     url:"no2_data.csv",
+                    //     dataType:"text",
+                    //     success:function(data)
+                    //     {
+                            // var ate = true;
+                            // var employee_data = data.split(/\r?\n|\r/);
+                            var table_data = '<table class="table table-bordered table-striped">';
+                                for(var count = 0; count<8; count++)
+                                {
+                                    // var cell_data = employee_data[count].split(",");
+                                    table_data += '<tr>';
+                                        for(var cell_count=0; cell_count<8; cell_count++)
+                                        {
+                                            // if(count === 0)
+                                            // {
+                                            //     if(ate){
+                                            //         table_data += '<th>'+cell_count+'</th>';
+                                            //         ate = false;
+                                            //     }
+                                            //     else{
+                                            //         table_data += '<th style= "opacity:0.7; background-color: '+color[cell_count]+';color:black;">'+cell_data[cell_count]+','+cell_data[cell_count+1]+'</th>';
+                                            //         cell_count += 1;
+                                        
+                                            //     }
+                                            // }
+                                // else
+                                {   
+                                  // var temp = new Date(cell_data[0])
+                                  //   if(temp > dts && temp<dte){
+                                        table_data += '<td style="background-color: '+color[Math.floor(Math.random() * 15)+1]+'"></td>';
+                                    // }
+                                }
+                            }
+                            table_data += '</tr>';
+                        }
+                        table_data += '</table>';
+                        $('#tabel').html(table_data);
+                    });
+            //     });
+            // });
+            
+        // });
+
+      </script>
+    
+</body>
+</html>
