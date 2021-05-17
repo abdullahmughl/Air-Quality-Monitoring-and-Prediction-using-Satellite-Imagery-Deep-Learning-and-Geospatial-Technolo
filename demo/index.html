@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet.heat demo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+    <title>Awair Web Portal</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <style>
+        #map {
+            width: 1000px;
+            height: 800px;
+        }
+        
+        body {
+            font: 16px/1.4 "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        .ghbtns {
+            position: relative;
+            top: 4px;
+            margin-left: 5px;
+        }
+        
+        a {
+            color: #0077ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Air Quality Awareness through AI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars"></i>
+              </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="../home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="width: 150px;" href="../stats.html">Graphical Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="width: 150px;" href="../table.html">Tabular Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="alink" href="demo/index.html">Maps</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section></section>
+    <div class="container" style="padding-top: 50px;">
+        <div class="row">
+
+            <div class="col-6 form-group row">
+                <label for="example-date-input" class="col-4 col-form-label">Select Date</label>
+                <div class="col-8">
+                    <input class="form-control" type="date" value="2019-12-01" id="start-date-input">
+                </div>
+            </div>
+            <!-- <div class="col-4"></div> -->
+        </div>
+
+    </div>
+    </section>
+
+
+
+
+
+    <div class="offset-3" id="map" style="padding-left: 15%;"></div>
+
+    <!-- <script src="../node_modules/simpleheat/simpleheat.js"></script>
+<script src="../src/HeatLayer.js"></script> -->
+
+    <script src="../dist/leaflet-heat.js"></script>
+
+    <script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script>
+    <script>
+        var map = L.map('map').setView([31.5204, 74.3587], 9);
+
+        var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+        Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60]
+        addressPoints = [
+            // [31.343864, 74.053087, 0.1],
+            // [31.343864, 74.111927, 0.5],
+            // [31.343864, 74.170768, 0.3],
+            // [31.343864, 74.229608, 0.8],
+            // [31.343864, 74.288449, 1],
+            // [31.343864, 74.347289, 0.4],
+            // [31.343864, 74.406129, 0.3],
+            // [31.343864, 74.46497, 0.7],
+            // [31.383926, 74.053087, 0.9],
+            // [31.383926, 74.111927, 1],
+            [31.383926, 74.170768, 0.2],
+            [31.383926, 74.229608, 0.1],
+            [31.383926, 74.288449, 0.6],
+            [31.383926, 74.347289, 0.8],
+            // [31.383926, 74.406129, 0.50],
+            // [31.383926, 74.46497, 1],
+            // [31.423989, 74.053087, 0.2],
+            // [31.423989, 74.111927, 1],
+            [31.423989, 74.170768, 0.2],
+            [31.423989, 74.229608, 1],
+            [31.423989, 74.288449, 1],
+            [31.423989, 74.347289, 0.8],
+            // [31.423989, 74.406129, 0.45],
+            // [31.423989, 74.46497, 0.6],
+            // [31.464052, 74.053087, 0.8],
+            // [31.464052, 74.111927, 0.7],
+            // [31.464052, 74.170768, 0.5],
+            [31.464052, 74.229608, 1],
+            [31.464052, 74.288449, 0.3],
+            [31.464052, 74.347289, 0.6],
+            [31.464052, 74.406129, 0.1],
+            // [31.464052, 74.46497, 1],
+            // [31.504114, 74.053087, 0.50],
+            // [31.504114, 74.111927, 0.8],
+            // [31.504114, 74.170768, 0.7],
+            [31.504114, 74.229608, 1],
+            [31.504114, 74.288449, 0.3],
+            [31.504114, 74.347289, 0.5],
+            [31.504114, 74.406129, 0.60],
+            // [31.504114, 74.46497, 0.8],
+            // [31.544177, 74.053087, 0.2],
+            // [31.544177, 74.111927, 0.11],
+            // [31.544177, 74.170768, 0.1],
+            // [31.544177, 74.229608, 0.2],
+            [31.544177, 74.288449, 0.5],
+            [31.544177, 74.347289, 0.9],
+            [31.544177, 74.406129, 0.1],
+            // [31.544177, 74.46497, 1],
+            // [31.584239, 74.053087, 0.3],
+            // [31.584239, 74.111927, 0.30],
+            // [31.584239, 74.170768, 0.4],
+            // [31.584239, 74.229608, 0.8],
+            [31.584239, 74.288449, 0.1],
+            [31.584239, 74.347289, 0.7],
+            [31.584239, 74.406129, 0.5],
+            // [31.584239, 74.46497, 0.2],
+            // [31.624302, 74.053087, 0.6],
+            // [31.624302, 74.111927, 0.8],
+            // [31.624302, 74.170768, 0.1],
+            // [31.624302, 74.229608, 0.9],
+            [31.624302, 74.288449, 0.7],
+            // [31.624302, 74.347289, 0.8],
+            // [31.624302, 74.406129, 0.6],
+            // [31.624302, 74.46497, 1]
+        ];
+
+
+
+        var heat = L.heatLayer(addressPoints, {
+            radius: 65, // default value
+            blur: 25, // default value
+            minOpacity: 0.12,
+            gradient: {
+                '0.1': '#80FF00',
+                '0.2': '#74DF00',
+                '0.3': '#00ff00',
+                '0.4': '#FFBF00',
+                '0.5': '#DBA901',
+                '0.6': '#DF3A01',
+                '0.7': '#B40404',
+                '0.8': '#8A0808',
+                '0.9': '#610B0B',
+                '1.0': '#3B0B0B'
+            }
+            // gradient: {
+            //     1: 'red',
+            //     0.1: 'blue',
+            //     0.5: 'lime'
+            // } // Values can be set for a scale of 0-1
+        }).addTo(map);
+    </script>
+</body>
+
+</html>
