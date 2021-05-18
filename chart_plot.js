@@ -4,19 +4,28 @@ async function setup() {
     const ctx = document.getElementById('myChart').getContext('2d');
     const ctx1 = document.getElementById('myChart1').getContext('2d');
     const ctx2 = document.getElementById('myChart2').getContext('2d');
-    // const ctx3 = document.getElementById('myChart3').getContext('2d');
+    var optn = document.getElementById('pollutants');
+    var selected_option = optn.options[optn.selectedIndex].value;
 
-    // const globalValue = await getData();
-    const no2values = await getAllno2Date();
-    const no2weeklyvalues = await getAllno2WeeklyDate();
-    const no2monthsvalues = await getAllno2MonthlyDate();
+    var filename = selected_option + '_data.csv';
+    var title = '';
+    if (selected_option == 'no2') {
+        title = 'Nitrogen Dioxide';
+    } else if (selected_option == 'so2') {
+        title = 'Sulphur Dioxide';
+    } else {
+        title = 'Carbon DIoxide';
+    }
+    const no2values = await getAllno2Date(filename);
+    const no2weeklyvalues = await getAllno2WeeklyDate(filename);
+    const no2monthsvalues = await getAllno2MonthlyDate(filename);
     // valueUpdate(globalValue);
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: no2values.date,
             datasets: [{
-                    label: 'Nitrogen Dixoide',
+                    label: title,
                     data: no2values.no2,
                     fill: false,
                     pointRadius: 1.5,
@@ -25,7 +34,7 @@ async function setup() {
                     borderWidth: 1
                 },
                 {
-                    label: 'Nitrogen Dixoide (Predicted)',
+                    label: title + ' (Predicted)',
                     data: no2values.no2_pred,
                     fill: false,
                     pointRadius: 1.5,
@@ -40,7 +49,7 @@ async function setup() {
             responsive: true,
             title: {
                 display: true,
-                text: 'Nitrogen Dixoxide Daily Data Comparison',
+                text: title + ' Daily Data Comparison',
                 position: 'top',
                 fontSize: 30,
                 fontColor: 'black'
@@ -119,7 +128,7 @@ async function setup() {
             responsive: true,
             title: {
                 display: true,
-                text: 'Nitrogen Dixoxide Year Based Monthly Data Comparison',
+                text: title + ' Year Based Monthly Data Comparison',
                 position: 'top',
                 fontSize: 30,
                 fontColor: 'black'
@@ -195,7 +204,7 @@ async function setup() {
             responsive: true,
             title: {
                 display: true,
-                text: 'Nitrogen Dixoxide Weekly Data Comparison',
+                text: title + ' Weekly Data Comparison',
                 position: 'top',
                 fontSize: 30,
                 fontColor: 'black'
@@ -265,8 +274,8 @@ function avergae(values) {
     return avg;
 }
 
-async function getAllno2Date() {
-    const response = await fetch('no2_data.csv');
+async function getAllno2Date(filename) {
+    const response = await fetch(filename);
     const data = await response.text();
     const date = []
     const no2 = []
@@ -310,8 +319,8 @@ async function getAllno2Date() {
     return { date, no2, no2_pred };
 }
 
-async function getAllno2MonthlyDate() {
-    const response = await fetch('no2_data.csv');
+async function getAllno2MonthlyDate(filename) {
+    const response = await fetch(filename);
     const data = await response.text();
     const months_count18 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const months_values18 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -365,8 +374,8 @@ async function getAllno2MonthlyDate() {
     return { months_avg18, months_avg19, months_avg20, months_avg21 };
 }
 
-async function getAllno2WeeklyDate() {
-    const response = await fetch('no2_data.csv');
+async function getAllno2WeeklyDate(filename) {
+    const response = await fetch(filename);
     const data = await response.text();
     const week18 = [];
     const week19 = [];
