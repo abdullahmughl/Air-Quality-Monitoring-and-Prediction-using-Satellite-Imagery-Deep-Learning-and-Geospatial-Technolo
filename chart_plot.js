@@ -8,7 +8,7 @@ async function setup() {
 
     // const globalValue = await getData();
     const no2values = await getAllno2Date();
-    const no2Dailyvalues = await getAllno2DailyDate();
+    const no2weeklyvalues = await getAllno2WeeklyDate();
     const no2monthsvalues = await getAllno2MonthlyDate();
     // valueUpdate(globalValue);
     const myChart = new Chart(ctx, {
@@ -19,18 +19,18 @@ async function setup() {
                     label: 'Nitrogen Dixoide',
                     data: no2values.no2,
                     fill: false,
-                    pointRadius: 1,
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    pointRadius: 1.5,
+                    borderColor: 'rgba(17, 16, 29, 1)',
+                    backgroundColor: 'rgba(17, 16, 29, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: 'Nitrogen Dixoide (Predicted)',
                     data: no2values.no2_pred,
                     fill: false,
-                    pointRadius: 1,
-                    borderColor: 'rgba(255, 199, 32, 1)',
-                    backgroundColor: 'rgba(255, 199, 132, 0.5)',
+                    pointRadius: 1.5,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     borderWidth: 1
                 }
             ]
@@ -142,8 +142,7 @@ async function setup() {
                         fontColor: 'black'
                     }
                 }]
-            },
-            events: ['click']
+            }
 
         }
     });
@@ -152,39 +151,39 @@ async function setup() {
     const myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: no2Dailyvalues.date,
+            labels: no2weeklyvalues.week,
             datasets: [{
                     label: '2018',
-                    data: no2Dailyvalues.no218,
+                    data: no2weeklyvalues.no218,
                     fill: false,
-                    pointRadius: 0,
+                    pointRadius: 1,
                     borderColor: 'rgba(47, 79, 79, 1)',
                     backgroundColor: 'rgba(0, 255, 127, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: '2019',
-                    data: no2Dailyvalues.no219,
+                    data: no2weeklyvalues.no219,
                     fill: false,
-                    pointRadius: 0,
+                    pointRadius: 1,
                     borderColor: 'rgba(2, 142, 255, 1)',
                     backgroundColor: 'rgba(2, 142, 255, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: '2020',
-                    data: no2Dailyvalues.no220,
+                    data: no2weeklyvalues.no220,
                     fill: false,
-                    pointRadius: 0,
+                    pointRadius: 1,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderWidth: 1
                 },
                 {
                     label: '2021',
-                    data: no2Dailyvalues.no221,
+                    data: no2weeklyvalues.no221,
                     fill: false,
-                    pointRadius: 0,
+                    pointRadius: 1,
                     borderColor: 'rgba(255, 0, 255, 1)',
                     backgroundColor: 'rgba(255, 0, 255, 0.5)',
                     borderWidth: 1
@@ -192,7 +191,34 @@ async function setup() {
             ]
         },
         options: {
-            spanGaps: true,
+            maintainAspectRatio: true,
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Nitrogen Dixoxide Weekly Data Comparison',
+                position: 'top',
+                fontSize: 30,
+                fontColor: 'black'
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Weeks",
+                        fontSize: 20,
+                        fontColor: 'black'
+
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Values in µg/m²",
+                        fontSize: 20,
+                        fontColor: 'black'
+                    }
+                }]
+            }
 
         }
     });
@@ -339,67 +365,79 @@ async function getAllno2MonthlyDate() {
     return { months_avg18, months_avg19, months_avg20, months_avg21 };
 }
 
-async function getAllno2DailyDate() {
+async function getAllno2WeeklyDate() {
     const response = await fetch('no2_data.csv');
     const data = await response.text();
-    const date = [];
+    const week18 = [];
+    const week19 = [];
+    const week20 = [];
+    const week21 = [];
+    const week = [];
     const no218 = [];
     const no219 = [];
     const no220 = [];
     const no221 = [];
     var m;
-    var count = 0;
-    var sdate = document.getElementById("start-date-input").valueAsDate;
-    // console.log(sdate);
-    var edate = document.getElementById("end-date-input").valueAsDate;
-    // console.log(edate);
+    var index = 0;
+    // var count = 0;
+    // var sdate = document.getElementById("start-date-input").valueAsDate;
+    // // console.log(sdate);
+    // var edate = document.getElementById("end-date-input").valueAsDate;
+    // // console.log(edate);
+    for (var i = 0; i < 52; i++) {
+        no218[i] = 0;
+        no219[i] = 0;
+        no220[i] = 0;
+        no221[i] = 0;
+        week18[i] = 0;
+        week19[i] = 0;
+        week20[i] = 0;
+        week21[i] = 0;
+
+    }
     const rows = data.split('\n').slice(1);
     rows.forEach(row => {
-        count = count + 1;
+        // count = count + 1;
         const cols = row.split(',');
         // years.push(cols[0]);
-        var dt = Date.parse(cols[0]);
+        // var dt = Date.parse(cols[0]);
         var dat = new Date(cols[0]);
         // console.log(dt);
-        if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
-            // date.push(cols[0]);
-            m = moment(cols[0], 'MM-DD-YYYY');
-            console.log(m.format('W'));
-            if (count < 2) {
-                date.push(cols[0]);
-            } else {
-                date.push(' ');
-            }
-            var tmep = cols.slice(1);
-            if (dat.getFullYear() == 2018) {
+        // if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+        // date.push(cols[0]);
+        m = moment(cols[0], 'MM-DD-YYYY');
+        index = m.format('W');
+        var tmep = cols.slice(1);
+        if (dat.getFullYear() == 2018) {
 
-                no218.push(avergae(tmep));
+            no218[index] = no218[index] + avergae(tmep);
+            week18[index] = week18[index] + 1;
+        } else if (dat.getFullYear() == 2019) {
 
-            } else if (dat.getFullYear() == 2019) {
+            no219[index] = no219[index] + avergae(tmep);
+            week19[index] = week19[index] + 1;
+        } else if (dat.getFullYear() == 2020) {
 
-                no219.push(avergae(tmep));
+            no220[index] = no220[index] + avergae(tmep);
+            week20[index] = week20[index] + 1;
+        } else {
 
-            } else if (dat.getFullYear() == 2020) {
+            no221[index] = no221[index] + avergae(tmep);
+            week21[index] = week21[index] + 1;
 
-                no220.push(avergae(tmep));
-
-            } else {
-
-                no221.push(avergae(tmep));
-
-            }
         }
-        if (count >= 2) {
-            count = 0;
-        }
+        // }
     });
-    no218.reverse();
-    no219.reverse();
-    no220.reverse();
-    no221.reverse();
-    date.reverse();
+    for (var i = 0; i < 52; i++) {
+        no218[i] = no218[i] / week18[i];
+        no219[i] = no219[i] / week19[i];
+        no220[i] = no220[i] / week20[i];
+        no221[i] = no221[i] / week21[i];
+        week[i] = i + 1;
 
-    return { date, no218, no219, no220, no221 };
+    }
+    // console.log(no218);
+    return { week, no218, no219, no220, no221 };
 }
 
 // async function getAllco2Date() {

@@ -10,7 +10,7 @@ window.onscroll = function() {
         } else {
             document.getElementsByClassName("sidebar")[0].style.left = "-78px";
             document.getElementsByClassName("home_content")[0].style.left = "0px";
-            document.getElementsByClassName("home_content")[0].style.width = "100%";
+            document.getElementsByClassName("home_content")[0].style.width = "100% + 78px";
         }
         prevScrollpos = currentScrollPos;
     }
