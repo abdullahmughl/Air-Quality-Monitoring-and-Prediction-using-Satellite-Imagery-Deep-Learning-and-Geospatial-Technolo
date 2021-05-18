@@ -4,10 +4,12 @@ async function setup() {
     const ctx = document.getElementById('myChart').getContext('2d');
     const ctx1 = document.getElementById('myChart1').getContext('2d');
     const ctx2 = document.getElementById('myChart2').getContext('2d');
-    const ctx3 = document.getElementById('myChart3').getContext('2d');
+    // const ctx3 = document.getElementById('myChart3').getContext('2d');
 
-    const globalValue = await getData();
+    // const globalValue = await getData();
     const no2values = await getAllno2Date();
+    const no2Dailyvalues = await getAllno2DailyDate();
+    const no2monthsvalues = await getAllno2MonthlyDate();
     // valueUpdate(globalValue);
     const myChart = new Chart(ctx, {
         type: 'line',
@@ -17,37 +19,65 @@ async function setup() {
                     label: 'Nitrogen Dixoide',
                     data: no2values.no2,
                     fill: false,
-                    pointRadius: 1.5,
+                    pointRadius: 1,
                     borderColor: 'rgba(255, 99, 132, 1)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     borderWidth: 1
+                },
+                {
+                    label: 'Nitrogen Dixoide (Predicted)',
+                    data: no2values.no2_pred,
+                    fill: false,
+                    pointRadius: 1,
+                    borderColor: 'rgba(255, 199, 32, 1)',
+                    backgroundColor: 'rgba(255, 199, 132, 0.5)',
+                    borderWidth: 1
                 }
-                // {
-                //     label: 'NO2 (Predicted)',
-                //     data: globalValue.no_pre1,
-                //     fill: false,
-                //     pointRadius: 1.5,
-                //     borderColor: 'rgba(255, 199, 32, 1)',
-                //     backgroundColor: 'rgba(255, 199, 132, 0.5)',
-                //     borderWidth: 1
-                // }
             ]
         },
         options: {
             maintainAspectRatio: true,
             responsive: true,
+            title: {
+                display: true,
+                text: 'Nitrogen Dixoxide Daily Data Comparison',
+                position: 'top',
+                fontSize: 30,
+                fontColor: 'black'
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Dates",
+                        fontSize: 20,
+                        fontColor: 'black'
+
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Values in µg/m²",
+                        fontSize: 20,
+                        fontColor: 'black'
+                    }
+                }]
+            },
+            events: ['click']
 
         }
     });
 
 
     const myChart1 = new Chart(ctx1, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: globalValue.years,
+            // labels: so2values.date,
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
-                    label: 'Sulphur Dixoide',
-                    data: globalValue.so,
+                    label: '2018',
+                    data: no2monthsvalues.months_avg18,
                     fill: false,
                     pointRadius: 1.5,
                     borderColor: 'rgba(96, 25, 232, 1)',
@@ -55,12 +85,30 @@ async function setup() {
                     borderWidth: 1
                 },
                 {
-                    label: 'Sulphur Dixoide (Predicted)',
-                    data: globalValue.so_pre1,
+                    label: '2019',
+                    data: no2monthsvalues.months_avg19,
                     fill: false,
                     pointRadius: 1.5,
                     borderColor: 'rgba(22, 172, 112, 1)',
                     backgroundColor: 'rgba(22, 172, 112, 0.5)',
+                    borderWidth: 1
+                },
+                {
+                    label: '2020',
+                    data: no2monthsvalues.months_avg20,
+                    fill: false,
+                    pointRadius: 1.5,
+                    borderColor: 'rgba(245, 170, 66, 1)',
+                    backgroundColor: 'rgba(245, 170, 66, 0.5)',
+                    borderWidth: 1
+                },
+                {
+                    label: '2021',
+                    data: no2monthsvalues.months_avg21,
+                    fill: false,
+                    pointRadius: 1.5,
+                    borderColor: 'rgba(255, 99, 247, 1)',
+                    backgroundColor: 'rgba(255, 99, 247, 0.5)',
                     borderWidth: 1
                 }
 
@@ -69,6 +117,33 @@ async function setup() {
         options: {
             maintainAspectRatio: true,
             responsive: true,
+            title: {
+                display: true,
+                text: 'Nitrogen Dixoxide Year Based Monthly Data Comparison',
+                position: 'top',
+                fontSize: 30,
+                fontColor: 'black'
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Months",
+                        fontSize: 20,
+                        fontColor: 'black'
+
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Values in µg/m²",
+                        fontSize: 20,
+                        fontColor: 'black'
+                    }
+                }]
+            },
+            events: ['click']
 
         }
     });
@@ -77,62 +152,80 @@ async function setup() {
     const myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: globalValue.years,
+            labels: no2Dailyvalues.date,
             datasets: [{
-                    label: 'Carbon',
-                    data: globalValue.co,
+                    label: '2018',
+                    data: no2Dailyvalues.no218,
                     fill: false,
-                    pointRadius: 1.5,
+                    pointRadius: 0,
                     borderColor: 'rgba(47, 79, 79, 1)',
                     backgroundColor: 'rgba(0, 255, 127, 0.5)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Carbon Dixoide (Predicted)',
-                    data: globalValue.co_pre1,
+                    label: '2019',
+                    data: no2Dailyvalues.no219,
                     fill: false,
-                    pointRadius: 1.5,
+                    pointRadius: 0,
                     borderColor: 'rgba(2, 142, 255, 1)',
                     backgroundColor: 'rgba(2, 142, 255, 0.5)',
                     borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            spanGaps: true,
-
-        }
-    });
-
-
-    const myChart3 = new Chart(ctx3, {
-        type: 'line',
-        data: {
-            labels: globalValue.years,
-            datasets: [{
-                    label: 'CO2',
-                    data: globalValue.co2,
-                    fill: false,
-                    pointRadius: 2.5,
-                    borderColor: 'rgba(255, 0, 255, 1)',
-                    backgroundColor: 'rgba(255, 0, 255, 0.5)',
-                    borderWidth: 1
                 },
                 {
-                    label: 'CO2 (Predicted)',
-                    data: globalValue.co2_pre1,
+                    label: '2020',
+                    data: no2Dailyvalues.no220,
                     fill: false,
-                    pointRadius: 2.5,
+                    pointRadius: 0,
                     borderColor: 'rgba(255, 0, 0, 1)',
                     backgroundColor: 'rgba(255, 0, 0, 0.5)',
                     borderWidth: 1
+                },
+                {
+                    label: '2021',
+                    data: no2Dailyvalues.no221,
+                    fill: false,
+                    pointRadius: 0,
+                    borderColor: 'rgba(255, 0, 255, 1)',
+                    backgroundColor: 'rgba(255, 0, 255, 0.5)',
+                    borderWidth: 1
                 }
             ]
         },
         options: {
             spanGaps: true,
+
         }
     });
+
+
+    // const myChart3 = new Chart(ctx3, {
+    //     type: 'line',
+    //     data: {
+    //         labels: globalValue.years,
+    //         datasets: [{
+    //                 label: 'CO2',
+    //                 data: globalValue.co2,
+    //                 fill: false,
+    //                 pointRadius: 2.5,
+    //                 borderColor: 'rgba(255, 0, 255, 1)',
+    //                 backgroundColor: 'rgba(255, 0, 255, 0.5)',
+    //                 borderWidth: 1
+    //             },
+    //             {
+    //                 label: 'CO2 (Predicted)',
+    //                 data: globalValue.co2_pre1,
+    //                 fill: false,
+    //                 pointRadius: 2.5,
+    //                 borderColor: 'rgba(255, 0, 0, 1)',
+    //                 backgroundColor: 'rgba(255, 0, 0, 0.5)',
+    //                 borderWidth: 1
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         spanGaps: true,
+    //     }
+    // });
 }
 
 function avergae(values) {
@@ -151,6 +244,8 @@ async function getAllno2Date() {
     const data = await response.text();
     const date = []
     const no2 = []
+    const no2_pred = []
+    var count = 0
     var sdate = document.getElementById("start-date-input").valueAsDate;
     // console.log(sdate);
     var edate = document.getElementById("end-date-input").valueAsDate;
@@ -158,133 +253,252 @@ async function getAllno2Date() {
     const rows = data.split('\n').slice(1);
     var val = rows[0].split(',');
     rows.forEach(row => {
+        count = count + 1;
         const cols = row.split(',');
         // years.push(cols[0]);
         var dt = Date.parse(cols[0]);
-        console.log(dt);
+        // console.log(dt);
         if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
-            date.push(cols[0]);
+            // date.push(cols[0]);
             var tmep = cols.slice(1);
             no2.push(avergae(tmep));
         }
-    });
+        if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(edate)) + (1000 * 60 * 60 * 24 * 15))) {
+            if (count < 2) {
+                date.push(cols[0]);
+            } else {
+                date.push(' ');
+            }
+            var tmep = cols.slice(1);
+            no2_pred.push(avergae(tmep));
+        }
+        if (count >= 2) {
+            count = 0;
+        }
 
-    return { date, no2 };
+    });
+    no2.reverse();
+    no2_pred.reverse();
+    date.reverse();
+
+    return { date, no2, no2_pred };
 }
-async function getAllso2Date() {
-    const response = await fetch('so2_data.csv');
+
+async function getAllno2MonthlyDate() {
+    const response = await fetch('no2_data.csv');
     const data = await response.text();
-    const date = []
-    const no2 = []
+    const months_count18 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_values18 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_avg18 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_count19 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_values19 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_avg19 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_count20 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_values20 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_avg20 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_count21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_values21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const months_avg21 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const rows = data.split('\n').slice(1);
-    var val = rows[0].split(',');
     rows.forEach(row => {
         const cols = row.split(',');
         // years.push(cols[0]);
-        date.push(cols[0]);
+        var dat = new Date(cols[0]);
+
+        // date.push(cols[0]);
         var tmep = cols.slice(1);
-        no2.push(avergae(tmep));
+        // no2.push(avergae(tmep));
+        if (dat.getFullYear() == 2018) {
+
+            months_values18[dat.getMonth()] = months_values18[dat.getMonth()] + avergae(tmep);
+            months_count18[dat.getMonth()] = months_count18[dat.getMonth()] + 1;
+        } else if (dat.getFullYear() == 2019) {
+
+            months_values19[dat.getMonth()] = months_values19[dat.getMonth()] + avergae(tmep);
+            months_count19[dat.getMonth()] = months_count19[dat.getMonth()] + 1;
+        } else if (dat.getFullYear() == 2020) {
+
+            months_values20[dat.getMonth()] = months_values20[dat.getMonth()] + avergae(tmep);
+            months_count20[dat.getMonth()] = months_count20[dat.getMonth()] + 1;
+        } else {
+
+            months_values21[dat.getMonth()] = months_values21[dat.getMonth()] + avergae(tmep);
+            months_count21[dat.getMonth()] = months_count21[dat.getMonth()] + 1;
+        }
+
+
     });
 
-    return { date, so2 };
-}
-async function getAllco2Date() {
-    const response = await fetch('co2_data.csv');
-    const data = await response.text();
-    const date = []
-    const no2 = []
-    const rows = data.split('\n').slice(1);
-    var val = rows[0].split(',');
-    rows.forEach(row => {
-        const cols = row.split(',');
-        // years.push(cols[0]);
-        date.push(cols[0]);
-        var tmep = cols.slice(1);
-        no2.push(avergae(tmep));
-    });
+    for (var i = 0; i < 12; i++) {
+        months_avg18[i] = months_values18[i] / months_count18[i];
+        months_avg19[i] = months_values19[i] / months_count19[i];
+        months_avg20[i] = months_values20[i] / months_count20[i];
+        months_avg21[i] = months_values21[i] / months_count21[i];
+    }
 
-    return { date, co2 };
-}
-async function getAllcoDate() {
-    const response = await fetch('co_data.csv');
-    const data = await response.text();
-    const date = []
-    const no2 = []
-    const rows = data.split('\n').slice(1);
-    var val = rows[0].split(',');
-    rows.forEach(row => {
-        const cols = row.split(',');
-        // years.push(cols[0]);
-        date.push(cols[0]);
-        var tmep = cols.slice(1);
-        no2.push(avergae(tmep));
-    });
-
-    return { date, co };
+    return { months_avg18, months_avg19, months_avg20, months_avg21 };
 }
 
-
-async function getData() {
-    // const response = await fetch('testdata.csv');
-    // getAllDate();
-    const response = await fetch('Air_Pollutant_Data.csv');
+async function getAllno2DailyDate() {
+    const response = await fetch('no2_data.csv');
     const data = await response.text();
-
-    const response_pre = await fetch('Air_Pollutant_Data_predicted.csv');
-    const data_pre = await response_pre.text();
+    const date = [];
+    const no218 = [];
+    const no219 = [];
+    const no220 = [];
+    const no221 = [];
+    var m;
+    var count = 0;
     var sdate = document.getElementById("start-date-input").valueAsDate;
-    console.log(sdate);
+    // console.log(sdate);
     var edate = document.getElementById("end-date-input").valueAsDate;
-    console.log(edate);
-    const years = [];
-
-    const no = [];
-    const so = [];
-    const co = [];
-    const co2 = [];
-    const no_pre1 = [];
-    const so_pre1 = [];
-    const co_pre1 = [];
-    const co2_pre1 = [];
+    // console.log(edate);
     const rows = data.split('\n').slice(1);
-    const rows_pre = data_pre.split('\n').slice(1);
-
-    var val = rows[0].split(',');
-    const no2_val = parseInt(val[1]);
-    const so2_val = parseInt(val[2]);
-    const co2_val = parseInt(val[3]);
-    const no2_val_pre = parseInt(parseFloat(val[1]) * 1.12);
-    const so2_val_pre = parseInt(parseFloat(val[2]) * 0.96);
-    const co2_val_pre = parseInt(parseFloat(val[3]) * 1.06);
-    const no2_val_wek = parseInt(parseFloat(val[1]) * 1.07);
-    const so2_val_wek = parseInt(parseFloat(val[2]) * 1.13);
-    const co2_val_wek = parseInt(parseFloat(val[3]) * 0.97);
-
     rows.forEach(row => {
+        count = count + 1;
         const cols = row.split(',');
-        // console.log(Date.parse(cols[0]));
+        // years.push(cols[0]);
         var dt = Date.parse(cols[0]);
-        console.log(dt);
+        var dat = new Date(cols[0]);
+        // console.log(dt);
         if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+            // date.push(cols[0]);
+            m = moment(cols[0], 'MM-DD-YYYY');
+            console.log(m.format('W'));
+            if (count < 2) {
+                date.push(cols[0]);
+            } else {
+                date.push(' ');
+            }
+            var tmep = cols.slice(1);
+            if (dat.getFullYear() == 2018) {
 
-            no.push(parseFloat(cols[1]));
-            so.push(parseFloat(cols[2]));
-            co.push(parseFloat(cols[3]));
-            co2.push(parseFloat(cols[4]));
+                no218.push(avergae(tmep));
+
+            } else if (dat.getFullYear() == 2019) {
+
+                no219.push(avergae(tmep));
+
+            } else if (dat.getFullYear() == 2020) {
+
+                no220.push(avergae(tmep));
+
+            } else {
+
+                no221.push(avergae(tmep));
+
+            }
+        }
+        if (count >= 2) {
+            count = 0;
         }
     });
+    no218.reverse();
+    no219.reverse();
+    no220.reverse();
+    no221.reverse();
+    date.reverse();
 
-    rows_pre.forEach(row => {
-        const cols = row.split(',');
-        var dt = Date.parse(cols[0]);
-        console.log(dt);
-        if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
-            years.push(cols[0]);
-            no_pre1.push(parseFloat(cols[1]));
-            so_pre1.push(parseFloat(cols[2]));
-            co_pre1.push(parseFloat(cols[3]));
-            co2_pre1.push(parseFloat(cols[4]));
-        }
-    });
-    return { years, no, so, co, co2, no_pre1, so_pre1, co_pre1, co2_pre1, no2_val, so2_val, co2_val, no2_val_pre, so2_val_pre, co2_val_pre, no2_val_wek, so2_val_wek, co2_val_wek };
+    return { date, no218, no219, no220, no221 };
 }
+
+// async function getAllco2Date() {
+//     const response = await fetch('co2_data.csv');
+//     const data = await response.text();
+//     const date = []
+//     const no2 = []
+//     const rows = data.split('\n').slice(1);
+//     var val = rows[0].split(',');
+//     rows.forEach(row => {
+//         const cols = row.split(',');
+//         // years.push(cols[0]);
+//         date.push(cols[0]);
+//         var tmep = cols.slice(1);
+//         no2.push(avergae(tmep));
+//     });
+
+//     return { date, co2 };
+// }
+// async function getAllcoDate() {
+//     const response = await fetch('co_data.csv');
+//     const data = await response.text();
+//     const date = []
+//     const no2 = []
+//     const rows = data.split('\n').slice(1);
+//     var val = rows[0].split(',');
+//     rows.forEach(row => {
+//         const cols = row.split(',');
+//         // years.push(cols[0]);
+//         date.push(cols[0]);
+//         var tmep = cols.slice(1);
+//         no2.push(avergae(tmep));
+//     });
+
+//     return { date, co };
+// }
+
+
+// async function getData() {
+//     // const response = await fetch('testdata.csv');
+//     // getAllDate();
+//     const response = await fetch('Air_Pollutant_Data.csv');
+//     const data = await response.text();
+
+//     const response_pre = await fetch('Air_Pollutant_Data_predicted.csv');
+//     const data_pre = await response_pre.text();
+//     var sdate = document.getElementById("start-date-input").valueAsDate;
+//     // console.log(sdate);
+//     var edate = document.getElementById("end-date-input").valueAsDate;
+//     // console.log(edate);
+//     const years = [];
+
+//     const no = [];
+//     const so = [];
+//     const co = [];
+//     const co2 = [];
+//     const no_pre1 = [];
+//     const so_pre1 = [];
+//     const co_pre1 = [];
+//     const co2_pre1 = [];
+//     const rows = data.split('\n').slice(1);
+//     const rows_pre = data_pre.split('\n').slice(1);
+
+//     var val = rows[0].split(',');
+//     const no2_val = parseInt(val[1]);
+//     const so2_val = parseInt(val[2]);
+//     const co2_val = parseInt(val[3]);
+//     const no2_val_pre = parseInt(parseFloat(val[1]) * 1.12);
+//     const so2_val_pre = parseInt(parseFloat(val[2]) * 0.96);
+//     const co2_val_pre = parseInt(parseFloat(val[3]) * 1.06);
+//     const no2_val_wek = parseInt(parseFloat(val[1]) * 1.07);
+//     const so2_val_wek = parseInt(parseFloat(val[2]) * 1.13);
+//     const co2_val_wek = parseInt(parseFloat(val[3]) * 0.97);
+
+//     rows.forEach(row => {
+//         const cols = row.split(',');
+//         // console.log(Date.parse(cols[0]));
+//         var dt = Date.parse(cols[0]);
+//         // console.log(dt);
+//         if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+
+//             no.push(parseFloat(cols[1]));
+//             so.push(parseFloat(cols[2]));
+//             co.push(parseFloat(cols[3]));
+//             co2.push(parseFloat(cols[4]));
+//         }
+//     });
+
+//     rows_pre.forEach(row => {
+//         const cols = row.split(',');
+//         var dt = Date.parse(cols[0]);
+//         // console.log(dt);
+//         if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+//             years.push(cols[0]);
+//             no_pre1.push(parseFloat(cols[1]));
+//             so_pre1.push(parseFloat(cols[2]));
+//             co_pre1.push(parseFloat(cols[3]));
+//             co2_pre1.push(parseFloat(cols[4]));
+//         }
+//     });
+//     return { years, no, so, co, co2, no_pre1, so_pre1, co_pre1, co2_pre1, no2_val, so2_val, co2_val, no2_val_pre, so2_val_pre, co2_val_pre, no2_val_wek, so2_val_wek, co2_val_wek };
+// }

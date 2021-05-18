@@ -1,10 +1,17 @@
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-        document.getElementById("nav-bar").style.top = "0";
-    } else {
-        document.getElementById("nav-bar").style.top = "-70px";
+    var viewportWidth = screen.width;
+    if (viewportWidth < 900) {
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementsByClassName("sidebar")[0].style.left = "0px";
+            document.getElementsByClassName("home_content")[0].style.left = "78px";
+
+        } else {
+            document.getElementsByClassName("sidebar")[0].style.left = "-78px";
+            document.getElementsByClassName("home_content")[0].style.left = "0px";
+            document.getElementsByClassName("home_content")[0].style.width = "100%";
+        }
+        prevScrollpos = currentScrollPos;
     }
-    prevScrollpos = currentScrollPos;
 }

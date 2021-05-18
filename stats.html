@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="navscroller.js"></script>
     <script src="chart_plot.js"></script>
     <style>
@@ -55,15 +56,15 @@
 
     </br>
     </br>
-    <div class="row">
+    <div class="row  d-flex justify-content-center">
         <div class="container d-flex justify-content-center">
-            <h5>Weekly comparison between NO<sub>2</sub> and SO<sub>2</sub> air pollutants from 2019 to 2021</h5>
+            <h5 style="text-align: center;">Weekly comparison between NO<sub>2</sub> and SO<sub>2</sub> air pollutants from 2019 to 2021</h5>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row  d-flex justify-content-center">
         <div class="container d-flex justify-content-center">
-            <h5>Common Air pollutant Graphs with 10 days Prediction</h5>
+            <h5 style="text-align: center;">Common Air pollutant Graphs with 10 days Prediction</h5>
         </div>
     </div>
 
@@ -91,35 +92,30 @@
     </br>
 
 
-    <div class="row" style="padding: 50px;">
-        <div class="col-12 col-sm-6 " style="padding: 10px;">
-            <canvas id="myChart" height="200px"></canvas>
-            </br>
-            <h4>Nitrogen Dioxide</h4>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-lg-8">
+            <canvas id="myChart" height="220px"></canvas>
         </div>
 
 
-        <div class="col-12 col-sm-6 " style="padding: 10px;">
-            <canvas id="myChart1" height="200px"></canvas>
-            </br>
-            <h4>Sulphur Dioxide</h4>
+        <div class="col-12 col-lg-8" style="padding: 10px;">
+            <canvas id="myChart1" height="250px"></canvas>
+
         </div>
     </div>
 
     </br>
     </br>
 
-    <div class="row" style="padding: 50px;">
-        <div class="col-12 col-sm-6 " style="padding: 10px;">
-            <canvas id="myChart2" height="200px"></canvas>
-            </br>
-            <h4>Carbon Monoxide</h4>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-lg-8 " style="padding: 10px;">
+            <canvas id="myChart2" height="250px"></canvas>
+
         </div>
 
-        <div class="col-12 col-sm-6 " style="padding: 10px;">
+        <div class="col-12 col-lg-8 " style="padding: 10px;">
             <canvas id="myChart3" height="200px"></canvas>
-            </br>
-            <h4>Carbon Dioxide</h4>
+
         </div>
     </div>
 
