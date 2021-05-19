@@ -125,6 +125,34 @@ th {
     display: none;
 } */
 
+.circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 13px;
+    color: black;
+    text-align: center;
+    margin: 15px;
+}
+
+.circle p {
+    position: relative;
+    top: 80px;
+    font-weight: 500;
+    /* line-height: 150px; */
+    text-align: center;
+    /* width: 100px; */
+    /* margin-right: 15px; */
+    /* justify-content: center; */
+}
+
+.aqi_circle {
+    display: flex;
+    flex-direction: row;
+    /* padding-left: 10px; */
+    width: 600px;
+}
+
 .loader {
     height: 100vh;
     width: 100vw;
