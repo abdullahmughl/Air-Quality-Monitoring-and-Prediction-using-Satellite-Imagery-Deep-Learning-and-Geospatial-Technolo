@@ -1,145 +1,95 @@
-google.charts.load('current', { packages: ['corechart', 'line'] });
-google.charts.setOnLoadCallback(drawLineColors);
+window.addEventListener('load', update);
 
-function drawLineColors() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('number', 'X');
-    data.addColumn('number', 'Actual');
-    data.addColumn('number', 'Predicted');
+async function update() {
+    var optn = document.getElementById('pollutants');
+    var selected_option = optn.options[optn.selectedIndex].value;
 
-    data.addRows([
-        [0, 0, 0],
-        [1, 10, 5],
-        [2, 23, 15],
-        [3, 17, 9],
-        [4, 18, 10],
-        [5, 9, 5],
-        [6, 11, 3],
-        [7, 27, 19],
-        [8, 33, 25],
-        [9, 40, 32],
-        [10, 32, 24],
-        [11, 35, 27],
-        [12, 30, 22],
-        [13, 40, 32],
-        [14, 42, 34],
-        [15, 47, 39],
-        [16, 44, 36],
-        [17, 48, 40],
-        [18, 52, 44],
-        [19, 54, 46],
-        [20, 42, 34],
-        [21, 55, 47],
-        [22, 56, 48],
-        [23, 57, 49],
-        [24, 60, 52],
-        [25, 50, 42],
-        [26, 50, 44],
-        [27, 51, 43],
-        [28, 49, 41],
-        [29, 53, 45],
-        [30, 55, 47],
-        [31, 60, 52],
-        [32, 61, 53],
-        [33, 59, 51],
-        [34, 62, 54],
-        [35, 65, 57],
-        [36, 62, 54],
-        [37, 58, 50],
-        [38, 55, 47],
-        [39, 61, 53],
-        [40, 64, 56],
-        [41, 65, 57],
-        [42, 63, 55],
-        [43, 66, 58],
-        [44, 67, 59],
-        [45, 69, 61],
-        [46, 69, 61],
-        [47, 70, 62],
-        [48, 72, 64],
-        [49, 68, 60],
-        [50, 66, 58],
-        [51, 65, 57],
-        [52, 67, 59],
-        [53, 70, 62],
-        [54, 71, 63],
-        [55, 72, 64],
-        [56, 73, 65],
-        [57, 75, 67],
-        [58, 70, 62],
-        [59, 68, 60],
-        [60, 64, 56],
-        [61, 60, 52],
-        [62, 65, 57],
-        [63, 67, 59],
-        [64, 68, 60],
-        [65, 69, 61],
-        [66, 70, 62],
-        [67, 72, 64],
-        [68, 75, 67],
-        [69, 80, 72]
-    ]);
+    var filename = selected_option + '_data.csv';
+    var title = '';
+    if (selected_option == 'no2') {
+        title = 'Nitrogen Dioxide';
+    } else if (selected_option == 'so2') {
+        title = 'Sulphur Dioxide';
+    } else {
+        title = 'Carbon DIoxide';
+    }
+    var loc = document.getElementById('locations');
+    var selected_loc = loc.options[loc.selectedIndex].value;
 
-    var options = {
-        hAxis: {
-            title: 'Date'
-        },
-        vAxis: {
-            title: 'Values'
-        },
-        colors: ['#a52714', '#097138'],
-        'height': 300
-    };
+    if (selected_loc == 'lahore') {
+        dataloader(filename, 1);
+    } else {
+        dataloader(filename, 2);
+    }
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+    console.log(title);
+
 }
 
+async function dataloader(filename, ind) {
+    const response = await fetch(filename);
+    const data = await response.text();
+    var fulltabel = '';
+    var tableheader = '<tr><th>Date</th>';
+    const locationNames = ['Ravi River', 'Shamkay Bhattian', 'Bahria Town School and College', 'Kot Arain', 'Jhedu Minor', 'Jinnah Sector LDA City', 'Institute of Southern Lahore', 'Badhwar', 'Ravi River', 'Khudpur', 'Bahria Town Marquee', 'Barkat Ali Market, Riwind Rd', 'Bakra Mandi, Defence Road', 'Lahore Ring Road, Kahna Interchange', 'Ahlu Rd', 'Mallian Road', 'Sultan Pur', 'Thathan Naulan', 'Model Baraz, Chung', 'Bilal Town, LDA Avenue', 'Wapda Town, Phase 1', 'Pak-Arab Housing Scheme', 'Deo Kalan', 'Thethar Rd', 'Nizampura', 'Sharaqpur', 'Ravi River, Katar Band South', 'General Bus Stand, Thoker Niaz Baig', 'Johar Town Park', 'Pak Electron Limited (PEL), Walton Road', 'Khyaban-e-Jinnah Rd, Sector-G', 'Jamia Masjid, Defence Raya Golf Resort', 'Qillah Sharief', 'Canal Upper Chenab', 'Forest Reserve 2, Shadhanwali', 'Shahdiwal', 'Qasim Ali Shah Foundation, Wahdat Road', 'Gulberg III, Block C3', 'Allama Iqbal International Airport', 'Lahore School of Economics, Shabbir Sharif Rd', 'Chak 22', 'West Minister Farmhouse', 'Katal, Lahore-Jaranwala Rd', 'Burj, Near Ravi River', 'Samanabad Town', 'Punjab Board of Investment & Trade PBIT', 'Al-Faisal Town', 'Paragon City', 'Chak 10', 'Budho Sharif', 'Burj Attari Stadium', 'Lahore Multan Motorway Interchange', 'Bund Road, Khokhar Town', 'Shaheen Park, Shad Bagh', 'Shalimar Housing Scheme, Sue Wala Road', 'Lahore Medical and Dental College', 'Dhamoke, Sheikhupura Rd', 'Pind Road, Sheikhpura', 'Kala Shah Kaku', 'Kot Abdul Malik', 'Shahdara', 'Jhuggian Jodha', 'Sialkot Lahore Motorway', 'Natt Kalan'];
+    const lhr_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60];
+    var tablebody = '';
+    var sdate = document.getElementById("start-date-input").valueAsDate;
+    // console.log(sdate);
+    var edate = document.getElementById("end-date-input").valueAsDate;
+    // console.log(edate);
 
+    if (ind == 1) {
 
-google.load("visualization", "1", {
-    packages: ["corechart"]
-});
-google.setOnLoadCallback(drawChart);
-
-function drawChart() {
-
-    var data = new google.visualization.DataTable();
-    data.addColumn('number', 'Month');
-    data.addColumn('number', '2019');
-    data.addColumn('number', '2020');
-    data.addRows([
-        [{ v: 0, f: 'Jan' }, 1000, 1200],
-        [{ v: 1, f: 'Feb' }, 1170, 900],
-        [{ v: 2, f: 'Mar' }, 660, 700],
-        [{ v: 3, f: 'Apr' }, 1030, 800]
-    ]);
-
-    var options = {
-        curveType: 'function',
-        title: '',
-        hAxis: {
-            title: 'Month',
-            titleTextStyle: {
-                color: '#333'
-            },
-            baseline: 0,
-            gridlines: {
-                color: '#f3f3f3',
-                count: 4
-            },
-            ticks: [{ v: 0, f: 'January' }, { v: 1, f: 'Feburary' }, { v: 2, f: 'March' }, { v: 3, f: 'April' }]
-        },
-        vAxis: {
-            minValue: 0,
-            gridlines: {
-                color: '#f3f3f3',
-                count: 5
-            },
-            title: 'Values'
+        for (var i = 0; i < lhr_arr.length; i++) {
+            tableheader = tableheader + '<th>' + locationNames[lhr_arr[i]] + '</th>';
         }
-    };
+        tableheader = tableheader + '</tr>';
+        const rows = data.split('\n').slice(1);
+        rows.forEach(row => {
+            const cols = row.split(',');
+            // years.push(cols[0]);
+            var dt = Date.parse(cols[0]);
+            // console.log(dt);
+            if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+                // date.push(cols[0]);
+                len = lhr_arr.length;
+                tablebody = tablebody + '<tr>';
+                tablebody = tablebody + '<td>' + cols[0] + '</td>';
+                for (var i = 0; i < len; i++) {
+                    tablebody = tablebody + '<td>' + cols[lhr_arr[i]] + '</td>';
+                }
+                tablebody = tablebody + '</tr>';
+            }
 
-    var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-    chart.draw(data, options);
+        });
+    } else {
+
+        for (var i = 0; i < 64; i++) {
+            tableheader = tableheader + '<th>' + locationNames[i] + '</th>';
+        }
+        tableheader = tableheader + '</tr>';
+        const rows = data.split('\n').slice(1);
+        rows.forEach(row => {
+            const cols = row.split(',');
+            // years.push(cols[0]);
+            var dt = Date.parse(cols[0]);
+            // console.log(dt);
+            if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
+                // date.push(cols[0]);
+                len = cols.length;
+                tablebody = tablebody + '<tr>';
+                for (var i = 0; i < 65; i++) {
+                    tablebody = tablebody + '<td>' + cols[i] + '</td>';
+                }
+                tablebody = tablebody + '</tr>';
+            }
+
+        });
+    }
+
+    fulltabel = '<table class="table table-bordered table-striped">' + tableheader + tablebody + '</table>';
+    document.getElementById('no2_table').innerHTML = fulltabel;
+
+    return { fulltabel };
 }
