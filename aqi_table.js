@@ -42,8 +42,6 @@ async function getNo2preAQI() {
         } else {
             aqi_no2.push(scale(no2[i], 400, 600, 401, 500));
         }
-
-        // console.log(aqi_no2);
         no2.reverse();
         aqi_no2.reverse();
         date.reverse();
