@@ -18,10 +18,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <script src="http://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
     <script src="navscroller.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="table.js"></script>
+    <link rel="stylesheet" href="table.css">
 
 </head>
 
@@ -87,26 +86,38 @@
                     <div class="col-6 form-group row">
 
                         <label for="pollutants" class="col-6 col-form-label">Choose an air pollutant:</label>
-                        <select name="pollutants" id="pollutants" style="border-radius: 15px; width: 180px">
+                        <select name="pollutants" id="pollutants" style="border-radius: 15px; width: 180px" onchange="update()">
                             <option value="no2" selected="selected">Nitrogen Dioxide</option>
                             <option value="so2">Sulphur Dioxide</option>
                             <option value="co2">Carbon Dioxide</option>
                         </select>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-6 form-group row">
+
+                        <label for="locations" class="col-8 col-form-label">Choose your desired location/Data Type:</label>
+                        <select name="locations" id="locations" style="border-radius: 15px; width: 180px" onchange="update()">
+                            <option value="lahore" selected="selected">Lahore</option>
+                            <option value="raw">Raw Data</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="row">
 
                     <div class="col-6 form-group row">
                         <label for="example-date-input" class="col-4 col-form-label">Start Date</label>
                         <div class="col-8">
-                            <input class="form-control" type="date" value="2019-12-01" id="start-date-input">
+                            <input class="form-control" type="date" value="2021-04-15" id="start-date-input" onchange="update()">
                         </div>
                     </div>
                     <!-- <div class="col-4"></div> -->
                     <div class="col-6 form-group row">
                         <label for="example-date-input" class="col-4 col-form-label">End Date</label>
                         <div class="col-8">
-                            <input class="form-control" type="date" value="2020-10-22" id="end-date-input">
+                            <input class="form-control" type="date" value="2021-05-15" id="end-date-input" onchange="update()">
                         </div>
                     </div>
                 </div>
@@ -115,37 +126,31 @@
 
             </br>
             </br>
-        </section>
+            </br>
+            <div class="d-flex justify-content-center" style=" align-content: center; ">
 
-
-        <section style="overflow: hidden;">
-
-            <div class="col-12 col-md-10 offset-md-1">
-                <div class="table-responsive">
-                    <h1 class="text-align">Tabular Data of Air Pollutants</h1>
-                    <br />
-                    <div class="col-12">
-                        <input type="checkbox" id="isNo2Checked" name="isNo2Checked" value="NO2">
-                        <label for="isNo2Checked"> Nitrogen Dioxide</label><br>
-                        <input type="checkbox" id="isSo2Checked" name="isSo2Checked" value="SO2">
-                        <label for="isSo2Checked"> Sulphur Dioxide</label><br>
-                        <input type="checkbox" id="isCo2Checked" name="isCo2Checked" value="CO2">
-                        <label for="isSo2Checked"> Carbon Dioxide</label><br>
-                    </div>
-                    <br />
-                </div>
+                <h5 id='tabel_lable'></h5>
             </div>
         </section>
 
-        <br />
-        <div id="no2_table" style="overflow: auto; padding: 15px;">
+
+        <!-- <div class="container ">
+
+            <div id="no2_table " style="overflow: auto; padding: 15px; ">
+            </div>
+        </div> -->
+        <div class="table-fixed-column-outter ">
+            <div class="table-fixed-column-inner ">
+
+            </div>
         </div>
-        <div id="so2_table" style="overflow: auto; padding: 15px;">
-        </div>
-        <div id="co2_table" style="overflow: auto; padding: 15px;">
-        </div>
+
+
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!--     
+    <script src="https://code.jquery.com/jquery-3.6.0.js " integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin=" anonymous "></script>
+
+
 
 
     <script>
@@ -154,17 +159,17 @@
                 var dts = new Date($('#start-date-input').val())
                 var dte = new Date($('#end-date-input').val())
                 var color = ['#fff', '#e91605', '#e95b05', '#e87c21', '#e89606', '#e79d1a', '#e8ab05', '#e8c006', '#e8e406', '#e8054c', '#e93b34', '#df7136', '#ea8444', '#de921a', '#e8b22b', '#dfa911', '#d7e806', '#e9058c', '#e94061', '#ea675f', '#ea675f', '#d6885a', '#d69e4b', '#d6c805', '#c9d505', '#d4058b', '#d43575', '#d55673', '#c58e6f', '#c68a4e', '#b88a4f', '#b8ab39', '#b8d606', '#a20499', '#a13b84', '#a16372', '#a08067', '#a19974', '#a29d63', '#a2a939', '#a2a939', '#7a0498', '#7a3e96', '#7a6286', '#798480', '#79957e', '#7aa27d', '#7ab575', '#7ab575', '#500498', '#58318a', '#425573', '#436b73', '#438e6f', '#41ad6f', '#3ba13b', '#3ba13b', '#0a0498', '#044798', '#047d98', '#047f7c', '#016d55', '#05aa72', '#04aa3e', '#0baa05'];
-                $("#no2_table").toggle(this.checked);
+                $("#no2_table ").toggle(this.checked);
 
                 $.ajax({
-                    url: "no2_data.csv",
-                    dataType: "text",
+                    url: "no2_data.csv ",
+                    dataType: "text ",
                     success: function(data) {
                         var ate = true;
                         var employee_data = data.split(/\r?\n|\r/);
-                        var table_data = '<h5>NO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped">';
+                        var table_data = '<h5>NO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped ">';
                         for (var count = 0; count < employee_data.length; count++) {
-                            var cell_data = employee_data[count].split(",");
+                            var cell_data = employee_data[count].split(", ");
                             table_data += '<tr>';
                             for (var cell_count = 0; cell_count < cell_data.length; cell_count++) {
                                 if (count === 0) {
@@ -199,17 +204,17 @@
                 var dts = new Date($('#start-date-input').val())
                 var dte = new Date($('#end-date-input').val())
                 var color = ['#fff', '#e91605', '#e95b05', '#e87c21', '#e89606', '#e79d1a', '#e8ab05', '#e8c006', '#e8e406', '#e8054c', '#e93b34', '#df7136', '#ea8444', '#de921a', '#e8b22b', '#dfa911', '#d7e806', '#e9058c', '#e94061', '#ea675f', '#ea675f', '#d6885a', '#d69e4b', '#d6c805', '#c9d505', '#d4058b', '#d43575', '#d55673', '#c58e6f', '#c68a4e', '#b88a4f', '#b8ab39', '#b8d606', '#a20499', '#a13b84', '#a16372', '#a08067', '#a19974', '#a29d63', '#a2a939', '#a2a939', '#7a0498', '#7a3e96', '#7a6286', '#798480', '#79957e', '#7aa27d', '#7ab575', '#7ab575', '#500498', '#58318a', '#425573', '#436b73', '#438e6f', '#41ad6f', '#3ba13b', '#3ba13b', '#0a0498', '#044798', '#047d98', '#047f7c', '#016d55', '#05aa72', '#04aa3e', '#0baa05'];
-                $("#so2_table").toggle(this.checked);
+                $("#so2_table ").toggle(this.checked);
 
                 $.ajax({
-                    url: "so2_data.csv",
-                    dataType: "text",
+                    url: "so2_data.csv ",
+                    dataType: "text ",
                     success: function(data) {
                         var ate = true;
                         var employee_data = data.split(/\r?\n|\r/);
-                        var table_data = '<h5>SO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped">';
+                        var table_data = '<h5>SO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped ">';
                         for (var count = 0; count < employee_data.length; count++) {
-                            var cell_data = employee_data[count].split(",");
+                            var cell_data = employee_data[count].split(", ");
                             table_data += '<tr>';
                             for (var cell_count = 0; cell_count < cell_data.length; cell_count++) {
                                 if (count === 0) {
@@ -243,17 +248,17 @@
                 var dts = new Date($('#start-date-input').val())
                 var dte = new Date($('#end-date-input').val())
                 var color = ['#fff', '#e91605', '#e95b05', '#e87c21', '#e89606', '#e79d1a', '#e8ab05', '#e8c006', '#e8e406', '#e8054c', '#e93b34', '#df7136', '#ea8444', '#de921a', '#e8b22b', '#dfa911', '#d7e806', '#e9058c', '#e94061', '#ea675f', '#ea675f', '#d6885a', '#d69e4b', '#d6c805', '#c9d505', '#d4058b', '#d43575', '#d55673', '#c58e6f', '#c68a4e', '#b88a4f', '#b8ab39', '#b8d606', '#a20499', '#a13b84', '#a16372', '#a08067', '#a19974', '#a29d63', '#a2a939', '#a2a939', '#7a0498', '#7a3e96', '#7a6286', '#798480', '#79957e', '#7aa27d', '#7ab575', '#7ab575', '#500498', '#58318a', '#425573', '#436b73', '#438e6f', '#41ad6f', '#3ba13b', '#3ba13b', '#0a0498', '#044798', '#047d98', '#047f7c', '#016d55', '#05aa72', '#04aa3e', '#0baa05'];
-                $("#co2_table").toggle(this.checked);
+                $("#co2_table ").toggle(this.checked);
 
                 $.ajax({
-                    url: "co2_data.csv",
-                    dataType: "text",
+                    url: "co2_data.csv ",
+                    dataType: "text ",
                     success: function(data) {
                         var ate = true;
                         var employee_data = data.split(/\r?\n|\r/);
-                        var table_data = '<h5>CO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped">';
+                        var table_data = '<h5>CO<sub>2</sub> Data Table</h5><table class="table table-bordered table-striped ">';
                         for (var count = 0; count < employee_data.length; count++) {
-                            var cell_data = employee_data[count].split(",");
+                            var cell_data = employee_data[count].split(", ");
                             table_data += '<tr>';
                             for (var cell_count = 0; cell_count < cell_data.length; cell_count++) {
                                 if (count === 0) {
@@ -281,7 +286,7 @@
             });
 
         });
-    </script>
+    </script> -->
 
 
 </body>
