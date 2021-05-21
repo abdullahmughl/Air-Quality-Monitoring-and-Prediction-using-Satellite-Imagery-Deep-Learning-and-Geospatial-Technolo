@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <h2>Demo</h2>
+        <div class="demo-wrapper">
+            <div class="heatmap" width="834" height="400" style="position: relative;">
+
+                <canvas class="heatmap-canvas" width="834" height="400" style="position: absolute; left: 10px; top: 10px;"></canvas></div>
+            <div class="tooltip" style="display: none; transform: translate(277px, 248px);">105</div>
+            <div class="legend-area">
+                <h4>Legend Title</h4>
+                <span id="min">0</span>
+                <span id="max">10</span>
+                <img id="gradient" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAKCAYAAABCHPt+AAABjElEQVRYR9WX0Y6CMBBFT7PtQvn/71SfoEZ2u2lhoCAKKBDXhExuin3g9vTOKPCe9qdUqmAzbWrIK5R1+KyCwh2ijf4hw1MAOWBRi3UGFMn7a7RxwAm4KDh5uCzXIwvEmo2rrsFWkLuNagU2mPpsP4fWN2xnhpiyf9VVMKM14QyEpzNFzJmu0ZDNSHhEmqnxuXzElpQDtNF1R0aOT8xR7Km1W0+GkHQMIebWnGYxQWhZqhPzGjJ6c4ekDMnRuo4mCCXNtfW+ln0e1UiIkLGyDgzZjZQ0Q/IS7LXPkB1JCRmyJwkhk6b27w1JSInGKDj7xKx7fRwhcrLl3h/rtfkyt591mC+5su6pmDvlz9bnSHubkN3IkEyJGSJklCh73VBLJo3JK2kIabqrI0nR1X/IkMm7f5wF2+pAyKtd1hwFz9a/yiRDVnZbB2VICPUKVVzxWTjJ7Rzyru5Ik7lGyGv0t/6Nc4eYInNFb9KQnLn1paTFK+uj55DQZXWEyDwy1S19DiGvkhX+NyBkZZf1B6NjeGitIY2IAAAAAElFTkSuQmCC"
+                    style="width:100%">
+            </div>
+        </div>
+        <div class="demo-controls">
+            <button class="trigger-refresh btn">re-generate data</button>
+            <br style="clear:both">
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+        </div>
+    </div>
+
+    <!-- <div class="demo-wrapper">
+        <div class="heatmap" style="position: relative;">
+
+            <canvas class="heatmap-canvas" width="834px" height="400px" style="position: absolute; left: 0px; top: 0px;"></canvas></div>
+        <div class="tooltip" style="display: none; transform: translate(15px, 315px);">0</div>
+        <div class="legend-area">
+            <h4>Legend Title</h4>
+            <span id="min">5</span>
+            <span id="max">1227</span>
+            <img id="gradient" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAKCAYAAABCHPt+AAABjElEQVRYR9WX0Y6CMBBFT7PtQvn/71SfoEZ2u2lhoCAKKBDXhExuin3g9vTOKPCe9qdUqmAzbWrIK5R1+KyCwh2ijf4hw1MAOWBRi3UGFMn7a7RxwAm4KDh5uCzXIwvEmo2rrsFWkLuNagU2mPpsP4fWN2xnhpiyf9VVMKM14QyEpzNFzJmu0ZDNSHhEmqnxuXzElpQDtNF1R0aOT8xR7Km1W0+GkHQMIebWnGYxQWhZqhPzGjJ6c4ekDMnRuo4mCCXNtfW+ln0e1UiIkLGyDgzZjZQ0Q/IS7LXPkB1JCRmyJwkhk6b27w1JSInGKDj7xKx7fRwhcrLl3h/rtfkyt591mC+5su6pmDvlz9bnSHubkN3IkEyJGSJklCh73VBLJo3JK2kIabqrI0nR1X/IkMm7f5wF2+pAyKtd1hwFz9a/yiRDVnZbB2VICPUKVVzxWTjJ7Rzyru5Ik7lGyGv0t/6Nc4eYInNFb9KQnLn1paTFK+uj55DQZXWEyDwy1S19DiGvkhX+NyBkZZf1B6NjeGitIY2IAAAAAElFTkSuQmCC"
+                style="width:100%">
+        </div>
+    </div> -->
+    <script src="leaflet-heat.js"></script>
+    <script src="heatmap.min.js"></script>
+    <script src="leaflet-heatmap.js"></script>
+    <script src="test2.js"></script>
+</body>
+
+</html>

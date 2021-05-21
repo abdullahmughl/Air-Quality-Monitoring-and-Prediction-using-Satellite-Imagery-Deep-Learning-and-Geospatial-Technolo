@@ -28,7 +28,7 @@
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <div class="logo_name">Awair</div>
+                <div class="logo_name">A<sup>3</sup></div>
             </div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
@@ -55,7 +55,7 @@
                 <span class="tooltip">Tabular Data</span>
             </li>
             <li>
-                <a href="demo/index.html">
+                <a href="heat-maps.html">
                     <i class='bx bx-map-alt'></i>
                     <span class="links_name">Maps</span>
                 </a>
@@ -71,12 +71,12 @@
             <div class="container">
                 <div class="rowc offset-3 col-6">
                     <!-- 
-                <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                </div> -->
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <span class="input-group-text border-0" id="search-addon">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div> -->
                 </div>
             </div>
             </br>
@@ -87,10 +87,10 @@
 
                         <label for="pollutants" class="col-8 col-form-label">Choose an air pollutant:</label>
                         <select name="pollutants" id="pollutants" style="border-radius: 15px; width: 180px" onchange="update()">
-                            <option value="no2" selected="selected">Nitrogen Dioxide</option>
-                            <option value="so2">Sulphur Dioxide</option>
-                            <option value="co2">Carbon Dioxide</option>
-                        </select>
+                    <option value="no2" selected="selected">Nitrogen Dioxide</option>
+                    <option value="so2">Sulphur Dioxide</option>
+                    <option value="co2">Carbon Dioxide</option>
+                </select>
                     </div>
                 </div>
 
@@ -99,9 +99,9 @@
 
                         <label for="locations" class="col-8 col-form-label">Choose your desired location/Data Type:</label>
                         <select name="locations" id="locations" style="border-radius: 15px; width: 180px" onchange="update()">
-                            <option value="lahore" selected="selected">Lahore</option>
-                            <option value="raw">Raw Data</option>
-                        </select>
+                    <option value="lahore" selected="selected">Lahore</option>
+                    <option value="raw">Raw Data</option>
+                </select>
                     </div>
                 </div>
 
@@ -135,10 +135,10 @@
 
 
         <!-- <div class="container ">
-
-            <div id="no2_table " style="overflow: auto; padding: 15px; ">
-            </div>
-        </div> -->
+    
+    <div id="no2_table " style="overflow: auto; padding: 15px; ">
+    </div>
+</div> -->
         <div class="table-fixed-column-outter ">
             <div class="table-fixed-column-inner ">
 
@@ -147,12 +147,13 @@
 
 
     </div>
+    <script src="home.js"></script>
     <!--     
     <script src="https://code.jquery.com/jquery-3.6.0.js " integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin=" anonymous "></script>
-
-
-
-
+    
+    
+    
+    
     <script>
         $(document).ready(function() {
             $('#isNo2Checked').click(function() {
