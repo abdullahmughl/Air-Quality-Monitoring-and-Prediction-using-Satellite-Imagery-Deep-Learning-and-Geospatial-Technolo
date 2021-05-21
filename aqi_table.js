@@ -28,7 +28,7 @@ async function getNo2preAQI() {
         const cols = row.split(',');
         date.push(cols[0]);
         var value = cols.slice(1);
-        no2.push((avergae(value)) * 460);
+        no2.push((avergae(value)) * 150);
         if (no2[i] < 40) {
             aqi_no2.push(scale(no2[i], 0, 40, 0, 50));
         } else if (no2[i] > 40 && no2[i] <= 80) {
