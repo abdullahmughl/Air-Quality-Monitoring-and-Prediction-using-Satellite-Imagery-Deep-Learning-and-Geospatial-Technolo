@@ -4,7 +4,7 @@ window.addEventListener('load', loader);
 async function loader() {
     var plot = await getDataPoints();
     var testData = {
-        max: 15,
+        max: 120,
         // data: [{ lat: 24.6408, lng: 46.7728, count: 3 },
         //     { lat: 50.75, lng: -1.55, count: 1 },
         //     { lat: 52.6333, lng: 1.75, count: 1 },
@@ -137,7 +137,7 @@ async function loader() {
 
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": 050,
+        "radius": 15,
         "maxOpacity": 15,
         // scales the radius based on map zoom
         "scaleRadius": false,

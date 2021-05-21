@@ -61,7 +61,7 @@ async function getDataPoints() {
     var plotdata = [];
     var prev = [];
     var nxt = [];
-    var repeater = 10;
+    var repeater = 20;
     const rows = data.split('\n').slice(1);
     // rows.forEach(row => {
     // const cols = row.split(',');
@@ -77,27 +77,23 @@ async function getDataPoints() {
         var y_lan = interpolateArray([coords[i][1], coords[i + 1][1]], repeater);
         var val = interpolateArray([parseFloat(temp[Data_arr[i]]), parseFloat(temp[Data_arr[i + 1]])], repeater);
         for (var j = 1; j < repeater; j++) {
-            var obj = { lat: x_lan[j], lng: y_lan[j], count: val[j] * 20 };
+            obj = [x_lan[j], y_lan[j], val[j]];
             plotdata.push(obj);
         }
         prev = nxt;
-        if (x_lan[0] == x_lan[1]) {
-            for (var j = 1; j < repeater; j++) {
-                nxt.push([x_lan[j], y_lan[j], val[j]]);
-                console.log(1);
+        for (var j = 1; j < repeater; j++) {
+            nxt.push([x_lan[j], y_lan[j], val[j]]);
 
-            }
-        } else {
-            nxt = [];
         }
+        console.log(prev.length);
         if (prev.length != 0) {
             for (var j = 0; j < repeater - 2; j++) {
                 var x_tmp = interpolateArray([prev[j][0], nxt[j + 1][0]], repeater);
                 var y_tmp = interpolateArray([prev[j][1], nxt[j + 1][1]], repeater);
                 var v_tmp = interpolateArray([prev[j][2], nxt[j + 1][2]], repeater);
                 for (var k = 1; k < repeater; k++) {
-                    var objx = { lat: x_tmp[k], lng: y_tmp[k], count: v_tmp[k] * 20 };
-                    plotdata.push(objx);
+                    obj = [x_tmp[k], y_tmp[k], v_tmp[k]];
+                    plotdata.push(obj);
 
                 }
 

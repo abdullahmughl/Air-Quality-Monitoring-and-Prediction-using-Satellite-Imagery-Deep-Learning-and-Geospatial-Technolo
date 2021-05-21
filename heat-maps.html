@@ -97,6 +97,7 @@
         <script src="../src/HeatLayer.js"></script> -->
 
     <script src="leaflet-heat.js"></script>
+    <script src="tester.js"></script>
 
     <script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script>
     <script>
@@ -210,30 +211,36 @@
 
         ];
 
+        getDataPoints().then(
+            (message) => {
+                var dataptr = message;
+                var heat = L.heatLayer(dataptr, {
+                    // max: 1,
+                    useLocalExtrema: true,
+                    radius: 15, // default value
+                    blur: 25, // default value
+                    minOpacity: 0.65,
+                    // gradient: {
+                    //     '10': '#80FF00',
+                    //     '20': '#74DF00',
+                    //     '30': '#00ff00',
+                    //     '40': '#FFBF00',
+                    //     '50': '#DBA901',
+                    //     '60': '#DF3A01',
+                    //     '70': '#B40404',
+                    //     '80': '#8A0808',
+                    //     '90': '#610B0B',
+                    //     '100': '#3B0B0B'
+                    // }
+                    // gradient: {
+                    //     1: 'red',
+                    //     0.1: 'blue',
+                    //     0.5: 'lime'
+                    // } // Values can be set for a scale of 0-1
+                }).addTo(map);
+            });
 
-
-        var heat = L.heatLayer(addressPoints, {
-            radius: 65, // default value
-            blur: 25, // default value
-            minOpacity: 0.25,
-            gradient: {
-                '0.1': '#80FF00',
-                '0.2': '#74DF00',
-                '0.3': '#00ff00',
-                '0.4': '#FFBF00',
-                '0.5': '#DBA901',
-                '0.6': '#DF3A01',
-                '0.7': '#B40404',
-                '0.8': '#8A0808',
-                '0.9': '#610B0B',
-                '1.0': '#3B0B0B'
-            }
-            // gradient: {
-            //     1: 'red',
-            //     0.1: 'blue',
-            //     0.5: 'lime'
-            // } // Values can be set for a scale of 0-1
-        }).addTo(map);
+        // var dataptr = await getDataPoints();
     </script>
 </body>
 

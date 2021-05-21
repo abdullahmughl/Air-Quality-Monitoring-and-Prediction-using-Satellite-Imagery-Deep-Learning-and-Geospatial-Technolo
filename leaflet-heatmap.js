@@ -157,12 +157,12 @@
             var data = data.data;
             var len = data.length;
             var d = [];
-            console.log(data);
+            // console.log(data);
 
             while (len--) {
                 var entry = data[len];
-                console.log(entry[latField])
-                console.log(entry[lngField]);
+                // console.log(entry[latField])
+                // console.log(entry[lngField]);
                 var latlng = new L.LatLng(entry[latField], entry[lngField]);
                 var dataObj = { latlng: latlng };
                 dataObj[valueField] = entry[valueField];
