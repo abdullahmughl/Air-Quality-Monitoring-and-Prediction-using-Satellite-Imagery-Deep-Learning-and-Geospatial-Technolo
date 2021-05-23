@@ -4,7 +4,7 @@ window.addEventListener('load', loader);
 async function loader() {
     var plot = await getDataPoints();
     var testData = {
-        // max: 20,
+        // max: 10,
         // min: 0,
         // data: [{ lat: 24.6408, lng: 46.7728, count: 3 },
         //     { lat: 50.75, lng: -1.55, count: 1 },
@@ -230,8 +230,8 @@ async function loader() {
 
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": 12,
-        "maxOpacity": 15,
+        "radius": 0.5,
+        "maxOpacity": 10,
         // scales the radius based on map zoom
         "scaleRadius": false,
         // if set to false the heatmap uses the global maximum for colorization
@@ -245,10 +245,12 @@ async function loader() {
         // which field name in your data represents the data value - default "value"
         valueField: 'count'
     };
-    var zmm = 10;
+    var zmm = 12;
     var map = new L.Map('map', {
         center: new L.LatLng(31.5204, 74.3587),
-        zoom: zmm
+        zoom: zmm,
+        minZoom: zmm,
+        maxZoom: zmm
     });
     var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
