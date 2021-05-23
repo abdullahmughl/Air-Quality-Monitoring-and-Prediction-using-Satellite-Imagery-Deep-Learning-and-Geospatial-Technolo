@@ -4,7 +4,7 @@ window.addEventListener('load', loader);
 async function loader() {
     var plot = await getDataPoints();
     var testData = {
-        max: 120,
+        max: 100,
         // data: [{ lat: 24.6408, lng: 46.7728, count: 3 },
         //     { lat: 50.75, lng: -1.55, count: 1 },
         //     { lat: 52.6333, lng: 1.75, count: 1 },
@@ -137,8 +137,8 @@ async function loader() {
 
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": 15,
-        "maxOpacity": 15,
+        "radius": 20,
+        "maxOpacity": 25,
         // scales the radius based on map zoom
         "scaleRadius": false,
         // if set to false the heatmap uses the global maximum for colorization
