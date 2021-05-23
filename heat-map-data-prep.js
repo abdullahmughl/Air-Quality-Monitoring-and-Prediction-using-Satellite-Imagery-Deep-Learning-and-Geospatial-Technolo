@@ -19,7 +19,7 @@ function interpolateArray(data, fitCount) {
 };
 
 async function getDataPoints() {
-    var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60]
+    var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60, 61, 62, 63];
     var coords = [
         [31.383926, 74.170768],
         [31.383926, 74.229608],
@@ -50,9 +50,12 @@ async function getDataPoints() {
         [31.584239, 74.406129],
 
         [31.624302, 74.288449],
+        [31.624302, 74.347289],
+        [31.624302, 74.406129],
+        [31.624302, 74.46497]
     ];
-    var counter = [3, 3, 3, 3, 2, 2, 0];
-    var reducer = [3, 3, 3, 3, 2, 2, 0];
+    // var counter = [3, 3, 3, 3, 2, 2, 1];
+    var reducer = [3, 3, 3, 3, 2, 2, 2];
     var indexer = 0;
     const response = await fetch('no2_data.csv');
     const data = await response.text();
@@ -77,50 +80,51 @@ async function getDataPoints() {
     // if (dt == (Date.parse(sdate))) {
     // date.push(cols[0]);
     var temp = cols.slice(1);
+    // console.log(Data_arr.length)
     for (var i = 0; i < Data_arr.length - 1; i++) {
         var x_lan = interpolateArray([coords[i][0], coords[i + 1][0]], repeater);
         var y_lan = interpolateArray([coords[i][1], coords[i + 1][1]], repeater);
         var val = interpolateArray([parseFloat(temp[Data_arr[i]]), parseFloat(temp[Data_arr[i + 1]])], repeater);
         for (var j = 1; j < repeater; j++) {
-            if (x_lan[0] == x_lan[1]) {
+            if (x_lan[0] == x_lan[1] && i != (Data_arr.length - 2)) {
 
                 var obj = { lat: x_lan[j], lng: y_lan[j], count: val[j] * 20 };
                 plotdata.push(obj);
             }
         }
-        if (x_lan[0] == x_lan[1]) {
-            prev = nxt;
+        // if (x_lan[0] == x_lan[1]) {
+        //     prev = nxt;
 
-            reducer[indexer] = reducer[indexer] - 1;
-            if (reducer[indexer] != -1) {
-                // nxt = [];
-                for (var j = 1; j < repeater; j++) {
-                    nxt.push([x_lan[j], y_lan[j], val[j]]);
-                    // console.log(1);
+        reducer[indexer] = reducer[indexer] - 1;
+        if (reducer[indexer] != -1) {
+            // nxt = [];
+            for (var j = 1; j < repeater; j++) {
+                nxt.push([x_lan[j], y_lan[j], val[j]]);
+                // console.log(1);
 
-                }
-                console.log(nxt.length);
-                // if (prev.length != 0) {
-                //     for (var j = 0; j < repeater - 1; j++) {
-                //         var x_tmp = interpolateArray([prev[j][0], nxt[j][0]], repeater);
-                //         var y_tmp = interpolateArray([prev[j][1], nxt[j][1]], repeater);
-                //         var v_tmp = interpolateArray([prev[j][2], nxt[j][2]], repeater);
-                //         for (var k = 1; k < repeater; k++) {
-                //             var objx = { lat: x_tmp[k], lng: y_tmp[k], count: v_tmp[k] * 20 };
-                //             plotdata.push(objx);
-
-                //         }
-
-                //     }
-
-                // }
-            } else {
-                indexer += 1;
-                incrementer.push(prev);
-                length_res.push(prev.length);
-                nxt = [];
             }
+            // if (prev.length != 0) {
+            //     for (var j = 0; j < repeater - 1; j++) {
+            //         var x_tmp = interpolateArray([prev[j][0], nxt[j][0]], repeater);
+            //         var y_tmp = interpolateArray([prev[j][1], nxt[j][1]], repeater);
+            //         var v_tmp = interpolateArray([prev[j][2], nxt[j][2]], repeater);
+            //         for (var k = 1; k < repeater; k++) {
+            //             var objx = { lat: x_tmp[k], lng: y_tmp[k], count: v_tmp[k] * 20 };
+            //             plotdata.push(objx);
+
+            //         }
+
+            //     }
+
+            // }
+        } else {
+            prev = nxt;
+            indexer += 1;
+            incrementer.push(prev);
+            length_res.push(prev.length);
+            nxt = [];
         }
+        // }
 
         // console.log(nxt);
         // nxt = [];

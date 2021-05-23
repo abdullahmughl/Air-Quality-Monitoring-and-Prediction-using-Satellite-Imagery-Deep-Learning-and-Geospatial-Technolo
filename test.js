@@ -230,8 +230,8 @@ async function loader() {
 
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": 20,
-        "maxOpacity": 25,
+        "radius": 12,
+        "maxOpacity": 15,
         // scales the radius based on map zoom
         "scaleRadius": false,
         // if set to false the heatmap uses the global maximum for colorization
