@@ -91,7 +91,7 @@
 
 
 
-    <div class="offset-3" id="map" style="padding-left: 15%;"></div>
+    <div class="offset-3" id="map" style="padding-left: 5%; width: 800px;"></div>
 
     <!-- <script src="../node_modules/simpleheat/simpleheat.js"></script>
         <script src="../src/HeatLayer.js"></script> -->
@@ -217,9 +217,9 @@
                 var heat = L.heatLayer(dataptr, {
                     // max: 1,
                     useLocalExtrema: true,
-                    radius: 15, // default value
-                    blur: 25, // default value
-                    minOpacity: 0.65,
+                    radius: 1, // default value
+                    blur: 1, // default value
+                    minOpacity: 1,
                     // gradient: {
                     //     .1: '#80FF00',
                     //     .15: '#74DF00',
@@ -232,11 +232,11 @@
                     //     .75: '#610B0B',
                     //     1: '#3B0B0B'
                     // }
-                    gradient: {
-                        1: 'red',
-                        0.1: 'blue',
-                        0.5: 'lime'
-                    } // Values can be set for a scale of 0-1
+                    // gradient: {
+                    //     1: 'red',
+                    //     0.1: 'blue',
+                    //     0.5: 'lime'
+                    // } // Values can be set for a scale of 0-1
                 }).addTo(map);
             });
 

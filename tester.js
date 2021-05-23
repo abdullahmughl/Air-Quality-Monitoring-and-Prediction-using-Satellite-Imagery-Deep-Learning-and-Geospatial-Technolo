@@ -22,7 +22,7 @@ async function getDataPoints() {
     var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60, 61, 62, 63];
     var coords = [
         [31.383926, 74.140768],
-        [31.383926, 74.229608],
+        [31.383926, 74.209608],
         [31.383926, 74.288449],
         [31.383926, 74.347289],
 
@@ -69,7 +69,7 @@ async function getDataPoints() {
     var nxt = [];
     var incrementer = [];
     var length_res = [];
-    var repeater = 10;
+    var repeater = 100;
     const rows = data.split('\n').slice(1);
     // rows.forEach(row => {
     // const cols = row.split(',');
