@@ -21,7 +21,9 @@ function interpolateArray(data, fitCount) {
 };
 
 function reloader() {
-
+    var date_val = document.getElementById('start-date-input');
+    var dt_setter = date_val.valueAsDate.toISOString().substring(0, 10);
+    window.location.href = window.location.protocol + '//' + window.location.hostname + ':5500' + window.location.pathname + "?t=" + dt_setter;
 }
 
 async function loader() {
@@ -30,8 +32,7 @@ async function loader() {
     var url = new URL(url_string);
     var t = url.searchParams.get("t");
     if (t) {
-        console.log(t);
-        // window.location.href = 'http://www.google.com';
+        document.getElementById('start-date-input').value = t;
     } else {
         var date = new Date();
         var currentDate = date.toISOString().substring(0, 10);
