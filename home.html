@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Awair </title>
+    <title> Air Quality Monitoring </title>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,8 +63,7 @@
     </div>
     <div class="home_content">
 
-        <section id="banner">
-            <!-- <div class="container"> -->
+        <!-- <section id="banner">
             <div class="row" style="width: 100%; margin:0px">
                 <div class="col-md-4" style="padding-left: 8%; padding-top: 5%;">
                     <h1 class="promo-title d-flex justify-content-left">Air Pollution</h1>
@@ -79,15 +78,15 @@
                 <div class="col-md-8 d-none d-lg-block" style="padding: 0px;">
                     <img src="FYP_Diagram/landing_img_curv.png" id="pol_bg">
                 </div>
-                <!-- </div> -->
             </div>
 
-        </section>
+        </section> -->
         </br>
         </br>
         <section id="aqi_sec" class="d-none d-lg-block">
             <!-- <div class="container"> -->
-            <h3 style="color: gray; text-align: center; margin-top: 50px;">Today's Air Quality Index</h3>
+            <h1 style="color: #11101d; text-align: center; margin-top: 50px; font-weight: 900;">Air Quality Awareness through AI</h1>
+            <h2 style="color: rgb(53, 52, 52); text-align: center; margin-top: 50px; font-weight: 900;">Today's Air Quality Index</h2>
             <div>
                 <div class="row  d-flex justify-content-center">
                     <div class="col-lg-6 d-flex justify-content-center">
@@ -96,7 +95,7 @@
                             <div class="card" style="width: 12rem; border-radius: 20px; margin: 10px; border: 1px; border-style: solid; border-color: grey; ">
                                 <div class="card-body">
                                     <h1 class="card-text" style="text-align: center;" id="no2aqi">0</h1>
-                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">µg/m<sup>2</sup></p>
+                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">mg/m<sup>2</sup></p>
                                 </div>
                                 <hr>
                                 <div class="card-body" style="text-align: center;">
@@ -107,7 +106,7 @@
                             <div class="card" style="width: 12rem; border-radius: 20px; margin: 10px; border: 1px; border-style: solid; border-color: grey;">
                                 <div class="card-body">
                                     <h1 class="card-text" style="text-align: center;" id="so2aqi">0</h1>
-                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">µg/m<sup>2</sup></p>
+                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">mg/m<sup>2</sup></p>
                                 </div>
                                 <hr>
                                 <div class="card-body" style="text-align: center;">
@@ -118,11 +117,11 @@
                             <div class="card" style="width: 12rem; border-radius: 20px; margin: 10px; border: 1px; border-style: solid; border-color: grey;">
                                 <div class="card-body">
                                     <h1 class="card-text" style="text-align: center;" id="co2aqi">0</h1>
-                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">µg/m<sup>2</sup></p>
+                                    <p class="cars-text" style="text-align: center; color: grey; margin-bottom: 0;">mg/m<sup>2</sup></p>
                                 </div>
                                 <hr>
                                 <div class="card-body" style="text-align: center;">
-                                    <h5 class="card-title">Carbon Dioxide</h5>
+                                    <h5 class="card-title">Carbon Monoxide</h5>
                                 </div>
                             </div>
                         </div>
@@ -159,18 +158,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center" style="padding-top: 200px;">
+                        <h5 id="aqi_note" style="padding: 20px; border-radius: 35px;"></h5>
+
+                    </div>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center" style="padding-top: 200px;">
-                <h5 id="aqi_note" style="padding: 20px; border-radius: 35px;"></h5>
-
-            </div>
             <script src="gauge.js"></script>
         </section>
 
         <section id="prediction_table">
-            <h3 style="color: gray; text-align: center; margin-top: 50px;">Prediction Table</h3>
+            <h3 style="color: gray; text-align: center; margin-top: 50px;">Air Quality Forecast</h3>
             <div class="container p-30">
                 <div class="row">
                     <div class="col-md-12 main-datatable">
@@ -182,7 +181,7 @@
                                             <th style="min-width:50px;">Date</th>
                                             <th style="min-width:150px;">Nitrogen Dioxide</th>
                                             <th style="min-width:150px;">Sulphur Dioxide</th>
-                                            <th style="min-width:100px;">Carbon Dioxide</th>
+                                            <th style="min-width:100px;">Carbon Monoxide</th>
                                             <th style="min-width:100px;">AQI</th>
                                         </tr>
                                     </thead>
@@ -196,8 +195,7 @@
                 </div>
             </div>
         </section>
-        <section id="info">
-            <!-- <div class="container"> -->
+        <!-- <section id="info">
             <div class="row">
                 <div class="col-lg-8" style="padding-left: 5%;">
                     <img src="paitent.png" id="pai_bg">
@@ -207,19 +205,12 @@
                     <p class="text-center" id="pai_txt" style="font-size:xx-large; font-family: Roboto; text-align: center; padding-top: 100px;">
                         According to Pakistan Air Quality Initiative (PAQI), in Pakistan, every year nearly 60,000 people die of health problems related to air pollution.
                     </p>
-                    <!-- <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                            Pakistan is the 2nd in index of most polluted countries around the globe.
-                        </p>
-                        <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                            Lahore and Karachi are in the list of top 10 most polluted cities in the world.
-                        </p> -->
+                    
                 </div>
-                <!-- </div> -->
             </div>
 
         </section>
         <section id="map">
-            <!-- <div class="container"> -->
             <div class="row">
                 <div class="col-md-6 d-none d-md-block">
 
@@ -228,10 +219,7 @@
                         actionable air quality data was published for the first time in Pakistan. In the absence of publicly available government data, a network of citizen-operated sensors began to monitor fine particulate matter, also known as PM2.5,
                         and report data in real-time. The data laid bare Lahore’s high levels of air pollution, shocking the public and becoming a media talking point.
                     </p>
-                    <!-- <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                        </p>
-                        <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                        </p> -->
+                    
                 </div>
                 <div class="col-md-4  offset-1" style="padding: 20px;">
                     <img src="FYP_Diagram/map-pakistan.png" id="pai_bg">
@@ -244,19 +232,15 @@
                         actionable air quality data was published for the first time in Pakistan. In the absence of publicly available government data, a network of citizen-operated sensors began to monitor fine particulate matter, also known as PM2.5,
                         and report data in real-time. The data laid bare Lahore’s high levels of air pollution, shocking the public and becoming a media talking point.
                     </p>
-                    <!-- <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                        </p>
-                        <p class="text-center" id="pai_txt" style="font-size: large; margin-top: 10px;">
-                        </p> -->
+                    
                 </div>
             </div>
             <div class="d-flex justify-content-center">
                 <p style="color: grey; text-align: center;"> * We are focusing on Lahore only but other cities will be added with furthur development</p>
             </div>
-        </section>
+        </section> -->
 
-        <section id="deep_learning">
-            <!-- <div class="container"> -->
+        <!-- <section id="deep_learning">
             <div class="row">
                 <div class="col-md-4 " style="padding-left: 5%;">
                 </div>
@@ -265,7 +249,7 @@
                     <p class="text-center" id="dl_txt" style="font-size: x-large;">
                         To solve this problem we are using satellite images combined with the state of the art Deep Learning model to predict future values and take precautionary measures before time </p>
                 </div>
-                <!-- </div> -->
+                
             </div>
 
         </section>
@@ -314,7 +298,7 @@
                     <img src="FYP_Diagram/web portal.png" id="pai_bg" style="padding-top: 10px;">
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <footer>
             <div class="d-flex justify-content-center">

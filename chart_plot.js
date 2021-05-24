@@ -14,7 +14,7 @@ async function setup() {
     } else if (selected_option == 'so2') {
         title = 'Sulphur Dioxide';
     } else {
-        title = 'Carbon DIoxide';
+        title = 'Carbon Monoxide';
     }
     var opt = document.getElementById('locations');
     var selected_option2 = opt.options[opt.selectedIndex].value;
@@ -75,7 +75,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Values in µg/m²",
+                        labelString: title + " (milli-g/m²)",
                         fontSize: 20,
                         fontColor: 'black'
                     }
@@ -154,7 +154,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Values in µg/m²",
+                        labelString: title + " (milli-g/m²)",
                         fontSize: 20,
                         fontColor: 'black'
                     }
@@ -166,7 +166,7 @@ async function setup() {
 
 
     const myChart2 = new Chart(ctx2, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: no2weeklyvalues.week,
             datasets: [{
@@ -175,8 +175,8 @@ async function setup() {
                     fill: false,
                     pointRadius: 1,
                     borderColor: 'rgba(47, 79, 79, 1)',
-                    backgroundColor: 'rgba(0, 255, 127, 0.5)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(7, 19, 79, 0.8)',
+                    borderWidth: 0
                 },
                 {
                     label: '2019',
@@ -185,7 +185,7 @@ async function setup() {
                     pointRadius: 1,
                     borderColor: 'rgba(2, 142, 255, 1)',
                     backgroundColor: 'rgba(2, 142, 255, 0.5)',
-                    borderWidth: 1
+                    borderWidth: 0
                 },
                 {
                     label: '2020',
@@ -193,8 +193,8 @@ async function setup() {
                     fill: false,
                     pointRadius: 1,
                     borderColor: 'rgba(255, 0, 0, 1)',
-                    backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                    borderWidth: 1
+                    backgroundColor: 'rgba(255, 0, 0, 0.6)',
+                    borderWidth: 0
                 },
                 {
                     label: '2021',
@@ -203,7 +203,7 @@ async function setup() {
                     pointRadius: 1,
                     borderColor: 'rgba(255, 0, 255, 1)',
                     backgroundColor: 'rgba(255, 0, 255, 0.5)',
-                    borderWidth: 1
+                    borderWidth: 0
                 }
             ]
         },
@@ -230,7 +230,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: "Values in µg/m²",
+                        labelString: title + " (milli-g/m²)",
                         fontSize: 20,
                         fontColor: 'black'
                     }

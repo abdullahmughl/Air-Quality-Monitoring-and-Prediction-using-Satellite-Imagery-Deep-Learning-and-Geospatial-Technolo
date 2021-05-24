@@ -22,7 +22,7 @@ async function update() {
         dataloader(filename, 2);
     }
 
-    document.getElementById('tabel_lable').innerHTML = title + ' values in µg/m²'
+    document.getElementById('tabel_lable').innerHTML = title + ' values in micro-g/m²'
 
 }
 
