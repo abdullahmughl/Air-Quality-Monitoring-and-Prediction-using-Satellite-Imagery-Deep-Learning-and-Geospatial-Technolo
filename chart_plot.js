@@ -16,7 +16,12 @@ async function setup() {
     } else {
         title = 'Carbon DIoxide';
     }
-    const no2values = await getAllno2Date(filename);
+    var optn = document.getElementById('locations');
+    var selected_option = optn.options[optn.selectedIndex].value;
+    // console.log(selected_option);
+    // console.log(optn.selectedIndex);
+    // title = selected_option + '\'s ' + title;
+    const no2values = await getAllno2Date(filename, optn.selectedIndex);
     const no2weeklyvalues = await getAllno2WeeklyDate(filename);
     const no2monthsvalues = await getAllno2MonthlyDate(filename);
     // valueUpdate(globalValue);
@@ -49,7 +54,7 @@ async function setup() {
             responsive: true,
             title: {
                 display: true,
-                text: title + ' Daily Data Comparison',
+                text: selected_option + '\'s ' + title + ' Daily Data Comparison',
                 position: 'top',
                 fontSize: 30,
                 fontColor: 'black'
@@ -274,7 +279,7 @@ function avergae(values) {
     return avg;
 }
 
-async function getAllno2Date(filename) {
+async function getAllno2Date(filename, ind) {
     const response = await fetch(filename);
     const data = await response.text();
     const date = []
@@ -285,8 +290,8 @@ async function getAllno2Date(filename) {
     // console.log(sdate);
     var edate = document.getElementById("end-date-input").valueAsDate;
     // console.log(edate);
+    const lhr_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60];
     const rows = data.split('\n').slice(1);
-    var val = rows[0].split(',');
     rows.forEach(row => {
         count = count + 1;
         const cols = row.split(',');
@@ -296,7 +301,11 @@ async function getAllno2Date(filename) {
         if (dt >= (Date.parse(sdate)) && dt <= (Date.parse(edate))) {
             // date.push(cols[0]);
             var tmep = cols.slice(1);
-            no2.push(avergae(tmep));
+            if (ind == 0) {
+                no2.push(avergae(tmep));
+            } else {
+                no2.push(tmep[lhr_arr[ind - 1]]);
+            }
         }
         if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(edate)) + (1000 * 60 * 60 * 24 * 15))) {
             if (count < 2) {
@@ -305,7 +314,11 @@ async function getAllno2Date(filename) {
                 date.push(' ');
             }
             var tmep = cols.slice(1);
-            no2_pred.push(avergae(tmep));
+            if (ind == 0) {
+                no2_pred.push(avergae(tmep));
+            } else {
+                no2_pred.push(tmep[lhr_arr[ind - 1]]);
+            }
         }
         if (count >= 2) {
             count = 0;
