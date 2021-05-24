@@ -16,21 +16,23 @@ async function setup() {
     } else {
         title = 'Carbon DIoxide';
     }
-    var optn = document.getElementById('locations');
-    var selected_option = optn.options[optn.selectedIndex].value;
+    var opt = document.getElementById('locations');
+    var selected_option2 = opt.options[opt.selectedIndex].value;
     // console.log(selected_option);
     // console.log(optn.selectedIndex);
     // title = selected_option + '\'s ' + title;
-    const no2values = await getAllno2Date(filename, optn.selectedIndex);
+    const no2values = await getAllno2Date(filename, opt.selectedIndex);
+    const no2values_pred = await getAllno2DatePred(selected_option, opt.selectedIndex);
     const no2weeklyvalues = await getAllno2WeeklyDate(filename);
     const no2monthsvalues = await getAllno2MonthlyDate(filename);
     // valueUpdate(globalValue);
     const myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: no2values.date,
+            labels: no2values_pred.date,
             datasets: [{
                     label: title,
+                    lineTension: 0,
                     data: no2values.no2,
                     fill: false,
                     pointRadius: 1.5,
@@ -40,7 +42,8 @@ async function setup() {
                 },
                 {
                     label: title + ' (Predicted)',
-                    data: no2values.no2_pred,
+                    lineTension: 0,
+                    data: no2values_pred.no2_pred,
                     fill: false,
                     pointRadius: 1.5,
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -54,7 +57,7 @@ async function setup() {
             responsive: true,
             title: {
                 display: true,
-                text: selected_option + '\'s ' + title + ' Daily Data Comparison',
+                text: selected_option2 + '\'s ' + title + ' Daily Data Comparison',
                 position: 'top',
                 fontSize: 30,
                 fontColor: 'black'
@@ -282,9 +285,7 @@ function avergae(values) {
 async function getAllno2Date(filename, ind) {
     const response = await fetch(filename);
     const data = await response.text();
-    const date = []
-    const no2 = []
-    const no2_pred = []
+    const no2 = [];
     var count = 0
     var sdate = document.getElementById("start-date-input").valueAsDate;
     // console.log(sdate);
@@ -307,12 +308,39 @@ async function getAllno2Date(filename, ind) {
                 no2.push(tmep[lhr_arr[ind - 1]]);
             }
         }
+
+    });
+    no2.reverse();
+
+    return { no2 };
+}
+
+async function getAllno2DatePred(filename, ind) {
+    filename = filename + '_data_cnn.csv';
+    const response = await fetch(filename);
+    const data = await response.text();
+    const date = [];
+    const no2_pred = [];
+    var count = 0;
+    var sdate = document.getElementById("start-date-input").valueAsDate;
+    // console.log(sdate);
+    var edate = document.getElementById("end-date-input").valueAsDate;
+    // console.log(edate);
+    const lhr_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60];
+    const rows = data.split('\n').slice(1);
+    // console.log(ind - 1);
+    rows.forEach(row => {
+        // count = count + 1;
+        const cols = row.split(',');
+        // years.push(cols[0]);
+        var dt = Date.parse(cols[0]);
+        // console.log(dt);
         if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(edate)) + (1000 * 60 * 60 * 24 * 15))) {
-            if (count < 2) {
-                date.push(cols[0]);
-            } else {
-                date.push(' ');
-            }
+            // if (count < 2) {
+            date.push(cols[0]);
+            // } else {
+            // date.push(' ');
+            // }
             var tmep = cols.slice(1);
             if (ind == 0) {
                 no2_pred.push(avergae(tmep));
@@ -320,16 +348,16 @@ async function getAllno2Date(filename, ind) {
                 no2_pred.push(tmep[lhr_arr[ind - 1]]);
             }
         }
-        if (count >= 2) {
-            count = 0;
-        }
+        // if (count >= 2) {
+        //     count = 0;
+        // }
 
     });
-    no2.reverse();
+
     no2_pred.reverse();
     date.reverse();
 
-    return { date, no2, no2_pred };
+    return { date, no2_pred };
 }
 
 async function getAllno2MonthlyDate(filename) {
