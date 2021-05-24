@@ -107,22 +107,27 @@ async function loader() {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
+            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
         } else if (n.substring(0, 1) == 's') {
             filename = 'so2_data_cnn.csv';
             optn.selectedIndex = 1;
             document.getElementById('labeler').innerHTML = "Sulphur Dioxide" + sentence;
+            document.getElementById('side_info').innerHTML = "Sulphur Dioxide (milli-g/m²)";
         } else if (n.substring(0, 1) == 'c') {
             filename = 'co2_data_cnn.csv';
             optn.selectedIndex = 2;
-            document.getElementById('labeler').innerHTML = "Carbon Dioxide" + sentence;
+            document.getElementById('labeler').innerHTML = "Carbon Monoxide" + sentence;
+            document.getElementById('side_info').innerHTML = "Nitrogen Monoxide (milli-g/m²)";
         } else {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
+            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
         }
     } else {
         filename = 'no2_data_cnn.csv'
         document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
+        document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
     }
 
     // var title = '';
@@ -270,10 +275,22 @@ async function loader() {
         alert("No Data is available on this date. Kindly select another date if you want.")
     }
     var avg_val = (min_val + max_val) / 2;
+    if (filename == 'no2_data_cnn.csv') {
 
-    document.getElementById('upper').innerHTML = max_val.toFixed(3);
-    document.getElementById('lower').innerHTML = min_val.toFixed(3);
-    document.getElementById('mid').innerHTML = avg_val.toFixed(3);
+        document.getElementById('upper').innerHTML = max_val.toFixed(3) + '  -';
+        document.getElementById('lower').innerHTML = min_val.toFixed(3) + '  -';
+        document.getElementById('mid').innerHTML = avg_val.toFixed(3) + '  -';
+        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(3) + '  -';
+        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(3) + '  -';
+    } else {
+        document.getElementById('upper').innerHTML = max_val.toFixed(2) + ' -';
+        document.getElementById('lower').innerHTML = min_val.toFixed(3) + ' -';
+        document.getElementById('mid').innerHTML = avg_val.toFixed(2) + ' -';
+        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(2) + ' -';
+        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(2) + ' -';
+
+    }
+
     var testData = {
         // max: 10,
         // min: 0,
