@@ -38,7 +38,7 @@ function reloader() {
         selector_val = 'no2';
 
     }
-    window.location.href = window.location.protocol + window.location.hostname + ':5500' + window.location.pathname + "?t=" + dt_setter + "&n=" + selector_val;
+    window.location.href = window.location.protocol + '//' + window.location.hostname + window.location.pathname + "?t=" + dt_setter + "&n=" + selector_val;
 }
 
 async function loader() {
