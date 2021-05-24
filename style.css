@@ -157,12 +157,19 @@ th {
     height: 55px;
     background-color: red;
     /* For browsers that do not support gradients */
-    background-image: linear-gradient(to right, red, orange, yellow, lime, deepskyblue);
+    background-image: linear-gradient(to right, red, orange, yellow, lime, slateblue);
     transform: rotate(90deg);
+    border: 1px;
+    border-style: solid;
+    border-color: black;
 }
 
 #grad1 p {
     transform: rotate(-90deg);
+}
+
+#labeler {
+    padding-left: 30%;
 }
 
 .loader {

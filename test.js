@@ -23,7 +23,22 @@ function interpolateArray(data, fitCount) {
 function reloader() {
     var date_val = document.getElementById('start-date-input');
     var dt_setter = date_val.valueAsDate.toISOString().substring(0, 10);
-    window.location.href = window.location.protocol + '//' + window.location.hostname + ':5500' + window.location.pathname + "?t=" + dt_setter;
+    var selector_val = "";
+    var opt = document.getElementById('pollutants');
+    var selected_option = opt.options[opt.selectedIndex].value;
+    if (selected_option == 'no2') {
+        selector_val = 'no2';
+    } else if (selected_option == 'so2') {
+        selector_val = 'so2';
+
+    } else if (selected_option == 'co2') {
+        selector_val = 'co2';
+
+    } else {
+        selector_val = 'no2';
+
+    }
+    window.location.href = window.location.protocol + '//' + window.location.hostname + ':5500' + window.location.pathname + "?t=" + dt_setter + "&n=" + selector_val;
 }
 
 async function loader() {
@@ -31,6 +46,8 @@ async function loader() {
     var url_string = window.location.href;
     var url = new URL(url_string);
     var t = url.searchParams.get("t");
+    var n = url.searchParams.get("n");
+    var filename = "";
     if (t) {
         document.getElementById('start-date-input').value = t;
     } else {
@@ -39,6 +56,9 @@ async function loader() {
         document.getElementById('start-date-input').value = currentDate;
 
     }
+
+
+
     var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60, 61, 62, 63];
     var coords = [
         [31.383926, 74.140768],
@@ -77,17 +97,39 @@ async function loader() {
     // var counter = [3, 3, 3, 3, 2, 2, 1];
     var reducer = [3, 3, 3, 3, 2, 2, 2];
     var indexer = 0;
+    var min_val = 20;
+    var max_val = 0;
     var optn = document.getElementById('pollutants');
     var selected_option = optn.options[optn.selectedIndex].value;
+    if (n) {
+        if (n.substring(0, 1) == 'n') {
+            filename = 'no2_data.csv';
+            optn.selectedIndex = 0;
+        } else if (n.substring(0, 1) == 's') {
+            filename = 'so2_data.csv';
+            optn.selectedIndex = 1;
+        } else if (n.substring(0, 1) == 'c') {
+            filename = 'co2_data.csv';
+            optn.selectedIndex = 2;
+        } else {
+            filename = 'no2_data.csv';
+            optn.selectedIndex = 0;
+        }
+    } else {
+        filename = 'no2_data.csv'
+    }
 
-    var filename = selected_option + '_data.csv';
     var title = '';
+    var sentence = ' Classification Heat map over Lahore';
     if (selected_option == 'no2') {
         title = 'Nitrogen Dioxide';
+        document.getElementById('labeler').innerHTML = title + sentence;
     } else if (selected_option == 'so2') {
         title = 'Sulphur Dioxide';
+        document.getElementById('labeler').innerHTML = title + sentence;
     } else {
         title = 'Carbon DIoxide';
+        document.getElementById('labeler').innerHTML = title + sentence;
     }
     const response = await fetch(filename);
     const data = await response.text();
@@ -112,7 +154,7 @@ async function loader() {
         // years.push(cols[0]);
         var dt = Date.parse(cols[0]);
         if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(sdate)) + 86800000)) {
-            console.log(dt);
+            // console.log(dt);
             // date.push(cols[0]);
             var temp = cols.slice(1);
             // console.log(Data_arr.length)
@@ -125,6 +167,12 @@ async function loader() {
 
                         var obj = { lat: x_lan[j], lng: y_lan[j], count: val[j] * 20 };
                         plotdata.push(obj);
+                        if (val[j] >= max_val) {
+                            max_val = val[j];
+                        }
+                        if (val[j] <= min_val) {
+                            min_val = val[j];
+                        }
                     }
                 }
                 // if (x_lan[0] == x_lan[1]) {
@@ -165,7 +213,7 @@ async function loader() {
                 // nxt = [];
                 // console.log(y_lan);
             }
-            console.log(incrementer);
+            // console.log(incrementer[0][1].length);
             var ln = Math.max(...length_res);
             var temp_x = [];
             var temp_y = [];
@@ -201,6 +249,12 @@ async function loader() {
                     for (var k = 1; k < repeater - 1; k++) {
                         obj = { lat: x_lan[k], lng: y_lan[k], count: val[k] * 20 };
                         plotdata.push(obj);
+                        if (val[j] >= max_val) {
+                            max_val = val[j];
+                        }
+                        if (val[j] <= min_val) {
+                            min_val = val[j];
+                        }
                     }
                 }
                 // console.log(y_lan);
@@ -210,7 +264,14 @@ async function loader() {
 
     });
 
+    if (plotdata.length == 0) {
+        alert("No Data is available on this date. Kindly select another date if you want.")
+    }
+    var avg_val = (min_val + max_val) / 2;
 
+    document.getElementById('upper').innerHTML = max_val.toFixed(3) + 'mg/m² -';
+    document.getElementById('lower').innerHTML = min_val.toFixed(3) + 'mg/m² -';
+    document.getElementById('mid').innerHTML = avg_val.toFixed(3) + 'mg/m² -';
     var testData = {
         // max: 10,
         // min: 0,
