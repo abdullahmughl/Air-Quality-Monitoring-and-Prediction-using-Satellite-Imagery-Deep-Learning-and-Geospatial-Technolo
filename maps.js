@@ -104,24 +104,24 @@ async function loader() {
     var sentence = ' Classification Heat map over Lahore';
     if (n) {
         if (n.substring(0, 1) == 'n') {
-            filename = 'no2_data.csv';
+            filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
         } else if (n.substring(0, 1) == 's') {
-            filename = 'so2_data.csv';
+            filename = 'so2_data_cnn.csv';
             optn.selectedIndex = 1;
             document.getElementById('labeler').innerHTML = "Sulphur Dioxide" + sentence;
         } else if (n.substring(0, 1) == 'c') {
-            filename = 'co2_data.csv';
+            filename = 'co2_data_cnn.csv';
             optn.selectedIndex = 2;
             document.getElementById('labeler').innerHTML = "Carbon Dioxide" + sentence;
         } else {
-            filename = 'no2_data.csv';
+            filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
         }
     } else {
-        filename = 'no2_data.csv'
+        filename = 'no2_data_cnn.csv'
         document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
     }
 
