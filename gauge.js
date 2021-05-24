@@ -16,55 +16,72 @@ var no2_val = 0;
 var so2_val = 0;
 var co2_val = 0;
 var gauge_val = 0;
+
 async function getNo2AQI() {
-    const response = await fetch('no2_data.csv');
+    const response = await fetch('no2_data_cnn.csv');
     const data = await response.text();
     var no2 = 0;
     var aqi_no2 = 0;
     const rows = data.split('\n').slice(1);
-    const row = rows[1];
-    const cols = row.split(',');
-    var value = cols.slice(1);
-    no2 = (avergae(value)) * 460;
-    if (no2 < 40) {
-        aqi_no2 = scale(no2, 0, 40, 0, 50);
-    } else if (no2 > 40 && no2 <= 80) {
-        aqi_no2 = scale(no2, 40, 80, 51, 100);
-    } else if (no2 > 80 && no2 <= 180) {
-        aqi_no2 = scale(no2, 80, 180, 101, 200);
-    } else if (no2 > 180 && no2 <= 280) {
-        aqi_no2 = scale(no2, 180, 280, 201, 300);
-    } else if (no2 > 280 && no2 <= 400) {
-        aqi_no2 = scale(no2, 280, 400, 301, 400);
-    } else {
-        aqi_no2 = scale(no2, 400, 600, 401, 500);
-    }
+    rows.forEach(row => {
+        // const row = rows[1];
+        const cols = row.split(',');
+        var dat = new Date();
+        var dt = Date.parse(cols[0]);
+        // console.log(Date.parse(dt));
+        // console.log(Date.parse(cols[0]));
+        if (dt >= (Date.parse(dat)) && dt <= ((Date.parse(dat)) + 86800000)) {
+            var value = cols.slice(1);
+            no2 = (avergae(value)) * 10;
+            if (no2 < 40) {
+                aqi_no2 = scale(no2, 0, 40, 0, 50);
+            } else if (no2 > 40 && no2 <= 80) {
+                aqi_no2 = scale(no2, 40, 80, 51, 100);
+            } else if (no2 > 80 && no2 <= 180) {
+                aqi_no2 = scale(no2, 80, 180, 101, 200);
+            } else if (no2 > 180 && no2 <= 280) {
+                aqi_no2 = scale(no2, 180, 280, 201, 300);
+            } else if (no2 > 280 && no2 <= 400) {
+                aqi_no2 = scale(no2, 280, 400, 301, 400);
+            } else {
+                aqi_no2 = scale(no2, 400, 600, 401, 500);
+            }
+        }
+    });
+
     return { no2, aqi_no2 };
 }
 
 async function getSo2AQI() {
-    const response = await fetch('so2_data.csv');
+    const response = await fetch('so2_data_cnn.csv');
     const data = await response.text();
     var so2 = 0;
     var aqi_so2 = 0;
     const rows = data.split('\n').slice(1);
-    const row = rows[10];
-    const cols = row.split(',');
-    var value = cols.slice(1);
-    so2 = (avergae(value)) * 640.66 * 0.5;
-    if (so2 < 40) {
-        aqi_so2 = scale(so2, 0, 40, 0, 50);
-    } else if (so2 > 40 && so2 <= 80) {
-        aqi_so2 = scale(so2, 40, 80, 51, 100);
-    } else if (so2 > 80 && so2 <= 380) {
-        aqi_so2 = scale(so2, 80, 380, 101, 200);
-    } else if (so2 > 380 && so2 <= 800) {
-        aqi_so2 = scale(so2, 380, 800, 201, 300);
-    } else if (so2 > 800 && so2 <= 1600) {
-        aqi_so2 = scale(so2, 800, 1600, 301, 400);
-    } else {
-        aqi_so2 = scale(so2, 1600, 7000, 401, 500);
-    }
+    rows.forEach(row => {
+        const cols = row.split(',');
+        var dat = new Date();
+        var dt = Date.parse(cols[0]);
+        // console.log(Date.parse(dt));
+        // console.log(Date.parse(cols[0]));
+        if (dt >= (Date.parse(dat)) && dt <= ((Date.parse(dat)) + 86800000)) {
+            var value = cols.slice(1);
+            so2 = (avergae(value)) * 64.066 * 0.5;
+            if (so2 < 40) {
+                aqi_so2 = scale(so2, 0, 40, 0, 50);
+            } else if (so2 > 40 && so2 <= 80) {
+                aqi_so2 = scale(so2, 40, 80, 51, 100);
+            } else if (so2 > 80 && so2 <= 380) {
+                aqi_so2 = scale(so2, 80, 380, 101, 200);
+            } else if (so2 > 380 && so2 <= 800) {
+                aqi_so2 = scale(so2, 380, 800, 201, 300);
+            } else if (so2 > 800 && so2 <= 1600) {
+                aqi_so2 = scale(so2, 800, 1600, 301, 400);
+            } else {
+                aqi_so2 = scale(so2, 1600, 7000, 401, 500);
+            }
+        }
+    });
     return { so2, aqi_so2 };
 }
 async function getCo2AQI() {
@@ -76,7 +93,7 @@ async function getCo2AQI() {
     const row = rows[3];
     const cols = row.split(',');
     var value = cols.slice(1);
-    co2 = (avergae(value)) * 460;
+    co2 = (avergae(value)) * 10;
     if (co2 < 40) {
         aqi_co2 = scale(co2, 0, 40, 0, 50);
     } else if (co2 > 40 && co2 <= 80) {
