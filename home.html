@@ -83,12 +83,17 @@
         </section> -->
         </br>
         </br>
+        <div class="d-flex flex-row-reverse">
+
+            <h6 class="float-left" id='current_date' style="padding-right: 15px;"></h6>
+        </div>
+
         <section id="aqi_sec" class="d-none d-lg-block">
             <!-- <div class="container"> -->
             <h1 style="color: #11101d; text-align: center; margin-top: 50px; font-weight: 900;">Air Quality Awareness through AI</h1>
             <h2 style="color: rgb(53, 52, 52); text-align: center; margin-top: 50px; font-weight: 900;">Today's Air Quality Index</h2>
             <div>
-                <div class="row  d-flex justify-content-center">
+                <div class="row d-flex justify-content-center" style="margin-right: 0;">
                     <div class="col-lg-6 d-flex justify-content-center">
                         <div class="card-group" style="width: 83%; height: 250px; margin-top: 50px;">
 
@@ -311,6 +316,14 @@
 
     <script src="home.js"></script>
     <script src="aqi_table.js"></script>
+    <script>
+        function clock() {
+            var datetime = new Date();
+
+            document.getElementById('current_date').innerHTML = datetime.toLocaleString();
+        }
+        setInterval(clock, 1000);
+    </script>
 </body>
 
 </html>
