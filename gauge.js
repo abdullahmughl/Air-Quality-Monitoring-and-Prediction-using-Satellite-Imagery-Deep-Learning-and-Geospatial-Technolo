@@ -168,23 +168,23 @@ valueUpdate().then(v => {
         document.getElementById('aqi_note').innerHTML = "It's a good day to be active outside.";
         document.getElementById('aqi_note').style.backgroundColor = '#00e400';
     } else if (aqi > 50 && aqi <= 100) {
-        document.getElementById('aqi_note').innerHTML = "<b>Usually sensitive people:</b> Consider reducing prolonged or heavy exertion. Watch for symptoms such as coughing or shortness of breath. These signs to take it easier. </br><b>Everyone else:</b> It's a good day to be active outside.";
+        document.getElementById('aqi_note').innerHTML = "<b>Usually sensitive People:</b> Consider reducing prolonged or heavy exertion. Watch for symptoms such as coughing or shortness of breath. These signs to take it easier. </br></br><b>Everyone Else:</b> It's a good day to be active outside.";
         document.getElementById('aqi_note').style.backgroundColor = '#ffff00';
     } else if (aqi > 100 && aqi <= 150) {
-        document.getElementById('aqi_note').innerHTML = "<b>Sensitive groups:</b> Reduce prolonged or heavy exertion. It's okay to be active outside, but take more break and do less intensive activities. Watch for symptoms such as coughing or shortness of breath. </br><b>People with asthama</b> should follow their asthama action plans and keep quick relief medicine handy.</br><b> If you have heart disease:</b> Symptoms such as palpitations, shortness of breath, or unusual fatigue may indicate a serious problem. If you have any idae of these, contact your health care provider.";
+        document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Reduce prolonged or heavy exertion. It's okay to be active outside, but take more break and do less intensive activities. Watch for symptoms such as coughing or shortness of breath. </br></br><b>People with Asthama</b> should follow their asthama action plans and keep quick relief medicine handy.</br></br><b> If you have heart disease:</b> Symptoms such as palpitations, shortness of breath, or unusual fatigue may indicate a serious problem. If you have any idae of these, contact your health care provider.";
         document.getElementById('aqi_note').style.backgroundColor = '#ff7e00';
         document.getElementById('aqi_note').style.color = 'white';
     } else if (aqi > 150 && aqi <= 200) {
-        document.getElementById('aqi_note').innerHTML = "<b>Sensitive groups:</b> Avoid prolonged or heavy exertion. Move activities indoor or resechedule to a time when air quality is better. </br><b>Everyone else:</b> Reduce prolonged or heavy exertion. Take more breaks during all outdoor activities.";
+        document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Avoid prolonged or heavy exertion. Move activities indoor or resechedule to a time when air quality is better. </br></br><b>Everyone Else:</b> Reduce prolonged or heavy exertion. Take more breaks during all outdoor activities.";
         document.getElementById('aqi_note').style.backgroundColor = '#ff0000';
         document.getElementById('aqi_note').style.color = 'white';
     } else if (aqi > 200 && aqi <= 300) {
-        document.getElementById('aqi_note').innerHTML = "<b>Sensitive groups:</b> Avoid all physical activities outdoors. Move activities indoor or resechedule to a time when air quality is better. </br><b>Everyone else:</b> Avoid prolonged or heavy exertion. Consider moving activities indoors or rescheduling to a time when air quality is better.";
+        document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Avoid all physical activities outdoors. Move activities indoor or resechedule to a time when air quality is better. </br></br><b>Everyone Else:</b> Avoid prolonged or heavy exertion. Consider moving activities indoors or rescheduling to a time when air quality is better.";
         document.getElementById('aqi_note').style.backgroundColor = '#99004c';
         document.getElementById('aqi_note').style.color = 'white';
 
     } else {
-        document.getElementById('aqi_note').innerHTML = "<b>Sensitive groups:</b> Remain indoors and keep activity levels low. Follow tips for keeping particle levels low indoors. </br><b>Everyone else:</b> Avoid all physical activities outdoors.";
+        document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Remain indoors and keep activity levels low. Follow tips for keeping particle levels low indoors. </br></br><b>Everyone Else:</b> Avoid all physical activities outdoors.";
         document.getElementById('aqi_note').style.backgroundColor = '#7e0023';
         document.getElementById('aqi_note').style.color = 'white';
     }

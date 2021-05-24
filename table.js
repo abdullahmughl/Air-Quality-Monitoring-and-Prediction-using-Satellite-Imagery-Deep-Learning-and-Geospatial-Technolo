@@ -11,7 +11,7 @@ async function update() {
     } else if (selected_option == 'so2') {
         title = 'Sulphur Dioxide';
     } else {
-        title = 'Carbon DIoxide';
+        title = 'Carbon Monoxide';
     }
     var loc = document.getElementById('locations');
     var selected_loc = loc.options[loc.selectedIndex].value;
@@ -22,7 +22,7 @@ async function update() {
         dataloader(filename, 2);
     }
 
-    document.getElementById('tabel_lable').innerHTML = title + ' values in micro-g/m²'
+    document.getElementById('tabel_lable').innerHTML = title + ' values in milli-g/m²'
 
 }
 

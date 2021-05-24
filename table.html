@@ -63,7 +63,7 @@
             </li>
         </ul>
     </div>
-    <div class="home_content" style="box-shadow: 0 0px 0px rgb(0 0 0 / 20%);">
+    <div class="home_content" style="box-shadow: 0 0px 0px rgb(0 0 0 / 20%); background-color: white;">
 
         <section id="tables_sec">
 
@@ -85,11 +85,11 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-8 form-group row">
 
-                        <label for="pollutants" class="col-8 col-form-label">Choose an air pollutant:</label>
+                        <label for="pollutants" class="col-8 col-form-label" style="font-weight: 800; font-size: 20px;">Choose an air pollutant:</label>
                         <select name="pollutants" id="pollutants" style="border-radius: 15px; width: 180px" onchange="update()">
                     <option value="no2" selected="selected">Nitrogen Dioxide</option>
                     <option value="so2">Sulphur Dioxide</option>
-                    <option value="co2">Carbon Dioxide</option>
+                    <option value="co2">Carbon Monoxide</option>
                 </select>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-8 form-group row">
 
-                        <label for="locations" class="col-8 col-form-label">Choose your desired location/Data Type:</label>
+                        <label for="locations" class="col-8 col-form-label" style="font-weight: 800; font-size: 20px;">Choose your desired location/Data Type:</label>
                         <select name="locations" id="locations" style="border-radius: 15px; width: 180px" onchange="update()">
                             <option value="lahore" selected="selected">Lahore</option>
                             <option value="raw">Raw Data</option>
@@ -108,14 +108,14 @@
                 <div class="row">
 
                     <div class="col-md-12 col-lg-6 form-group row">
-                        <label for="example-date-input" class="col-4 col-form-label">Start Date</label>
+                        <label for="example-date-input" class="col-4 col-form-label" style="font-weight: 800; font-size: 20px;">Start Date</label>
                         <div class="col-8">
                             <input class="form-control" type="date" value="2021-04-15" id="start-date-input" onchange="update()">
                         </div>
                     </div>
                     <!-- <div class="col-4"></div> -->
                     <div class="col-md-12 col-lg-6 form-group row">
-                        <label for="example-date-input" class="col-4 col-form-label">End Date</label>
+                        <label for="example-date-input" class="col-4 col-form-label" style="font-weight: 800; font-size: 20px;">End Date</label>
                         <div class="col-8">
                             <input class="form-control" type="date" value="2021-05-15" id="end-date-input" onchange="update()">
                         </div>
@@ -129,7 +129,7 @@
             </br>
             <div class="d-flex justify-content-center" style=" align-content: center; ">
 
-                <h5 id='tabel_lable'></h5>
+                <h3 id='tabel_lable' style="margin-bottom: 20px;"></h3>
             </div>
         </section>
 

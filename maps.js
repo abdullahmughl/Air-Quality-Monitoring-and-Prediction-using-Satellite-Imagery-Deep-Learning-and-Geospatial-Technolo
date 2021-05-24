@@ -271,9 +271,9 @@ async function loader() {
     }
     var avg_val = (min_val + max_val) / 2;
 
-    document.getElementById('upper').innerHTML = max_val.toFixed(3) + 'mg/m² -';
-    document.getElementById('lower').innerHTML = min_val.toFixed(3) + 'mg/m² -';
-    document.getElementById('mid').innerHTML = avg_val.toFixed(3) + 'mg/m² -';
+    document.getElementById('upper').innerHTML = max_val.toFixed(3);
+    document.getElementById('lower').innerHTML = min_val.toFixed(3);
+    document.getElementById('mid').innerHTML = avg_val.toFixed(3);
     var testData = {
         // max: 10,
         // min: 0,
