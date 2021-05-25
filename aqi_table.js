@@ -135,13 +135,32 @@ valueUpdatepre().then(v => {
         var newCell3 = newRow.insertCell();
         var newCell4 = newRow.insertCell();
         var newCell5 = newRow.insertCell();
+        var newCell6 = newRow.insertCell();
 
         newCell1.innerHTML = v.no2.date[i];
         newCell2.innerHTML = v.no2.no2[i].toFixed(2);
         newCell3.innerHTML = v.so2.so2[i].toFixed(2);
         newCell4.innerHTML = v.co2.co2[i].toFixed(2);
-        aqi = Math.max(v.no2.aqi_no2[i].toFixed(0), v.so2.aqi_so2[i].toFixed(0), v.co2.aqi_co2[i].toFixed(0));
+        aqi = Math.max((v.no2.aqi_no2[i] * 0.5).toFixed(0), (v.so2.aqi_so2[i] * 0.5).toFixed(0), (v.co2.aqi_co2[i] * 0.5).toFixed(0));
         newCell5.innerHTML = aqi;
+        if (aqi < 50) {
+            newCell6.innerHTML = 'Good';
+        } else if (aqi < 100) {
+            newCell6.innerHTML = 'Moderate';
+
+        } else if (aqi < 150) {
+            newCell6.innerHTML = 'Unhealty for Sensitive Groups';
+
+        } else if (aqi < 200) {
+            newCell6.innerHTML = 'Unhealthy';
+
+        } else if (aqi < 300) {
+            newCell6.innerHTML = 'Very Unhealty';
+
+        } else if (aqi < 500) {
+            newCell6.innerHTML = 'Hazardous';
+
+        }
 
     }
     // push a text node to the cell
