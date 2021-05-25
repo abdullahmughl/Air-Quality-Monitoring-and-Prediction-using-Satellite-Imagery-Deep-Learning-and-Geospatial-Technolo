@@ -30,25 +30,26 @@ async function getNo2AQI() {
         var dt = Date.parse(cols[0]);
         // console.log(Date.parse(dt));
         // console.log(Date.parse(cols[0]));
-        if (dt >= (Date.parse(dat)) && dt <= ((Date.parse(dat)) + 86800000)) {
+        if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
             var value = cols.slice(1);
-            no2 = (avergae(value)) * 10;
-            if (no2 < 40) {
-                aqi_no2 = scale(no2, 0, 40, 0, 50);
-            } else if (no2 > 40 && no2 <= 80) {
-                aqi_no2 = scale(no2, 40, 80, 51, 100);
-            } else if (no2 > 80 && no2 <= 180) {
-                aqi_no2 = scale(no2, 80, 180, 101, 200);
-            } else if (no2 > 180 && no2 <= 280) {
-                aqi_no2 = scale(no2, 180, 280, 201, 300);
-            } else if (no2 > 280 && no2 <= 400) {
-                aqi_no2 = scale(no2, 280, 400, 301, 400);
+            no2 = (avergae(value));
+            if (no2 < 0.4) {
+                aqi_no2 = scale(no2, 0, 0.4, 0, 50);
+            } else if (no2 >= 0.4 && no2 <= 0.8) {
+                aqi_no2 = scale(no2, 0.4, 0.80, 51, 100);
+            } else if (no2 > 0.80 && no2 <= 2.0) {
+                aqi_no2 = scale(no2, 0.80, 2.0, 101, 200);
+            } else if (no2 > 2.0 && no2 <= 3.50) {
+                aqi_no2 = scale(no2, 2.0, 3.50, 201, 300);
+            } else if (no2 > 3.50 && no2 <= 4.00) {
+                aqi_no2 = scale(no2, 3.50, 4.00, 301, 400);
             } else {
-                aqi_no2 = scale(no2, 400, 600, 401, 500);
+                aqi_no2 = scale(no2, 4.00, 8.00, 401, 500);
             }
         }
     });
 
+    // console.log(aqi_no2);
     return { no2, aqi_no2 };
 }
 
@@ -64,51 +65,62 @@ async function getSo2AQI() {
         var dt = Date.parse(cols[0]);
         // console.log(Date.parse(dt));
         // console.log(Date.parse(cols[0]));
-        if (dt >= (Date.parse(dat)) && dt <= ((Date.parse(dat)) + 86800000)) {
+        if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
             var value = cols.slice(1);
-            so2 = (avergae(value)) * 64.066 * 0.5;
-            if (so2 < 40) {
-                aqi_so2 = scale(so2, 0, 40, 0, 50);
-            } else if (so2 > 40 && so2 <= 80) {
-                aqi_so2 = scale(so2, 40, 80, 51, 100);
-            } else if (so2 > 80 && so2 <= 380) {
-                aqi_so2 = scale(so2, 80, 380, 101, 200);
-            } else if (so2 > 380 && so2 <= 800) {
-                aqi_so2 = scale(so2, 380, 800, 201, 300);
-            } else if (so2 > 800 && so2 <= 1600) {
-                aqi_so2 = scale(so2, 800, 1600, 301, 400);
+            so2 = (avergae(value));
+            if (so2 < 15) {
+                aqi_so2 = scale(so2, -10, 15, 0, 50);
+            } else if (so2 >= 15 && so2 <= 20) {
+                aqi_so2 = scale(so2, 15, 20, 51, 100);
+            } else if (so2 > 20 && so2 <= 35) {
+                aqi_so2 = scale(so2, 20, 35, 101, 200);
+            } else if (so2 > 35 && so2 <= 50) {
+                aqi_so2 = scale(so2, 35, 50, 201, 300);
+            } else if (so2 > 50 && so2 <= 60) {
+                aqi_so2 = scale(so2, 50, 60, 301, 400);
             } else {
-                aqi_so2 = scale(so2, 1600, 7000, 401, 500);
+                aqi_so2 = scale(so2, 60, 75, 401, 500);
             }
         }
     });
+    // console.log(aqi_so2);
     return { so2, aqi_so2 };
 }
 async function getCo2AQI() {
-    const response = await fetch('no2_data.csv');
+    const response = await fetch('co2_data_cnn.csv');
     const data = await response.text();
     var co2 = 0;
     var aqi_co2 = 0;
     const rows = data.split('\n').slice(1);
-    const row = rows[3];
-    const cols = row.split(',');
-    var value = cols.slice(1);
-    co2 = (avergae(value)) * 10;
-    if (co2 < 40) {
-        aqi_co2 = scale(co2, 0, 40, 0, 50);
-    } else if (co2 > 40 && co2 <= 80) {
-        aqi_co2 = scale(co2, 40, 80, 51, 100);
-    } else if (co2 > 80 && co2 <= 180) {
-        aqi_co2 = scale(co2, 80, 180, 101, 200);
-    } else if (co2 > 180 && co2 <= 280) {
-        aqi_co2 = scale(co2, 180, 280, 201, 300);
-    } else if (co2 > 280 && co2 <= 400) {
-        aqi_co2 = scale(co2, 280, 400, 301, 400);
-    } else {
-        aqi_co2 = scale(co2, 400, 600, 401, 500);
-    }
+    rows.forEach(row => {
+        // const row = rows[1];
+        const cols = row.split(',');
+        var dat = new Date();
+        var dt = Date.parse(cols[0]);
+        // console.log(Date.parse(dt));
+        // console.log(Date.parse(cols[0]));
+        if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
+            var value = cols.slice(1);
+            co2 = (avergae(value));
+            if (co2 < 100) {
+                aqi_co2 = scale(co2, 0, 100, 0, 50);
+            } else if (co2 >= 100 && co2 <= 300) {
+                aqi_co2 = scale(co2, 100, 300, 51, 100);
+            } else if (co2 > 300 && co2 <= 500) {
+                aqi_co2 = scale(co2, 300, 500, 101, 200);
+            } else if (co2 > 500 && co2 <= 800) {
+                aqi_co2 = scale(co2, 500, 800, 201, 300);
+            } else if (co2 > 800 && co2 <= 1300) {
+                aqi_co2 = scale(co2, 800, 1300, 301, 400);
+            } else {
+                aqi_co2 = scale(co2, 1300, 1700, 401, 500);
+            }
+        }
+    });
+    // console.log(aqi_co2);
     return { co2, aqi_co2 };
 }
+
 var opts = {
     angle: 0, // The span of the gauge arc
     lineWidth: 0.3, // The line thickness
@@ -161,7 +173,8 @@ valueUpdate().then(v => {
     document.getElementById('no2aqi').innerHTML = v.no2.no2.toFixed(2);
     document.getElementById('so2aqi').innerHTML = v.so2.so2.toFixed(2);
     document.getElementById('co2aqi').innerHTML = v.co2.co2.toFixed(2);
-    const aqi = Math.max(v.no2.aqi_no2.toFixed(0), v.so2.aqi_so2.toFixed(0), v.co2.aqi_co2.toFixed(0));
+    // const aqi = Math.max(v.no2.aqi_no2.toFixed(0), v.so2.aqi_so2.toFixed(0), v.co2.aqi_co2.toFixed(0));
+    const aqi = Math.max((v.no2.aqi_no2 * 0.5).toFixed(0), (v.so2.aqi_so2 * 0.5).toFixed(0), (v.co2.aqi_co2 * 0.5).toFixed(0));
     document.getElementById('AQI_num').innerHTML = aqi;
     gauge.set(aqi);
     if (aqi <= 50) {
@@ -176,7 +189,7 @@ valueUpdate().then(v => {
         document.getElementById('aqi_note').style.color = 'white';
     } else if (aqi > 150 && aqi <= 200) {
         document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Avoid prolonged or heavy exertion. Move activities indoor or resechedule to a time when air quality is better. </br></br><b>Everyone Else:</b> Reduce prolonged or heavy exertion. Take more breaks during all outdoor activities.";
-        document.getElementById('aqi_note').style.backgroundColor = '#ff0000';
+        document.getElementById('aqi_note').style.backgroundColor = '#c70000';
         document.getElementById('aqi_note').style.color = 'white';
     } else if (aqi > 200 && aqi <= 300) {
         document.getElementById('aqi_note').innerHTML = "<b>Sensitive Groups:</b> Avoid all physical activities outdoors. Move activities indoor or resechedule to a time when air quality is better. </br></br><b>Everyone Else:</b> Avoid prolonged or heavy exertion. Consider moving activities indoors or rescheduling to a time when air quality is better.";

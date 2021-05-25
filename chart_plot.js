@@ -159,7 +159,8 @@ async function setup() {
                         fontColor: 'black'
                     }
                 }]
-            }
+            },
+            events: ['click']
 
         }
     });
@@ -235,7 +236,8 @@ async function setup() {
                         fontColor: 'black'
                     }
                 }]
-            }
+            },
+            events: ['click']
 
         }
     });

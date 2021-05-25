@@ -117,7 +117,7 @@ async function loader() {
             filename = 'co2_data_cnn.csv';
             optn.selectedIndex = 2;
             document.getElementById('labeler').innerHTML = "Carbon Monoxide" + sentence;
-            document.getElementById('side_info').innerHTML = "Nitrogen Monoxide (milli-g/m²)";
+            document.getElementById('side_info').innerHTML = "Carbon Monoxide (milli-g/m²)";
         } else {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
@@ -282,12 +282,19 @@ async function loader() {
         document.getElementById('mid').innerHTML = avg_val.toFixed(3) + '  -';
         document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(3) + '  -';
         document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(3) + '  -';
-    } else {
+    } else if (filename == 'so2_data_cnn.csv') {
         document.getElementById('upper').innerHTML = max_val.toFixed(2) + ' -';
         document.getElementById('lower').innerHTML = min_val.toFixed(3) + ' -';
         document.getElementById('mid').innerHTML = avg_val.toFixed(2) + ' -';
         document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(2) + ' -';
         document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(2) + ' -';
+
+    } else if (filename == 'co2_data_cnn.csv') {
+        document.getElementById('upper').innerHTML = max_val.toFixed(0) + ' -';
+        document.getElementById('lower').innerHTML = min_val.toFixed(2) + ' -';
+        document.getElementById('mid').innerHTML = avg_val.toFixed(1) + ' -';
+        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(1) + ' -';
+        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(1) + ' -';
 
     }
 

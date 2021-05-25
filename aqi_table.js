@@ -15,7 +15,7 @@
 
 
 async function getNo2preAQI() {
-    const response = await fetch('no2_data.csv');
+    const response = await fetch('no2_data_cnn.csv');
     const data = await response.text();
     var no2 = [];
     var date = [];
@@ -24,55 +24,55 @@ async function getNo2preAQI() {
     var i;
     for (i = 0; i < 15; i++) {
 
-        const row = rows[i];
+        const row = rows[i + 21];
         const cols = row.split(',');
-        date.push(cols[0]);
+        date.unshift(cols[0]);
         var value = cols.slice(1);
-        no2.push((avergae(value)) * 150);
-        if (no2[i] < 40) {
-            aqi_no2.push(scale(no2[i], 0, 40, 0, 50));
-        } else if (no2[i] > 40 && no2[i] <= 80) {
-            aqi_no2.push(scale(no2[i], 40, 80, 51, 100));
-        } else if (no2[i] > 80 && no2[i] <= 180) {
-            aqi_no2.push(scale(no2[i], 80, 180, 101, 200));
-        } else if (no2[i] > 180 && no2[i] <= 280) {
-            aqi_no2.push(scale(no2[i], 180, 280, 201, 300));
-        } else if (no2[i] > 280 && no2[i] <= 400) {
-            aqi_no2.push(scale(no2[i], 280, 400, 301, 400));
+        no2.push(avergae(value));
+        if (no2[i] < 0.4) {
+            aqi_no2.push(scale(no2[i], 0, 0.40, 0, 50));
+        } else if (no2[i] >= 0.40 && no2[i] <= 0.80) {
+            aqi_no2.push(scale(no2[i], 0.40, 0.80, 51, 100));
+        } else if (no2[i] > 0.80 && no2[i] <= 2.0) {
+            aqi_no2.push(scale(no2[i], 0.80, 2.0, 101, 200));
+        } else if (no2[i] > 2.0 && no2[i] <= 3.50) {
+            aqi_no2.push(scale(no2[i], 2.0, 3.50, 201, 300));
+        } else if (no2[i] > 3.50 && no2[i] <= 4.00) {
+            aqi_no2.push(scale(no2[i], 3.50, 4.00, 301, 400));
         } else {
-            aqi_no2.push(scale(no2[i], 400, 600, 401, 500));
+            aqi_no2.push(scale(no2[i], 4.0, 8.00, 401, 500));
         }
         no2.reverse();
         aqi_no2.reverse();
-        date.reverse();
+        // date.reverse();
     }
     return { no2, aqi_no2, date };
 }
 
 async function getSo2preAQI() {
-    const response = await fetch('so2_data.csv');
+    const response = await fetch('so2_data_cnn.csv');
     const data = await response.text();
     var so2 = [];
     var aqi_so2 = [];
     const rows = data.split('\n').slice(1);
     var i;
     for (i = 0; i < 15; i++) {
-        const row = rows[i];
+        const row = rows[i + 21];
         const cols = row.split(',');
         var value = cols.slice(1);
-        so2.push((avergae(value)) * 640.66 * 0.5);
-        if (so2[i] < 40) {
-            aqi_so2.push(scale(so2[i], 0, 40, 0, 50));
-        } else if (so2[i] > 40 && so2[i] <= 80) {
-            aqi_so2.push(scale(so2[i], 40, 80, 51, 100));
-        } else if (so2[i] > 80 && so2[i] <= 380) {
-            aqi_so2.push(scale(so2[i], 80, 380, 101, 200));
-        } else if (so2[i] > 380 && so2[i] <= 800) {
-            aqi_so2.push(scale(so2[i], 380, 800, 201, 300));
-        } else if (so2[i] > 800 && so2[i] <= 1600) {
-            aqi_so2.push(scale(so2[i], 800, 1600, 301, 400));
+        so2.push(avergae(value));
+        if (so2[i] < 15) {
+            aqi_so2.push(scale(so2[i], -10, 15, 0, 50));
+        } else if (so2[i] > 15 && so2[i] <= 20) {
+            aqi_so2.push(scale(so2[i], 15, 20, 51, 100));
+        } else if (so2[i] > 20 && so2[i] <= 35) {
+            aqi_so2.push(scale(so2[i], 20, 35, 101, 200));
+        } else if (so2[i] > 35 && so2[i] <= 50) {
+            aqi_so2.push(scale(so2[i], 35, 50, 201, 300));
+        } else if (so2[i] > 50 && so2[i] <= 60) {
+            aqi_so2.push(scale(so2[i], 50, 60, 301, 400));
         } else {
-            aqi_so2.push(scale(so2[i], 1600, 7000, 401, 500));
+            aqi_so2.push(scale(so2[i], 60, 75, 401, 500));
         }
     }
     so2.reverse();
@@ -80,7 +80,7 @@ async function getSo2preAQI() {
     return { so2, aqi_so2 };
 }
 async function getCo2preAQI() {
-    const response = await fetch('no2_data.csv');
+    const response = await fetch('co2_data_cnn.csv');
     const data = await response.text();
     var co2 = [];
     var aqi_co2 = [];
@@ -88,22 +88,22 @@ async function getCo2preAQI() {
     var i;
     for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 18];
+        const row = rows[i + 21];
         const cols = row.split(',');
         var value = cols.slice(1);
-        co2.push((avergae(value)) * 460);
-        if (co2[i] < 40) {
-            aqi_co2.push(scale(co2[i], 0, 40, 0, 50));
-        } else if (co2[i] > 40 && co2[i] <= 80) {
-            aqi_co2.push(scale(co2[i], 40, 80, 51, 100));
-        } else if (co2[i] > 80 && co2[i] <= 180) {
-            aqi_co2.push(scale(co2[i], 80, 180, 101, 200));
-        } else if (co2[i] > 180 && co2[i] <= 280) {
-            aqi_co2.push(scale(co2[i], 180, 280, 201, 300));
-        } else if (co2[i] > 280 && co2[i] <= 400) {
-            aqi_co2.push(scale(co2[i], 280, 400, 301, 400));
+        co2.push(avergae(value));
+        if (co2[i] < 100) {
+            aqi_co2.push(scale(co2[i], 0, 100, 0, 50));
+        } else if (co2[i] > 100 && co2[i] <= 300) {
+            aqi_co2.push(scale(co2[i], 100, 300, 51, 100));
+        } else if (co2[i] > 300 && co2[i] <= 500) {
+            aqi_co2.push(scale(co2[i], 300, 500, 101, 200));
+        } else if (co2[i] > 500 && co2[i] <= 800) {
+            aqi_co2.push(scale(co2[i], 500, 800, 201, 300));
+        } else if (co2[i] > 800 && co2[i] <= 1300) {
+            aqi_co2.push(scale(co2[i], 800, 1300, 301, 400));
         } else {
-            aqi_co2.push(scale(co2[i], 400, 600, 401, 500));
+            aqi_co2.push(scale(co2[i], 1300, 1700, 401, 500));
         }
     }
     co2.reverse();
