@@ -34,6 +34,9 @@ function reloader() {
     } else if (selected_option == 'co2') {
         selector_val = 'co2';
 
+    } else if (selected_option == 'aqi') {
+        selector_val = 'aqi';
+
     } else {
         selector_val = 'no2';
 
@@ -118,6 +121,11 @@ async function loader() {
             optn.selectedIndex = 2;
             document.getElementById('labeler').innerHTML = "Carbon Monoxide" + sentence;
             document.getElementById('side_info').innerHTML = "Carbon Monoxide (milli-g/m²)";
+        } else if (n.substring(0, 1) == 'a') {
+            filename = 'aqi_data_cnn.csv';
+            optn.selectedIndex = 3;
+            document.getElementById('labeler').innerHTML = "Air Quality Index" + sentence;
+            document.getElementById('side_info').innerHTML = "Air Quality Index";
         } else {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
@@ -295,6 +303,17 @@ async function loader() {
         document.getElementById('mid').innerHTML = avg_val.toFixed(1) + ' -';
         document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(1) + ' -';
         document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(1) + ' -';
+
+    } else if (filename == 'aqi_data_cnn.csv') {
+        document.getElementById('upper').innerHTML = 500 + '  	—';
+        document.getElementById('lower').innerHTML = 0 + '  —';
+        document.getElementById('mid').innerHTML = 250 + '  —';
+        document.getElementById('upper_mid').innerHTML = 375 + '  ―';
+        document.getElementById('lower_mid').innerHTML = 125 + '  ―';
+        document.getElementById('lower').style.paddingLeft = '20px';
+        document.getElementById('lower_mid').style.paddingLeft = '56px';
+        document.getElementById('mid').style.paddingLeft = '9px';
+        document.getElementById('upper_mid').style.paddingLeft = '14px';
 
     }
 
