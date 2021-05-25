@@ -40,6 +40,10 @@ body {
     transition: all 0.5s ease;
 }
 
+#naver .active {
+    left: 80px;
+}
+
 .sidebar.active {
     width: 240px;
 }
