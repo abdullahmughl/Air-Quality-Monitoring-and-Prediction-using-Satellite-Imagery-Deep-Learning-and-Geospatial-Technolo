@@ -168,7 +168,7 @@ async function loader() {
         const cols = row.split(',');
         // years.push(cols[0]);
         var dt = Date.parse(cols[0]);
-        if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(sdate)) + 86800000)) {
+        if (dt <= (Date.parse(sdate)) && dt >= ((Date.parse(sdate)) - 86800000)) {
             // console.log(dt);
             // date.push(cols[0]);
             var temp = cols.slice(1);
@@ -182,8 +182,8 @@ async function loader() {
 
                         var obj = { lat: x_lan[j], lng: y_lan[j], count: val[j] * 20 };
                         plotdata.push(obj);
-                        if (val[j] >= max_val) {
-                            max_val = val[j];
+                        if (val[j] >= max_val && filename != 'co2_data_cnn.csv') {
+                            max_val = val[j] * 2;
                         }
                         if (val[j] <= min_val) {
                             min_val = val[j];
@@ -264,9 +264,13 @@ async function loader() {
                     for (var k = 1; k < repeater - 1; k++) {
                         obj = { lat: x_lan[k], lng: y_lan[k], count: val[k] * 20 };
                         plotdata.push(obj);
-                        if (val[j] >= max_val) {
+                        if (val[j] >= max_val && filename != 'co2_data_cnn.csv') {
+                            max_val = val[j] * 2;
+                        }
+                        if (val[j] >= max_val && filename == 'co2_data_cnn.csv') {
                             max_val = val[j];
                         }
+
                         if (val[j] <= min_val) {
                             min_val = val[j];
                         }
@@ -281,6 +285,10 @@ async function loader() {
 
     if (plotdata.length == 0) {
         alert("No Data is available on this date. Kindly select another date if you want.")
+    }
+
+    if (min_val < 0) {
+        min_val = min_val * -1;
     }
     var avg_val = (min_val + max_val) / 2;
     if (filename == 'no2_data_cnn.csv') {
