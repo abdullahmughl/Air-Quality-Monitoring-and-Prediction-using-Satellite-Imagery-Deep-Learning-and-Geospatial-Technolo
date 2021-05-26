@@ -185,6 +185,9 @@ async function loader() {
                         if (val[j] >= max_val && filename != 'co2_data_cnn.csv') {
                             max_val = val[j] * 2;
                         }
+                        if (val[j] >= max_val && filename == 'co2_data_cnn.csv') {
+                            max_val = val[j];
+                        }
                         if (val[j] <= min_val) {
                             min_val = val[j];
                         }
@@ -286,7 +289,18 @@ async function loader() {
     if (plotdata.length == 0) {
         alert("No Data is available on this date. Kindly select another date if you want.")
     }
+    if (filename == 'no2_data_cnn.csv') {
+        if (max_val > 3 && max_val < 5.5) {
 
+            max_val = max_val / 1.5;
+
+        } else if (max_val >= 5.5) {
+            max_val = max_val / 2;
+        } else {
+            max_val = max_val * 1.5;
+        }
+        min_val = min_val / 2;
+    }
     if (min_val < 0) {
         min_val = min_val * -1;
     }
