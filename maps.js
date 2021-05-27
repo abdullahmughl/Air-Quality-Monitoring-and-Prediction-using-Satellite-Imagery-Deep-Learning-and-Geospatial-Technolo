@@ -410,6 +410,12 @@ async function loader() {
         }
         min_val = min_val / 2;
     }
+    if (filename == 'aqi_data_cnn.csv') {
+        max_val = max_val / 1.85;
+        min_val = 0;
+
+    }
+
     if (min_val < 0) {
         min_val = min_val * -1;
     }
@@ -436,11 +442,11 @@ async function loader() {
         document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(1) + ' -';
 
     } else if (filename == 'aqi_data_cnn.csv') {
-        document.getElementById('upper').innerHTML = 500 + '  	—';
-        document.getElementById('lower').innerHTML = 0 + '  —';
-        document.getElementById('mid').innerHTML = 250 + '  —';
-        document.getElementById('upper_mid').innerHTML = 375 + '  ―';
-        document.getElementById('lower_mid').innerHTML = 125 + '  ―';
+        document.getElementById('upper').innerHTML = max_val.toFixed(0) + '  	—';
+        document.getElementById('lower').innerHTML = min_val + '  —';
+        document.getElementById('mid').innerHTML = avg_val.toFixed(0) + '  —';
+        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(0) + '  ―';
+        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(0) + '  ―';
         document.getElementById('lower').style.paddingLeft = '20px';
         document.getElementById('lower_mid').style.paddingLeft = '56px';
         document.getElementById('mid').style.paddingLeft = '9px';
