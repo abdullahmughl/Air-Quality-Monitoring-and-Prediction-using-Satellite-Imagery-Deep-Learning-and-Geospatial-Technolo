@@ -60,7 +60,71 @@ async function loader() {
 
     }
 
-
+    const locationNames = ['Ravi River',
+        'Shamkay Bhattian', //1
+        'Bahria Town School and College', //2
+        'Kot Arain', //3
+        'Jhedu Minor', //4
+        'Jinnah Sector LDA City', //5
+        'Institute of Southern Lahore', //6
+        'Badhwar', //7
+        'Ravi River', //8
+        'Khudpur', //9
+        'Bahria Town Marquee', //10
+        'Barkat Ali Market, Riwind Rd', //11
+        'Bakra Mandi, Defence Road', //12
+        'Lahore Ring Road, Kahna Interchange', //13
+        'Ahlu Rd', //14
+        'Mallian Road', //15
+        'Sultan Pur', //16
+        'Thathan Naulan', //17
+        'Model Baraz, Chung', //18
+        'Bilal Town, LDA Avenue', //19
+        'Wapda Town, Phase 1', //20
+        'Pak-Arab Housing Scheme', //21
+        'Deo Kalan', //22
+        'Thethar Rd', //23
+        'Nizampura', //24
+        'Sharaqpur', //25
+        'Ravi River, Katar Band South', //26
+        'General Bus Stand, Thoker Niaz Baig', //27
+        'Johar Town Park', //28
+        'Pak Electron Limited (PEL), Walton Road', //29
+        'Khyaban-e-Jinnah Rd, Sector-G', //30
+        'Jamia Masjid, Defence Raya Golf Resort', //31
+        'Qillah Sharief', //32
+        'Canal Upper Chenab', //33
+        'Forest Reserve 2, Shadhanwali', //34
+        'Shahdiwal', //35
+        'Qasim Ali Shah Foundation, Wahdat Road', //36
+        'Gulberg III, Block C3', //37
+        'Allama Iqbal International Airport', //38
+        'Lahore School of Economics, Shabbir Sharif Rd', //39
+        'Chak 22', //40
+        'West Minister Farmhouse', //41
+        'Katal, Lahore-Jaranwala Rd', //42
+        'Burj, Near Ravi River', //43
+        'Samanabad Town', //44
+        'Punjab Board of Investment & Trade PBIT', //45
+        'Al-Faisal Town', //46
+        'Paragon City', //47
+        'Chak 10', //48
+        'Budho Sharif', //49
+        'Burj Attari Stadium', //50
+        'Lahore Multan Motorway Interchange', //51
+        'Bund Road, Khokhar Town', //52
+        'Shaheen Park, Shad Bagh', //53
+        'Shalimar Housing Scheme, Sue Wala Road', //54
+        'Lahore Medical and Dental College', //55
+        'Dhamoke, Sheikhupura Rd', //56
+        'Pind Road, Sheikhpura', //57
+        'Kala Shah Kaku', //58
+        'Kot Abdul Malik', //59
+        'Shahdara', //60
+        'Jhuggian Jodha', //61
+        'Sialkot Lahore Motorway', //62
+        'Natt Kalan' //63
+    ];
 
     var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60, 61, 62, 63];
     var coords = [
@@ -97,11 +161,47 @@ async function loader() {
         [31.624302, 74.386129],
         [31.624302, 74.46497]
     ];
+
+    var coords_rev = [
+        [31.383926, 74.180768],
+        [31.3837432, 74.2279442],
+        [31.3883118, 74.2854916],
+        [31.3841862, 74.3488868],
+
+        [31.4246071, 74.1754847],
+        [31.4181143, 74.2152072],
+        [31.4306365, 74.2574001],
+        [31.4321997, 74.3541074],
+
+        [31.464128, 74.2242393],
+        [31.4627761, 74.2809841],
+        [31.4676726, 74.3460817],
+        [31.4474994, 74.2688555],
+
+        [31.5112977, 74.2464315],
+        [31.5042162, 74.2856727],
+        [31.5063815, 74.3429861],
+        [31.5205458, 74.4083237],
+
+        [31.5358909, 74.2893083],
+        [31.5433319, 74.3433717],
+        [31.5474766, 74.4017579],
+
+        [31.5474536, 74.2656093],
+        [31.5909408, 74.3376165],
+        [31.5830369, 74.4066614],
+
+        [31.6036362, 74.3102966],
+        [31.624302, 74.347289],
+        [31.624302, 74.386129],
+        [31.624302, 74.46497]
+    ];
     // var counter = [3, 3, 3, 3, 2, 2, 1];
     var reducer = [3, 3, 3, 3, 2, 2, 2];
     var indexer = 0;
     var min_val = 20;
     var max_val = 0;
+    var title = '';
     var optn = document.getElementById('pollutants');
     // var selected_option = optn.options[optn.selectedIndex].value;
     var sentence = ' Classification Heat map over Lahore';
@@ -111,31 +211,37 @@ async function loader() {
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
             document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+            title = 'Nitrogen Dioxide';
         } else if (n.substring(0, 1) == 's') {
             filename = 'so2_data_cnn.csv';
             optn.selectedIndex = 1;
             document.getElementById('labeler').innerHTML = "Sulphur Dioxide" + sentence;
             document.getElementById('side_info').innerHTML = "Sulphur Dioxide (milli-g/m²)";
+            title = 'Sulphur Dioxide';
         } else if (n.substring(0, 1) == 'c') {
             filename = 'co2_data_cnn.csv';
             optn.selectedIndex = 2;
             document.getElementById('labeler').innerHTML = "Carbon Monoxide" + sentence;
             document.getElementById('side_info').innerHTML = "Carbon Monoxide (milli-g/m²)";
+            title = 'Carbon Monoxide';
         } else if (n.substring(0, 1) == 'a') {
             filename = 'aqi_data_cnn.csv';
             optn.selectedIndex = 3;
             document.getElementById('labeler').innerHTML = "Air Quality Index" + sentence;
             document.getElementById('side_info').innerHTML = "Air Quality Index";
+            title = 'Air Quality Index';
         } else {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
             document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+            title = 'Nitrogen Dioxide';
         }
     } else {
         filename = 'no2_data_cnn.csv'
         document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
         document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+        title = 'Nitrogen Dioxide';
     }
 
     // var title = '';
@@ -160,6 +266,7 @@ async function loader() {
     var length_res = [];
     var repeater = 130;
     var plotdata = [];
+    var loc_val = [];
     var sdate = document.getElementById("start-date-input").valueAsDate;
     // console.log(Date.parse(sdate));
     const rows = data.split('\n').slice(1);
@@ -174,6 +281,7 @@ async function loader() {
             var temp = cols.slice(1);
             // console.log(Data_arr.length)
             for (var i = 0; i < Data_arr.length - 1; i++) {
+                loc_val.push(temp[Data_arr[i + 1]]);
                 var x_lan = interpolateArray([coords[i][0], coords[i + 1][0]], repeater);
                 var y_lan = interpolateArray([coords[i][1], coords[i + 1][1]], repeater);
                 var val = interpolateArray([parseFloat(temp[Data_arr[i]]), parseFloat(temp[Data_arr[i + 1]])], repeater);
@@ -181,6 +289,7 @@ async function loader() {
                     if (x_lan[0] == x_lan[1] && i != (Data_arr.length - 2)) {
 
                         var obj = { lat: x_lan[j], lng: y_lan[j], count: val[j] * 20 };
+
                         plotdata.push(obj);
                         if (val[j] >= max_val && filename != 'co2_data_cnn.csv') {
                             max_val = val[j] * 2;
@@ -564,6 +673,7 @@ async function loader() {
     };
 
 
+
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
         "radius": 0.5,
@@ -588,6 +698,12 @@ async function loader() {
         minZoom: zmm,
         maxZoom: zmm
     });
+
+    for (var x = 0; x < loc_val.length - 2; x++) {
+        var marker = L.marker(coords_rev[x]).addTo(map);
+        marker.bindPopup("<b>" + locationNames[Data_arr[x]] + "</b><br>" + title + ": " + loc_val[x]);
+    }
+
     var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);

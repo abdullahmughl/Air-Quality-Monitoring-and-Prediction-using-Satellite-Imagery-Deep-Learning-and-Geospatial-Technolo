@@ -11,4 +11,10 @@ function sider() {
 
 btn.onclick = function() {
     sidebar.classList.toggle("active");
+    if (document.getElementById('naver').style.left == "240px") {
+        document.getElementById('naver').style.left = "78px";
+    } else {
+        document.getElementById('naver').style.left = "240px";
+
+    }
 }
