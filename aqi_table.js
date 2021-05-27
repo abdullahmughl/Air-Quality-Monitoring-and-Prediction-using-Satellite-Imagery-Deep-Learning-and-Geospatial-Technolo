@@ -22,9 +22,9 @@ async function getNo2preAQI() {
     var aqi_no2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 15; i++) {
+    for (i = 0; i < 14; i++) {
 
-        const row = rows[i + 21];
+        const row = rows[i + 20];
         const cols = row.split(',');
         date.unshift(cols[0]);
         var value = cols.slice(1);
@@ -56,8 +56,8 @@ async function getSo2preAQI() {
     var aqi_so2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 15; i++) {
-        const row = rows[i + 21];
+    for (i = 0; i < 14; i++) {
+        const row = rows[i + 20];
         const cols = row.split(',');
         var value = cols.slice(1);
         so2.push(avergae(value));
@@ -86,9 +86,9 @@ async function getCo2preAQI() {
     var aqi_co2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 15; i++) {
+    for (i = 0; i < 14; i++) {
 
-        const row = rows[i + 21];
+        const row = rows[i + 20];
         const cols = row.split(',');
         var value = cols.slice(1);
         co2.push(avergae(value));
@@ -124,7 +124,7 @@ valueUpdatepre().then(v => {
     var tbodyRef = document.getElementById('aqi_table').getElementsByTagName('tbody')[0];
     var i;
     var aqi = 0;
-    for (i = 0; i < 15; i++) {
+    for (i = 0; i < 14; i++) {
 
         // Insert a row at the end of table
         var newRow = tbodyRef.insertRow();

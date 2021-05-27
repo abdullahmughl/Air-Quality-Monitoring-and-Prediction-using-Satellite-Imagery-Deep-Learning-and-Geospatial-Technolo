@@ -699,8 +699,8 @@ async function loader() {
         maxZoom: zmm
     });
 
-    for (var x = 0; x < loc_val.length - 2; x++) {
-        var marker = L.marker(coords_rev[x]).addTo(map);
+    for (var x = 0; x < loc_val.length; x++) {
+        var marker = L.marker(coords[x]).addTo(map);
         marker.bindPopup("<b>" + locationNames[Data_arr[x]] + "</b><br>" + title + ": " + loc_val[x]);
     }
 
