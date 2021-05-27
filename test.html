@@ -73,9 +73,22 @@
     </div>
     <div class="home_content" style="box-shadow: 0 0px 0px rgb(0 0 0 / 20%);">
         <nav class="navbar navbar-light fixed-top bg-light" style="left: 240px;" id='naver'>
-            <a class="navbar-brand" href="#">
-                <h3 style="color: #11101d; text-align: center; margin-top: 20px; margin-left: 10px;font-weight: 900;">Air Quality Awareness through AI</h3>
-            </a>
+            <div class="col-12" style="background-color: #11101d; width: 100%;">
+                <div class="row">
+
+                    <div class="col-4">
+
+                        <a class="navbar-brand" href="#">
+                            <h3 style="color: white; text-align: center; margin-top: 20px; margin-left: 10px;font-weight: 900;">Air Quality Awareness through AI</h3>
+                        </a>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse offset-6">
+
+                        <h6 class="float-left" id='current_date' style="padding-right: 15px; padding-top: 25px; color: white;"></h6>
+                    </div>
+                </div>
+            </div>
         </nav>
         <!-- <section id="banner">
             <div class="row" style="width: 100%; margin:0px">
@@ -98,10 +111,10 @@
         </br>
         </br>
 
-        <section id='info' style="padding-top: 20px;">
+        <section id='info' style="padding-top: 20px; padding-bottom: 0;">
             <!-- <div class="container"> -->
-            <div class="row" style="margin-left: 0px; margin-top: 25px; background-color: slategray;">
-                <div class="col-7" style="">
+            <div class="row" style="margin-left: 0px; margin-top: 0px; background-color: #d6d0e8;">
+                <div class="col-7">
                     <div class="container" style="padding: 50px;">
 
                         <div class="col-12">
@@ -116,7 +129,7 @@
                                     <img src="FYP_Diagram/cost1.png" alt="Cost Effective" style="max-height: 100px; object-fit: cover;">
                                 </div>
                                 <div class="col-9 text-left" style="padding-top: 30px; margin-right: 0px;">
-                                    <h4 style="margin-right: 0px;"><b>FEATURE 2:</b>Cost Effective.</h4>
+                                    <h4 style="margin-right: 0px;"><b>FEATURE 1: </b>Cost Effective.</h4>
 
                                 </div>
                             </div>
@@ -129,7 +142,7 @@
                                     <img src="FYP_Diagram/soft.png" alt="Cost Effective" style="max-height: 100px; object-fit: cover;">
                                 </div>
                                 <div class="col-9" style="padding-top: 30px; margin-right: 0px;">
-                                    <h4 style="margin-right: 0px;"><b>FEATURE 1: </b>Software Based Solution.</h4>
+                                    <h4 style="margin-right: 0px;"><b>FEATURE 2: </b>Software Based Solution.</h4>
 
                                 </div>
                             </div>
@@ -141,7 +154,7 @@
                                     <img src="FYP_Diagram/spatial.png" alt="Cost Effective" style="max-height: 100px; object-fit: cover;">
                                 </div>
                                 <div class="col-9 " style="padding-top: 30px;  margin-right: 0px;">
-                                    <h4 style="margin-right: 0px;"><b>FEATURE 3:</b>Better Spatial Coverage than on-groung monitoring stations.</h4>
+                                    <h4 style="margin-right: 0px;"><b>FEATURE 3: </b>Better Spatial Coverage than on-groung monitoring stations.</h4>
 
                                 </div>
                             </div>
@@ -154,7 +167,7 @@
                                     <img src="FYP_Diagram/visual.png" alt="Cost Effective" style="max-height: 100px; object-fit: cover;">
                                 </div>
                                 <div class="col-9 text-left" style="padding-top: 30px; margin-right: 0px;">
-                                    <h4 style=" margin-right: 0px;"><b>FEATURE 1:</b>Provide Effective information communication, analysis and visualization.</h4>
+                                    <h4 style=" margin-right: 0px;"><b>FEATURE 4: </b>Provide Effective information communication, analysis and visualization.</h4>
 
                                 </div>
                             </div>
@@ -163,10 +176,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-5" style="">
+                <div class="col-5">
                     <div class="container d-flex justify-content-center">
                         <!-- <div class="col-2 offset-1"> -->
-                        <img src="FYP_Diagram/abt_side.png" alt="Cost Effective" style="max-height: 2500px; width:440px;object-fit: cover;">
+                        <img src="FYP_Diagram/abt_side.png" alt="Cost Effective" style="max-height: 2500px; width:350px;object-fit: cover;display: block;margin-left: auto;margin-right: auto; padding-top: 25px;">
                         <!-- </div> -->
                     </div>
 
@@ -216,41 +229,54 @@
         </section>
         <section id="details">
             <div class="row">
-                <div class="col-3">
-                    <h3>How does it works</h3>
-                    <h5>A deep learning method based on Convolutional Neural Network to predict air pollutants!</h5>
+                <div class="col-3" style="background-color: #11101d; padding-top: 30px;">
+                    <h3 style="text-align: center; color: white;">How does it works</h3>
+                    <h5 style="text-align: center; color: white;">A deep learning method based on Convolutional Neural Network to predict air pollutants!</h5>
                 </div>
-                <div class="col-3">
-                    <img src="FYP_Diagram/heatmap.png" alt="" style="max-width: 200px;">
+                <div class="col-3" style="background-color: #b3a6d6;">
+                    <img src="FYP_Diagram/heatmap.png" alt="" style="max-width: 200px; display: block;margin-left: auto;margin-right: auto;">
 
                 </div>
-                <div class="col-3">
+                <div class="col-3" style="background-color: #11101d; padding-top: 30px;">
+                    <h3 style="text-align: center; color: white;">How do we collect data</h3>
+                    <h5 style="text-align: center; color: white;">Use State of the art Sentinel-5 Precursor to download data after every 15 days!</h5>
 
                 </div>
-                <div class="col-3">
-                    <img src="FYP_Diagram/pollutant.svg" alt="" style="max-width: 200px;">
+                <div class="col-3" style="background-color: #b3a6d6;">
+                    <img src="FYP_Diagram/pollutant.svg" alt="" style="max-width: 200px; display: block;margin-left: auto;margin-right: auto;">
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
-                    <img src="FYP_Diagram/down.png" alt="" style="max-width: 200px;">
+                <div class="col-3" style="background-color: #d6d0e8; left: 15px;">
+                    <img src="FYP_Diagram/conv.png" alt="" style="max-width: 200px;display: block;margin-left: auto;margin-right: auto;">
 
                 </div>
-                <div class="col-3">
-                    <h5>Check pollution and air quality in Lahore, using our air quality map. Our air quality heatmap makes air quality quick, easy and intuitive to understand. </h5>
+                <div class="col-3" style="background-color: #24223d; padding-top: 30px;">
+                    <h5 style="text-align: center; margin-top: 15px; color: white;">Check pollution and air quality in Lahore, using our air quality map. Our air quality heatmap makes air quality quick, easy and intuitive to understand. </h5>
                 </div>
-                <div class="col-3">
-                    <img src="FYP_Diagram/conv.png" alt="" style="max-width: 200px;">
+                <div class="col-3" style="background-color: #d6d0e8;">
+                    <img src="FYP_Diagram/down.png" alt="" style="max-width: 180px;display: block;margin-left: auto;margin-right: auto;">
 
                 </div>
-                <div class="col-3">
-                    <h5>Use of Satellite Imagery to Monitor Air Quality </h5>
+                <div class="col-3" style="background-color: #24223d; padding-top: 30px;">
+                    <h5 style="text-align: center; margin-top: 50px; color: white;">Use of Satellite Imagery to Monitor Air Quality </h5>
 
                 </div>
             </div>
 
 
+        </section>
+
+        <section id="info" style="padding-top: 100px; padding-bottom: 100px;">
+            <div class="col-6 offset-3">
+                <div class="col-12 text-center"></div>
+                <h1 style="text-align: center;">Try our Air quality and Air pollutants Predictions</h1>
+                <div style="margin-left: 35%; margin-top: 10%;">
+
+                    <a href="http://air-quality-monitoring-pk.herokuapp.com/home.html" style="text-decoration: none; background-color: #23d975; color: #11101d; padding: 20px; padding-left: 60px; padding-right: 60px; border-radius: 15px; font-size: x-large;" target="_self"><b> Tell Me More</b></a>
+                </div>
+            </div>
         </section>
 
     </div>
