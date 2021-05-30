@@ -337,7 +337,7 @@ async function getAllno2DatePred(filename, ind) {
         // years.push(cols[0]);
         var dt = Date.parse(cols[0]);
         // console.log(dt);
-        if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(edate)) + (1000 * 60 * 60 * 24 * 15))) {
+        if (dt >= (Date.parse(sdate)) && dt <= ((Date.parse(edate)) + (1000 * 60 * 60 * 24 * 30))) {
             // if (count < 2) {
             date.push(cols[0]);
             // } else {

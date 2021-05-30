@@ -157,7 +157,7 @@ th {
     height: 55px;
     background-color: red;
     /* For browsers that do not support gradients */
-    background-image: linear-gradient(to right, red, orange, yellow, lime, slateblue);
+    background-image: linear-gradient(to right, red, yellow, lime, aqua, cornflowerblue);
     transform: rotate(90deg);
     border: 1px;
     border-style: solid;
