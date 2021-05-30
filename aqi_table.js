@@ -22,9 +22,9 @@ async function getNo2preAQI() {
     var aqi_no2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 14; i++) {
+    for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 18];
+        const row = rows[i + 16];
         const cols = row.split(',');
         date.unshift(cols[0]);
         var value = cols.slice(1);
@@ -56,8 +56,8 @@ async function getSo2preAQI() {
     var aqi_so2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 14; i++) {
-        const row = rows[i + 18];
+    for (i = 0; i < 15; i++) {
+        const row = rows[i + 16];
         const cols = row.split(',');
         var value = cols.slice(1);
         so2.push(avergae(value));
@@ -86,9 +86,9 @@ async function getCo2preAQI() {
     var aqi_co2 = [];
     const rows = data.split('\n').slice(1);
     var i;
-    for (i = 0; i < 14; i++) {
+    for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 18];
+        const row = rows[i + 16];
         const cols = row.split(',');
         var value = cols.slice(1);
         co2.push(avergae(value));
@@ -110,6 +110,22 @@ async function getCo2preAQI() {
     aqi_co2.reverse();
     return { co2, aqi_co2 };
 }
+async function getAQIpreAQI() {
+    const response = await fetch('aqi_data_cnn.csv');
+    const data = await response.text();
+    var aqi = [];
+    const rows = data.split('\n').slice(1);
+    var i;
+    for (i = 0; i < 15; i++) {
+
+        const row = rows[i + 16];
+        const cols = row.split(',');
+        var value = cols.slice(1);
+        aqi.push(avergae(value));
+    }
+    aqi.reverse()
+    return aqi;
+}
 
 
 async function valueUpdatepre() {
@@ -117,14 +133,15 @@ async function valueUpdatepre() {
     const no2 = await getNo2preAQI();
     const so2 = await getSo2preAQI();
     const co2 = await getCo2preAQI();
+    const aqi = await getAQIpreAQI();
 
-    return { no2, so2, co2 };
+    return { no2, so2, co2, aqi };
 }
 valueUpdatepre().then(v => {
     var tbodyRef = document.getElementById('aqi_table').getElementsByTagName('tbody')[0];
     var i;
     var aqi = 0;
-    for (i = 0; i < 14; i++) {
+    for (i = 0; i < 15; i++) {
 
         // Insert a row at the end of table
         var newRow = tbodyRef.insertRow();
@@ -141,7 +158,7 @@ valueUpdatepre().then(v => {
         newCell2.innerHTML = v.no2.no2[i].toFixed(2);
         newCell3.innerHTML = v.so2.so2[i].toFixed(2);
         newCell4.innerHTML = v.co2.co2[i].toFixed(2);
-        aqi = Math.max((v.no2.aqi_no2[i] * 0.5).toFixed(0), (v.so2.aqi_so2[i] * 0.5).toFixed(0), (v.co2.aqi_co2[i] * 0.5).toFixed(0));
+        aqi = v.aqi[i].toFixed(0);
         newCell5.innerHTML = aqi;
         if (aqi < 50) {
             newCell6.innerHTML = 'Good';

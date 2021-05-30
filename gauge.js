@@ -121,6 +121,27 @@ async function getCo2AQI() {
     return { co2, aqi_co2 };
 }
 
+async function getAQI() {
+    const response = await fetch('aqi_data_cnn.csv');
+    const data = await response.text();
+    var aqi = 0;
+    const rows = data.split('\n').slice(1);
+    rows.forEach(row => {
+        // const row = rows[1];
+        const cols = row.split(',');
+        var dat = new Date();
+        var dt = Date.parse(cols[0]);
+        // console.log(Date.parse(dt));
+        // console.log(Date.parse(cols[0]));
+        if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
+            var value = cols.slice(1);
+            aqi = (avergae(value));
+        }
+    });
+    // console.log(aqi_co2);
+    return aqi;
+}
+
 var opts = {
     angle: 0, // The span of the gauge arc
     lineWidth: 0.3, // The line thickness
@@ -166,15 +187,17 @@ async function valueUpdate() {
     const no2 = await getNo2AQI();
     const so2 = await getSo2AQI();
     const co2 = await getCo2AQI();
+    const aqi = await getAQI();
 
-    return { no2, so2, co2 };
+    return { no2, so2, co2, aqi };
 }
 valueUpdate().then(v => {
     document.getElementById('no2aqi').innerHTML = v.no2.no2.toFixed(2);
     document.getElementById('so2aqi').innerHTML = v.so2.so2.toFixed(2);
     document.getElementById('co2aqi').innerHTML = v.co2.co2.toFixed(2);
     // const aqi = Math.max(v.no2.aqi_no2.toFixed(0), v.so2.aqi_so2.toFixed(0), v.co2.aqi_co2.toFixed(0));
-    const aqi = Math.max((v.no2.aqi_no2 * 0.5).toFixed(0), (v.so2.aqi_so2 * 0.5).toFixed(0), (v.co2.aqi_co2 * 0.5).toFixed(0));
+    // const aqi = Math.max((v.no2.aqi_no2 * 0.5).toFixed(0), (v.so2.aqi_so2 * 0.5).toFixed(0), (v.co2.aqi_co2 * 0.5).toFixed(0));
+    const aqi = v.aqi.toFixed(0)
     document.getElementById('AQI_num').innerHTML = aqi;
     gauge.set(aqi);
     if (aqi <= 50) {
