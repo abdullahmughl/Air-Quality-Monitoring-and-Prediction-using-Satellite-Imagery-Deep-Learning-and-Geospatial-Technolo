@@ -6,12 +6,16 @@ async function update() {
 
     var filename = selected_option + '_data.csv';
     var title = '';
+    var unit = '';
     if (selected_option == 'no2') {
         title = 'Nitrogen Dioxide';
+        unit = 'ppb'
     } else if (selected_option == 'so2') {
         title = 'Sulphur Dioxide';
+        unit = 'ppb'
     } else {
         title = 'Carbon Monoxide';
+        unit = 'ppm'
     }
     var loc = document.getElementById('locations');
     var selected_loc = loc.options[loc.selectedIndex].value;
@@ -22,7 +26,7 @@ async function update() {
         dataloader(filename, 2);
     }
 
-    document.getElementById('tabel_lable').innerHTML = title + ' values in milli-g/m²'
+    document.getElementById('tabel_lable').innerHTML = title + ' values in ' + unit;
 
 }
 

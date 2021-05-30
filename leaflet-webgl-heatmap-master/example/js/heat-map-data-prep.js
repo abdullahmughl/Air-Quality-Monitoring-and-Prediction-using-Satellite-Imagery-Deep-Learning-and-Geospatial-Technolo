@@ -45,9 +45,10 @@ function reloader() {
 }
 
 
-function norm(number) {
+function norm(number, n) {
     var max = Math.max(...number);
     var min = Math.min(...number);
+    var min = min * n;
     // console.log(max);
     var result = [];
     for (var i = 0; i < number.length; i++) {
@@ -445,19 +446,19 @@ async function getDataPoints() {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
-            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (ppb)";
             title = 'Nitrogen Dioxide';
         } else if (n.substring(0, 1) == 's') {
             filename = 'so2_data_cnn.csv';
             optn.selectedIndex = 1;
             document.getElementById('labeler').innerHTML = "Sulphur Dioxide" + sentence;
-            document.getElementById('side_info').innerHTML = "Sulphur Dioxide (milli-g/m²)";
+            document.getElementById('side_info').innerHTML = "Sulphur Dioxide (ppb)";
             title = 'Sulphur Dioxide';
         } else if (n.substring(0, 1) == 'c') {
             filename = 'co2_data_cnn.csv';
             optn.selectedIndex = 2;
             document.getElementById('labeler').innerHTML = "Carbon Monoxide" + sentence;
-            document.getElementById('side_info').innerHTML = "Carbon Monoxide (milli-g/m²)";
+            document.getElementById('side_info').innerHTML = "Carbon Monoxide (ppm)";
             title = 'Carbon Monoxide';
         } else if (n.substring(0, 1) == 'a') {
             filename = 'aqi_data_cnn.csv';
@@ -469,13 +470,13 @@ async function getDataPoints() {
             filename = 'no2_data_cnn.csv';
             optn.selectedIndex = 0;
             document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
-            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+            document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (ppb)";
             title = 'Nitrogen Dioxide';
         }
     } else {
         filename = 'no2_data_cnn.csv'
         document.getElementById('labeler').innerHTML = "Nitrogen Dioxide" + sentence;
-        document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (milli-g/m²)";
+        document.getElementById('side_info').innerHTML = "Nitrogen Dioxide (ppb)";
         title = 'Nitrogen Dioxide';
     }
 
@@ -517,7 +518,13 @@ async function getDataPoints() {
             var temp2 = cols.slice(1);
             max_val = Math.max(...temp2);
             min_val = Math.min(...temp2);
-            var temp = norm(temp2);
+            if (filename != 'so2_data_cnn.csv') {
+
+                var temp = norm(temp2, 1);
+            } else {
+                var temp = norm(temp2, 0.8);
+
+            }
             // console.log(Data_arr.length)
             for (var i = 0; i < Data_arr.length - 1; i++) {
                 loc_val.push(temp2[Data_arr[i + 1]]);
@@ -525,7 +532,7 @@ async function getDataPoints() {
                 var y_lan = interpolateArray([coords[i][1], coords[i + 1][1]], repeater);
                 var val = interpolateArray([parseFloat(temp[Data_arr[i]]), parseFloat(temp[Data_arr[i + 1]])], repeater);
                 for (var j = 1; j < repeater; j++) {
-                    if (x_lan[0] == x_lan[1] && i != (Data_arr.length - 2)) {
+                    if (x_lan[0] == x_lan[1]) {
 
                         var obj = [x_lan[j], y_lan[j], val[j]];
 
@@ -579,6 +586,31 @@ async function getDataPoints() {
                 // nxt = [];
                 // console.log(y_lan);
             }
+
+
+            var rep = ((plotdata.length) / 8);
+            console.log(plotdata.length)
+            console.log(Data_arr.length)
+            for (var i = 0; i < 7; i++) {
+                for (var j = 0; j < rep; j++) {
+
+                    var x_lan = interpolateArray([plotdata[(i * rep) + j][0], plotdata[((i + 1) * rep) + j][0]], repeater);
+                    var y_lan = interpolateArray([plotdata[(i * rep) + j][1], plotdata[((i + 1) * rep) + j][1]], repeater);
+                    var val = interpolateArray([plotdata[(i * rep) + j][2], plotdata[((i + 1) * rep) + j][2]], repeater);
+
+                    // console.log(y_lan[1]);
+                    // console.log(y_lan[0]);
+                    for (var k = 1; k < repeater - 1; k++) {
+                        if (y_lan[0] == y_lan[1]) {
+
+                            var obj = [x_lan[k], y_lan[k], val[k]];
+
+                            plotdata.push(obj);
+
+                        }
+                    }
+                }
+            }
             // console.log(incrementer[0][1].length);
             var ln = Math.max(...length_res);
             var temp_x = [];
@@ -614,7 +646,7 @@ async function getDataPoints() {
                     val = interpolateArray([finalarr[i][j][2], finalarr[i + 1][j][2]], repeater);
                     for (var k = 1; k < repeater - 1; k++) {
                         obj = [x_lan[k], y_lan[k], val[k]];
-                        plotdata.push(obj);
+                        // plotdata.push(obj);
                         // if (val[j] >= max_val && filename != 'co2_data_cnn.csv') {
                         //     max_val = val[j] * 2;
                         // }
@@ -656,9 +688,9 @@ async function getDataPoints() {
 
     // }
 
-    if (min_val < 0) {
-        min_val = min_val * -1;
-    }
+    // if (min_val < 0) {
+    //     min_val = min_val * -1;
+    // }
     var avg_val = (min_val + max_val) / 2;
     if (filename == 'no2_data_cnn.csv') {
 
@@ -675,11 +707,11 @@ async function getDataPoints() {
         document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(2) + ' -';
 
     } else if (filename == 'co2_data_cnn.csv') {
-        document.getElementById('upper').innerHTML = max_val.toFixed(0) + ' -';
+        document.getElementById('upper').innerHTML = max_val.toFixed(2) + ' -';
         document.getElementById('lower').innerHTML = min_val.toFixed(2) + ' -';
-        document.getElementById('mid').innerHTML = avg_val.toFixed(1) + ' -';
-        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(1) + ' -';
-        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(1) + ' -';
+        document.getElementById('mid').innerHTML = avg_val.toFixed(2) + ' -';
+        document.getElementById('upper_mid').innerHTML = ((avg_val + max_val) / 2).toFixed(2) + ' -';
+        document.getElementById('lower_mid').innerHTML = ((avg_val + min_val) / 2).toFixed(2) + ' -';
 
     } else if (filename == 'aqi_data_cnn.csv') {
         document.getElementById('upper').innerHTML = max_val.toFixed(0) + '  	—';
@@ -692,6 +724,10 @@ async function getDataPoints() {
         document.getElementById('mid').style.paddingLeft = '9px';
         document.getElementById('upper_mid').style.paddingLeft = '14px';
 
+    }
+    if (filename == 'aqi_data_cnn.csv') {
+        document.getElementById('grad1').style.display = "none";
+        plotdata = []
     }
     return plotdata;
 

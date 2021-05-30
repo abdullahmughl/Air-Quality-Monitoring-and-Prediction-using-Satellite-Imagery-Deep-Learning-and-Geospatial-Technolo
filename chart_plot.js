@@ -9,12 +9,16 @@ async function setup() {
 
     var filename = selected_option + '_data.csv';
     var title = '';
+    var unit = '';
     if (selected_option == 'no2') {
         title = 'Nitrogen Dioxide';
+        unit = '(ppb)'
     } else if (selected_option == 'so2') {
         title = 'Sulphur Dioxide';
+        unit = '(ppb)'
     } else {
         title = 'Carbon Monoxide';
+        unit = '(ppm)'
     }
     var opt = document.getElementById('locations');
     var selected_option2 = opt.options[opt.selectedIndex].value;
@@ -75,7 +79,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: title + " (milli-g/m²)",
+                        labelString: title + " " + unit,
                         fontSize: 20,
                         fontColor: 'black'
                     }
@@ -154,7 +158,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: title + " (milli-g/m²)",
+                        labelString: title + " " + unit,
                         fontSize: 20,
                         fontColor: 'black'
                     }
@@ -231,7 +235,7 @@ async function setup() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: title + " (milli-g/m²)",
+                        labelString: title + " " + unit,
                         fontSize: 20,
                         fontColor: 'black'
                     }

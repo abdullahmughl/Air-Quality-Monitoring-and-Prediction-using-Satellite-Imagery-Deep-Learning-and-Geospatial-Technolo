@@ -1,5 +1,5 @@
 var map = L.map('mapid', {
-    center: [31.5204, 74.3587],
+    center: [31.4204, 74.2587],
     zoom: 12,
     minZoom: 10,
     // maxBounds: [
@@ -80,35 +80,38 @@ getDataPoints().then(
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
-        pinMarker().then((v) => {
+        if (message.length == 0) {
+
+            pinMarker().then((v) => {
 
 
-            for (var x = 0; x < v.loc_val.length - 1; x++) {
-                if (v.loc_val[x] < 50) {
-                    img = goodIcon;
-                    note = 'Good';
-                } else if (v.loc_val[x] < 100) {
-                    img = moderateIcon;
-                    note = 'Moderate';
-                } else if (v.loc_val[x] < 150) {
-                    img = unhealysIcon;
-                    note = 'Unhealthy for sensitive groups';
-                } else if (v.loc_val[x] < 200) {
-                    img = unhealthyIcon;
-                    note = 'Unhealthy';
-                } else if (v.loc_val[x] < 300) {
-                    img = vunhealtyIcon;
-                    note = 'Very unhealthy';
-                } else {
-                    img = hazardousIcon;
-                    note = 'Hazardous';
+                for (var x = 0; x < v.loc_val.length - 1; x++) {
+                    if (v.loc_val[x] < 50) {
+                        img = goodIcon;
+                        note = 'Good';
+                    } else if (v.loc_val[x] < 100) {
+                        img = moderateIcon;
+                        note = 'Moderate';
+                    } else if (v.loc_val[x] < 150) {
+                        img = unhealysIcon;
+                        note = 'Unhealthy for sensitive groups';
+                    } else if (v.loc_val[x] < 200) {
+                        img = unhealthyIcon;
+                        note = 'Unhealthy';
+                    } else if (v.loc_val[x] < 300) {
+                        img = vunhealtyIcon;
+                        note = 'Very unhealthy';
+                    } else {
+                        img = hazardousIcon;
+                        note = 'Hazardous';
+                    }
+
+                    var marker = L.marker(v.coords_rev[x], { icon: img }).addTo(map);
+
+                    marker.bindPopup("<b>" + v.locationNames[v.Data_arr[x]] + "</b><br>" + "Air Quality Index" + ": " + v.loc_val[x] + "<br><b>" + note + "</b>");
                 }
-
-                var marker = L.marker(v.coords_rev[x], { icon: img }).addTo(map);
-
-                marker.bindPopup("<b>" + v.locationNames[v.Data_arr[x]] + "</b><br>" + "Air Quality Index" + ": " + v.loc_val[x] + "<br><b>" + note + "</b>");
-            }
-        })
+            })
+        }
         try {
             map.addLayer(heatmap);
         } catch (e) {
