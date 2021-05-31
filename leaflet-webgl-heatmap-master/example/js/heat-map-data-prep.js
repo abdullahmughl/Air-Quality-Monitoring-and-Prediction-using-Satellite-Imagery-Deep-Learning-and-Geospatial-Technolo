@@ -58,7 +58,7 @@ function norm(number, n) {
     return result;
 }
 
-async function pinMarker() {
+async function pinMarker(filename) {
     var coords_rev = [
         [31.383926, 74.180768],
         [31.3837432, 74.2279442],
@@ -69,7 +69,10 @@ async function pinMarker() {
         [31.4181143, 74.2152072],
         [31.4306365, 74.2574001],
         [31.4321997, 74.3541074],
+        [31.423989, 74.406129],
+        [31.423989, 74.45497],
 
+        [31.464052, 74.170768],
         [31.464128, 74.2242393],
         [31.4627761, 74.2809841],
         [31.4676726, 74.3460817],
@@ -79,6 +82,7 @@ async function pinMarker() {
         [31.5042162, 74.2856727],
         [31.5063815, 74.3429861],
         [31.5205458, 74.4083237],
+        [31.504114, 74.45497],
 
         [31.5358909, 74.2893083],
         [31.5433319, 74.3433717],
@@ -88,6 +92,7 @@ async function pinMarker() {
         [31.5909408, 74.3376165],
         [31.5830369, 74.4066614],
 
+        [31.6157041, 74.2449181],
         [31.6036362, 74.3102966],
         [31.624302, 74.347289],
         [31.624302, 74.386129],
@@ -160,8 +165,8 @@ async function pinMarker() {
         'Natt Kalan' //63
     ];
 
-    var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 27, 28, 29, 30, 35, 36, 37, 38, 44, 45, 46, 52, 53, 54, 60, 61, 62, 63];
-    const response = await fetch('aqi_data_cnn.csv');
+    var Data_arr = [10, 11, 12, 13, 18, 19, 20, 21, 22, 23, 26, 27, 28, 29, 30, 35, 36, 37, 38, 40, 44, 45, 46, 52, 53, 54, 59, 60, 61, 62, 63];
+    const response = await fetch(filename);
     const data = await response.text();
 
     // var sdate = document.getElementById("start-date-input").valueAsDate;
@@ -191,7 +196,13 @@ async function pinMarker() {
             var temp = cols.slice(1);
             for (var i = 0; i < Data_arr.length; i++) {
                 var tyx = parseFloat(temp[Data_arr[i]]);
-                loc_val.push((tyx).toFixed(0));
+                if (filename == 'aqi_data_cnn.csv') {
+
+                    loc_val.push((tyx).toFixed(0));
+                } else {
+
+                    loc_val.push((tyx).toFixed(3));
+                }
             }
         }
     });
@@ -729,6 +740,6 @@ async function getDataPoints() {
         document.getElementById('grad1').style.display = "none";
         plotdata = []
     }
-    return plotdata;
+    return { plotdata, filename, title };
 
 };

@@ -1,6 +1,6 @@
 var map = L.map('mapid', {
     center: [31.4204, 74.2587],
-    zoom: 12,
+    zoom: 13,
     minZoom: 10,
     // maxBounds: [
     //     [43.957236472025635, -64.6600341796875],
@@ -28,7 +28,7 @@ var heatmap = L.webGLHeatmap({
 getDataPoints().then(
     (message) => {
 
-        heatmap.setData(message);
+        heatmap.setData(message.plotdata);
         // heatmap.multiply(2);
         var img;
         var note = '';
@@ -80,9 +80,17 @@ getDataPoints().then(
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
         });
-        if (message.length == 0) {
+        var greyIcon = new L.Icon({
+            iconUrl: '../../../FYP_Diagram/grey.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+        // if (message.length == 0) {
 
-            pinMarker().then((v) => {
+        pinMarker(message.filename).then((v) => {
 
 
                 for (var x = 0; x < v.loc_val.length - 1; x++) {
@@ -105,13 +113,18 @@ getDataPoints().then(
                         img = hazardousIcon;
                         note = 'Hazardous';
                     }
+                    if (message.filename == 'aqi_data_cnn.csv') {
 
-                    var marker = L.marker(v.coords_rev[x], { icon: img }).addTo(map);
+                        var marker = L.marker(v.coords_rev[x], { icon: img }).addTo(map);
+                    } else {
+                        var marker = L.marker(v.coords_rev[x], { icon: greyIcon }).addTo(map);
+                        note = '';
+                    }
 
-                    marker.bindPopup("<b>" + v.locationNames[v.Data_arr[x]] + "</b><br>" + "Air Quality Index" + ": " + v.loc_val[x] + "<br><b>" + note + "</b>");
+                    marker.bindPopup("<b>" + v.locationNames[v.Data_arr[x]] + "</b><br>" + message.title + ": " + v.loc_val[x] + "<br><b>" + note + "</b>");
                 }
             })
-        }
+            // }
         try {
             map.addLayer(heatmap);
         } catch (e) {
