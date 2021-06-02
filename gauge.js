@@ -22,6 +22,7 @@ async function getNo2AQI() {
     const data = await response.text();
     var no2 = 0;
     var aqi_no2 = 0;
+    var no2o = 0;
     const rows = data.split('\n').slice(1);
     rows.forEach(row => {
         // const row = rows[1];
@@ -33,24 +34,29 @@ async function getNo2AQI() {
         if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
             var value = cols.slice(1);
             no2 = (avergae(value));
-            if (no2 < 0.4) {
-                aqi_no2 = scale(no2, 0, 0.4, 0, 50);
-            } else if (no2 >= 0.4 && no2 <= 0.8) {
-                aqi_no2 = scale(no2, 0.4, 0.80, 51, 100);
-            } else if (no2 > 0.80 && no2 <= 2.0) {
-                aqi_no2 = scale(no2, 0.80, 2.0, 101, 200);
-            } else if (no2 > 2.0 && no2 <= 3.50) {
-                aqi_no2 = scale(no2, 2.0, 3.50, 201, 300);
-            } else if (no2 > 3.50 && no2 <= 4.00) {
-                aqi_no2 = scale(no2, 3.50, 4.00, 301, 400);
+            no2o = no2;
+            no2 = no2 / 1000;
+            console.log(no2);
+            if (no2 < 0.054) {
+                aqi_no2 = scale(no2, 0, 0.0544, 0, 50);
+            } else if (no2 >= 0.054 && no2 <= 0.101) {
+                aqi_no2 = scale(no2, 0.054, 0.101, 51, 100);
+            } else if (no2 > 0.101 && no2 <= 0.361) {
+                aqi_no2 = scale(no2, 0.101, 0.361, 101, 150);
+            } else if (no2 > 0.361 && no2 <= 0.650) {
+                aqi_no2 = scale(no2, 0.361, 0.650, 151, 200);
+            } else if (no2 > 0.650 && no2 <= 1.250) {
+                aqi_no2 = scale(no2, 0.650, 1.250, 201, 300);
+            } else if (no2 > 1.250 && no2 <= 1.650) {
+                aqi_no2 = scale(no2, 1.250, 1.650, 301, 400);
             } else {
-                aqi_no2 = scale(no2, 4.00, 8.00, 401, 500);
+                aqi_no2 = scale(no2, 1.650, 2.0, 401, 500);
             }
         }
     });
 
     // console.log(aqi_no2);
-    return { no2, aqi_no2 };
+    return { no2o, aqi_no2 };
 }
 
 async function getSo2AQI() {
@@ -58,6 +64,7 @@ async function getSo2AQI() {
     const data = await response.text();
     var so2 = 0;
     var aqi_so2 = 0;
+    // var so2o = 0;
     const rows = data.split('\n').slice(1);
     rows.forEach(row => {
         const cols = row.split(',');
@@ -68,18 +75,21 @@ async function getSo2AQI() {
         if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
             var value = cols.slice(1);
             so2 = (avergae(value));
-            if (so2 < 15) {
-                aqi_so2 = scale(so2, -10, 15, 0, 50);
-            } else if (so2 >= 15 && so2 <= 20) {
-                aqi_so2 = scale(so2, 15, 20, 51, 100);
-            } else if (so2 > 20 && so2 <= 35) {
-                aqi_so2 = scale(so2, 20, 35, 101, 200);
-            } else if (so2 > 35 && so2 <= 50) {
-                aqi_so2 = scale(so2, 35, 50, 201, 300);
-            } else if (so2 > 50 && so2 <= 60) {
-                aqi_so2 = scale(so2, 50, 60, 301, 400);
+
+            if (so2 < 36) {
+                aqi_so2 = scale(so2, 0, 36, 0, 50);
+            } else if (so2 >= 36 && so2 <= 76) {
+                aqi_so2 = scale(so2, 36, 76, 51, 100);
+            } else if (so2 > 76 && so2 <= 186) {
+                aqi_so2 = scale(so2, 76, 186, 101, 150);
+            } else if (so2 > 186 && so2 <= 304) {
+                aqi_so2 = scale(so2, 186, 304, 151, 200);
+            } else if (so2 > 304 && so2 <= 605) {
+                aqi_so2 = scale(so2, 304, 605, 201, 300);
+            } else if (so2 > 605 && so2 <= 805) {
+                aqi_so2 = scale(so2, 605, 805, 301, 400);
             } else {
-                aqi_so2 = scale(so2, 60, 75, 401, 500);
+                aqi_so2 = scale(so2, 805, 1500, 401, 500);
             }
         }
     });
@@ -102,18 +112,20 @@ async function getCo2AQI() {
         if (dt <= (Date.parse(dat)) && dt >= ((Date.parse(dat)) - 86800000)) {
             var value = cols.slice(1);
             co2 = (avergae(value));
-            if (co2 < 100) {
-                aqi_co2 = scale(co2, 0, 100, 0, 50);
-            } else if (co2 >= 100 && co2 <= 300) {
-                aqi_co2 = scale(co2, 100, 300, 51, 100);
-            } else if (co2 > 300 && co2 <= 500) {
-                aqi_co2 = scale(co2, 300, 500, 101, 200);
-            } else if (co2 > 500 && co2 <= 800) {
-                aqi_co2 = scale(co2, 500, 800, 201, 300);
-            } else if (co2 > 800 && co2 <= 1300) {
-                aqi_co2 = scale(co2, 800, 1300, 301, 400);
+            if (co2 < 4.5) {
+                aqi_co2 = scale(co2, 0, 4.5, 0, 50);
+            } else if (co2 >= 4.5 && co2 <= 9.5) {
+                aqi_co2 = scale(co2, 4.5, 9.5, 51, 100);
+            } else if (co2 > 9.5 && co2 <= 12.5) {
+                aqi_co2 = scale(co2, 9.5, 12.5, 101, 150);
+            } else if (co2 > 12.5 && co2 <= 15.5) {
+                aqi_co2 = scale(co2, 12.5, 15.5, 151, 200);
+            } else if (co2 > 15.5 && co2 <= 30.0) {
+                aqi_co2 = scale(co2, 15.5, 30.0, 201, 300);
+            } else if (co2 > 30.0 && co2 <= 40.5) {
+                aqi_co2 = scale(co2, 30.5, 40.5, 301, 400);
             } else {
-                aqi_co2 = scale(co2, 1300, 1700, 401, 500);
+                aqi_co2 = scale(co2, 40.5, 60, 401, 500);
             }
         }
     });
@@ -192,9 +204,12 @@ async function valueUpdate() {
     return { no2, so2, co2, aqi };
 }
 valueUpdate().then(v => {
-    document.getElementById('no2aqi').innerHTML = v.no2.no2.toFixed(2);
+    document.getElementById('no2aqi').innerHTML = v.no2.no2o.toFixed(2);
+    document.getElementById('no2aqia').innerHTML = (v.no2.aqi_no2 + 1).toFixed(0);
     document.getElementById('so2aqi').innerHTML = v.so2.so2.toFixed(2);
+    document.getElementById('so2aqia').innerHTML = v.so2.aqi_so2.toFixed(0) - 1;
     document.getElementById('co2aqi').innerHTML = v.co2.co2.toFixed(2);
+    document.getElementById('co2aqia').innerHTML = v.co2.aqi_co2.toFixed(0) - 1;
     // const aqi = Math.max(v.no2.aqi_no2.toFixed(0), v.so2.aqi_so2.toFixed(0), v.co2.aqi_co2.toFixed(0));
     // const aqi = Math.max((v.no2.aqi_no2 * 0.5).toFixed(0), (v.so2.aqi_so2 * 0.5).toFixed(0), (v.co2.aqi_co2 * 0.5).toFixed(0));
     const aqi = v.aqi.toFixed(0)

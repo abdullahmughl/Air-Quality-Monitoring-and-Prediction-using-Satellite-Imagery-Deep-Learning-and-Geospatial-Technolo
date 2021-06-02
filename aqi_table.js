@@ -24,7 +24,7 @@ async function getNo2preAQI() {
     var i;
     for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 16];
+        const row = rows[i + 14];
         const cols = row.split(',');
         date.unshift(cols[0]);
         var value = cols.slice(1);
@@ -57,7 +57,7 @@ async function getSo2preAQI() {
     const rows = data.split('\n').slice(1);
     var i;
     for (i = 0; i < 15; i++) {
-        const row = rows[i + 16];
+        const row = rows[i + 14];
         const cols = row.split(',');
         var value = cols.slice(1);
         so2.push(avergae(value));
@@ -88,7 +88,7 @@ async function getCo2preAQI() {
     var i;
     for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 16];
+        const row = rows[i + 14];
         const cols = row.split(',');
         var value = cols.slice(1);
         co2.push(avergae(value));
@@ -118,7 +118,7 @@ async function getAQIpreAQI() {
     var i;
     for (i = 0; i < 15; i++) {
 
-        const row = rows[i + 16];
+        const row = rows[i + 14];
         const cols = row.split(',');
         var value = cols.slice(1);
         aqi.push(avergae(value));
