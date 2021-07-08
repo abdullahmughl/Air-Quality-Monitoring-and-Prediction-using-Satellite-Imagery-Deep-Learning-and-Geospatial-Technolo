@@ -212,7 +212,7 @@ valueUpdate().then(v => {
     document.getElementById('co2aqia').innerHTML = v.co2.aqi_co2.toFixed(0) - 1;
     // const aqi = Math.max(v.no2.aqi_no2.toFixed(0), v.so2.aqi_so2.toFixed(0), v.co2.aqi_co2.toFixed(0));
     // const aqi = Math.max((v.no2.aqi_no2 * 0.5).toFixed(0), (v.so2.aqi_so2 * 0.5).toFixed(0), (v.co2.aqi_co2 * 0.5).toFixed(0));
-    const aqi = v.aqi.toFixed(0)
+    const aqi = Math.max(((v.no2.aqi_no2 + 1).toFixed(0)),(v.so2.aqi_so2.toFixed(0) - 1),(v.co2.aqi_co2.toFixed(0) - 1));
     document.getElementById('AQI_num').innerHTML = aqi;
     gauge.set(aqi);
     if (aqi <= 50) {
