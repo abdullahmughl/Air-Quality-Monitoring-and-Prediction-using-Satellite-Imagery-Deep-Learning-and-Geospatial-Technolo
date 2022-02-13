@@ -23,10 +23,17 @@ async function getNo2preAQI() {
     const rows = data.split('\n').slice(1);
     var i;
     for (i = 0; i < 15; i++) {
+        var today = new Date();
+        today.setDate(today.getDate() + i);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
 
         const row = rows[i + 14];
         const cols = row.split(',');
-        date.unshift(cols[0]);
+        date.unshift(today);
         var value = cols.slice(1);
         no2.push(avergae(value));
         if (no2[i] < 0.4) {
